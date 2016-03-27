@@ -17,12 +17,13 @@
 
     var tabs = [
         {
-            tab1:"hello",
-            name:"Tools and Frameworks"
+            name:"Tools and Frameworks",
+            description:"The tools used, like Selenium, UI Automation, TestComplete, Sikuli, RestAssured, "+
+            "RestSharp, Mocha, JMeter, Jasmine/Karma and some others."
         },
         {
-            tab2:"helloAgain",
-            name:"Languages"
+            name:"Languages",
+            description:"The languages I've used, including C#, Java, Javascript and Groovy."
         }
     ];
 })();
