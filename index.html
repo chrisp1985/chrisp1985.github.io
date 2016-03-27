@@ -17,9 +17,44 @@
 
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
-	
-  </head>
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://chrisp1985.github.io/src/js/menuControl.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script>
+    var app = angular.module("myModule",[]);
+
+    app.controller("myCtrl", function() {
+        this.tab = 1;
+
+        this.selects = tabs;
+
+        this.setTab = function(newValue){
+          this.tab = newValue;
+        };
+
+        this.isSet = function(tabName){
+          return this.tab === tabName;
+        };
+    });
+
+    var tabs = [
+        {
+            tab1:"hello",
+            name:"Tools and Frameworks"
+        },
+        {
+            tab2:"helloAgain",
+            name:"Languages"
+        }
+    ];
+    </script>
+  </head>
 
   <body>
 	<style>
@@ -55,37 +90,29 @@
 	<div class="container">
 			<p>The website was created using Bootstrap and Font-Awesome, with some Angular additions.</p>
 	</div>
-
-    <section class="tab container" ng-controller="myCtrl as tab">
-      <ul class="nav nav-pills">
-        <li ng-class="{ active: tab.isSet(1) }">
-          <a href ng-click="tab.setTab(1)">Tools</a></li>
-        <li ng-class="{ active: tab.isSet(2) }">
-          <a href ng-click="tab.setTab(2)">Languages</a></li>
-      </ul>
-      <div ng-show="tab.isSet(1)">
-        <h4>Tools and Frameworks</h4>
-        <blockquote>{{selects.name}}</blockquote>
-      </div>
-      <div ng-show="tab.isSet(2)">
-        <h4>Languages</h4>
-        <blockquote>{{selects.name}}</blockquote>
-      </div>
-    </section>
+    <div ng-app="myModule">
+        <section class="tab container" ng-controller="myCtrl as tab">
+          <ul class="nav nav-pills">
+            <li ng-class="{ active: tab.isSet(1) }">
+              <a href ng-click="tab.setTab(1)">Tools</a></li>
+            <li ng-class="{ active: tab.isSet(2) }">
+              <a href ng-click="tab.setTab(2)">Languages</a></li>
+          </ul>
+          <div ng-show="tab.isSet(1)">
+            <h4>Tools and Frameworks</h4>
+            <blockquote>{{tab.selects[0].name}}</blockquote>
+          </div>
+          <div ng-show="tab.isSet(2)">
+            <h4>Languages</h4>
+              <blockquote>{{tab.selects[1].name}}</blockquote>
+          </div>
+        </section>
+    </div>
 
     <div class="container">
       <footer>
-        <p>&copy; 2015 Me, PLC.</p>
+        <p>&copy; 2016 Me, PLC.</p>
       </footer>
     </div>
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="http://chrisp1985.github.io/src/js/menuControl.js"></script>
   </body>
 </html>
