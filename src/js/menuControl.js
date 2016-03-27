@@ -1,12 +1,7 @@
 (function() {
-    angular.module("myModule",[])
+    var app = angular.module("myModule",[]);
 
-    .service("myFirstService",function() {
-        this.trial = function() {
-            Console.log("hello");
-        };
-    })
-    .controller("myCtrl",[ 'myFirstService',function() {
+    app.controller("myCtrl", function() {
         this.tab = 1;
 
         this.selects = tabs;
@@ -18,7 +13,7 @@
         this.isSet = function(tabName){
           return this.tab === tabName;
         };
-    }]);
+    });
 
     var tabs = [
         {
