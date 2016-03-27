@@ -6,7 +6,7 @@
             Console.log("hello");
         };
     })
-    .controller("myCtrl"[ 'myFirstService',function() {
+    .controller("myCtrl",[ 'myFirstService',function() {
         this.tab = 1;
 
         this.selects = tabs;

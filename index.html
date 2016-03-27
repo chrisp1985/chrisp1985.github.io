@@ -30,10 +30,19 @@
 	
 	</style>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container"> 
-		<div class="navbar-header">
-		  <div class="navbar-brand">Chris Parsons CV</>		  
-        </div>			
+      <div class="container">
+        <div class="navbar-header">
+          <div class="navbar-brand">Chris Parsons CV</>
+        </div>
+        <a class="navbar-header">
+          <a class="navbar-brand" href="">Tools</>
+        </a>
+        <a class="navbar-header">
+          <a class="navbar-brand" href="">Languages</>
+        </a>
+        <a class="navbar-header">
+          <a class="navbar-brand" href="http://chrisp1985.github.io/src/js/menuControl.js">JavaScript</>
+        </a>
         <div id="navbar" class="navbar-collapse collapse">
         </div><!--/.navbar-collapse -->
       </div>
@@ -50,14 +59,12 @@
 			<p>The website was created using Bootstrap and Font-Awesome, with some Angular additions.</p>
 	</div>
 
-    <section class="tab" ng-controller="myCtrl as tab">
+    <section class="tab container" ng-controller="myCtrl as tab">
       <ul class="nav nav-pills">
         <li ng-class="{ active: tab.isSet(1) }">
-          <a href ng-click="tab.setTab(1)">Description</a></li>
+          <a href ng-click="tab.setTab(1)">Tools</a></li>
         <li ng-class="{ active: tab.isSet(2) }">
-          <a href ng-click="tab.setTab(2)">Specs</a></li>
-        <li ng-class="{ active: tab.isSet(3) }">
-          <a href ng-click="tab.setTab(3)">Reviews</a></li>
+          <a href ng-click="tab.setTab(2)">Languages</a></li>
       </ul>
       <div ng-show="tab.isSet(1)">
         <h4>Tools and Frameworks</h4>
@@ -67,33 +74,9 @@
         <h4>Languages</h4>
         <blockquote>{{selects.name}}</blockquote>
       </div>
-      <div ng-show="tab.isSet(3)">
-        <h4>Reviews</h4>
-      </div>
-    </section
-	
+    </section>
+
     <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">		  
-		  <h2>My CV</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Frameworks what I've used</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Concepts what I know.</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
-
-      <hr>
-
       <footer>
         <p>&copy; 2015 Me, PLC.</p>
       </footer>
@@ -106,6 +89,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="http://chrisp1985.github.io/src/js/menuControl.js"</script>
+    <script src="http://chrisp1985.github.io/src/js/menuControl.js"></script>
   </body>
 </html>
