@@ -1,4 +1,4 @@
-
+(function() {
     var app = angular.module("myModule",[]);
 
     app.controller("myCtrl", function() {
@@ -25,3 +25,4 @@
             name:"Languages"
         }
     ];
+})();
