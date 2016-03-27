@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myModule">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,16 +39,39 @@
       </div>
     </nav>
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron hello">
+    <div class="jumbotron hello" ng-controller="myCtrl">
       <div class="container">
         <h1>Welcome!</h1>
         <p>This is a website devoted to Mr Awesome, Chrispo Parsnip using Bootstrap.</p>
+        <button ng-click="push()">Push here.</button>
       </div>
     </div>
 
 	<div class="container">
 			<p>The website was created using Bootstrap and Font-Awesome, with some Angular additions.</p>
 	</div>
+
+    <section class="tab" ng-controller="myCtrl as tab">
+      <ul class="nav nav-pills">
+        <li ng-class="{ active: tab.isSet(1) }">
+          <a href ng-click="tab.setTab(1)">Description</a></li>
+        <li ng-class="{ active: tab.isSet(2) }">
+          <a href ng-click="tab.setTab(2)">Specs</a></li>
+        <li ng-class="{ active: tab.isSet(3) }">
+          <a href ng-click="tab.setTab(3)">Reviews</a></li>
+      </ul>
+      <div ng-show="tab.isSet(1)">
+        <h4>Description</h4>
+        <blockquote>{{product.description}}</blockquote>
+      </div>
+      <div ng-show="tab.isSet(2)">
+        <h4>Specs</h4>
+        <blockquote>Shine: {{product.shine}}</blockquote>
+      </div>
+      <div ng-show="tab.isSet(3)">
+        <h4>Reviews</h4>
+      </div>
+    </section
 	
     <div class="container">
       <!-- Example row of columns -->
@@ -84,5 +107,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src=".."</script>
   </body>
 </html>
