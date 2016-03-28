@@ -71,27 +71,30 @@
       </div>
     </div>
 
-	<div class="container-fluid-chris">
+	<div class="container-fluid">
 		<h2>About</h2>
         <h4>The website was created using Bootstrap and Font-Awesome, with some Angular additions.</h4>
 	</div>
-    <div ng-app="myModule">
-        <section class="tab container" ng-controller="myCtrl as tab">
-          <ul class="nav nav-pills">
-            <li ng-class="{ active: tab.isSet(1) }">
-              <a href ng-click="tab.setTab(1)">Tools</a></li>
-            <li ng-class="{ active: tab.isSet(2) }">
-              <a href ng-click="tab.setTab(2)">Languages</a></li>
-          </ul>
-          <div ng-show="tab.isSet(1)">
-            <h4>Tools and Frameworks</h4>
-            <blockquote>{{tab.selects[0].description}}</blockquote>
-          </div>
-          <div ng-show="tab.isSet(2)">
-            <h4>Languages</h4>
-              <blockquote>{{tab.selects[1].description}}</blockquote>
-          </div>
-        </section>
+
+    <div class="container-fluid">
+        <div ng-app="myModule">
+            <section class="tab container" ng-controller="myCtrl as tab">
+              <ul class="nav nav-pills">
+                <li ng-class="{ active: tab.isSet(1) }">
+                  <a href ng-click="tab.setTab(1)">Tools</a></li>
+                <li ng-class="{ active: tab.isSet(2) }">
+                  <a href ng-click="tab.setTab(2)">Languages</a></li>
+              </ul>
+              <div ng-show="tab.isSet(1)">
+                <h4>Tools and Frameworks</h4>
+                <blockquote>{{tab.selects[0].description}}</blockquote>
+              </div>
+              <div ng-show="tab.isSet(2)">
+                <h4>Languages</h4>
+                  <blockquote>{{tab.selects[1].description}}</blockquote>
+              </div>
+            </section>
+        </div>
     </div>
 
     <div class="container">
