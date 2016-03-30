@@ -100,6 +100,118 @@
                 <div ng-show="tab.isSet(1)">
                     <h4>{{tab.selects[0].name}}</h4>
                     <blockquote>{{tab.selects[0].description}}</blockquote>
+                    <p>Example 1</p>
+                    <pre><code>describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+                        "use strict";
+
+                        // *******************************
+                        //  AUTHENTICATOR ANGULAR MODULE
+                        // *******************************
+                        var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
+                        beforeEach(module('authenticator'));
+                        beforeEach(module('ngCookies'));
+                        beforeEach(module(function($provide) {
+                        $window = {location: { replace: jasmine.createSpy()} };
+                        $provide.value('$window', $window);
+                        }));
+                        beforeEach(inject(function($injector) {
+                        authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
+                        authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
+                        myCookies = $injector.get('$cookieStore',[]);
+                        httpBackend = $injector.get('$httpBackend');
+                        }));
+
+                        // *******************************
+                        //  AUTHENTICATED TOKEN SERVICE
+                        // *******************************
+                        describe('Authenticated Token Service',function() {
+
+                        // ***************************
+                        // DELETE AUTHENTICATED TOKEN
+                        // ***************************
+                        describe('deleteAuthenticatedToken',function() {
+                        it('Check that the deleteAuthenticatedToken method is defined.',function() {
+                        expect(authenticatedTokenService.deleteAuthenticatedToken).not.toEqual(undefined);
+                        });
+
+                        it('Check that the deleteAuthenticatedToken method calls the remove function within cookies.',function() {
+                        var spyCookies = spyOn(myCookies,'remove');
+                        authenticatedTokenService.deleteAuthenticatedToken();
+                        expect(spyCookies).toHaveBeenCalledWith("customAuthToken");
+                        });
+                        });
+                        });
+
+                        // ***********************
+                        //  AUTHENTICATOR FACTORY
+                        // ***********************
+                        describe('Authenticator Factory',function() {
+
+                        // *********
+                        //   LOGIN
+                        // *********
+                        describe('login',function() {
+                        it('Check that the login method is defined.',function() {
+                        expect(authenticatorService.login).not.toEqual(undefined);
+                        });
+
+                        it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
+                        var creds, successCallbackSpy, errorCallbackSpy;
+                        creds = {"userName":"admin","password":"admin"};
+                        successCallbackSpy = jasmine.createSpy();
+                        errorCallbackSpy = jasmine.createSpy();
+
+                        httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                        return headers['Content-Type'] === 'application/json';
+                        }).respond(200, 'HELLO');
+                        authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
+                        httpBackend.flush();
+                        expect(successCallbackSpy).toHaveBeenCalled();
+                        });
+
+                        it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
+                        var invalidcreds, successCallbackSpy, errorCallbackSpy;
+                        invalidcreds = {"userName":"admin2","password":"admin2"};
+                        successCallbackSpy = jasmine.createSpy();
+                        errorCallbackSpy = jasmine.createSpy();
+
+                        httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
+                        return headers['Content-Type'] === 'application/json';
+                        }).respond(500, 'BOO');
+                        authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
+                        httpBackend.flush();
+                        //                setTimeout(function(){
+                        expect(errorCallbackSpy).toHaveBeenCalled();
+                        //                }, 200);
+                        });
+                        });
+
+                        // **********
+                        //   LOGOUT
+                        // **********
+                        describe('logout',function() {
+                        it('Check that the logout method is defined.',function() {
+                        expect(authenticatorService.logout).not.toEqual(undefined);
+                        });
+
+                        it('Check that when the logout method is executed with valid credentials, the successCallback is called.',function() {
+                        var spyService = spyOn(authenticatedTokenService,'deleteAuthenticatedToken');
+                        httpBackend.expectDELETE('/tokens/',{"Accept":"application/json, text/plain, */*"}).respond(200, 'LOGGED OUT A-OK');
+                        authenticatorService.logout();
+                        httpBackend.flush();
+                        expect(spyService).toHaveBeenCalled();
+                        });
+
+                        it('Check that when the logout method is executed with valid credentials, the successCallback is called.',function() {
+                        var spyService = spyOn(authenticatedTokenService,'deleteAuthenticatedToken');
+                        httpBackend.expectDELETE('/tokens/',{"Accept":"application/json, text/plain, */*"}).respond(500, 'UH-OH.');
+                        authenticatorService.logout();
+                        httpBackend.flush();
+                        expect(spyService).not.toHaveBeenCalled();
+                        });
+                        });
+                        });
+                        });</code></pre>
                 </div>
                 <div ng-show="tab.isSet(2)">
                     <h4>{{tab.selects[1].name}}</h4>
@@ -108,7 +220,66 @@
                 <div ng-show="tab.isSet(3)">
                     <h4>{{tab.selects[2].name}}</h4>
                     <blockquote>{{tab.selects[2].description}}</blockquote>
-                    <pre><code>{{tab.selects[2].examples[0]}}</code></pre>
+                    <p>Example 1</p>
+                    <pre><code>
+                        public AutomationElement waitForObject(AutomationElement winRoot,
+                            TreeNode node, double timeToWait, String elementName, object[] args)
+                        {
+                        // Set the time.
+                        DateTime timeAtStart = DateTime.Now;
+                        DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
+
+                        // Set the returned element to be null (so if the element isn't found, null is returned).
+                        AutomationElement returnedEle = null;
+
+                        // While the timer hasn't expired...
+                        while (now.Subtract(timeAtStart).TotalSeconds < timeToWait)
+                        {
+                            try
+                            {
+                                // Create the object here.
+                                MethodInfo method = typeof(ArcGIS_PageObjects).GetMethod(elementName);
+                                AutomationElement root = null;
+
+                                if (winRoot == null)
+                                {
+                                    root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
+                                }
+                                else
+                                {
+                                    root = winRoot;
+                                }
+
+                                // Invoke the element through reflection.
+                                AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
+
+                                if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
+                                {
+                                    // OMG, you found the element.
+                                    returnedEle = newEle;
+                                    break;
+                                }
+
+                            }
+
+                            catch
+                            {
+                                // Just carry on.
+                            }
+
+                            // Reset the time.
+                            now = DateTime.Now;
+                        }
+
+                        // Has the timer expired?
+                        if (now.Subtract(timeAtStart).TotalSeconds > timeToWait)
+                        {
+                            Assert.Fail("Wait time was exceeded for element so test failed.");
+                        }
+
+                        // Return the element.
+                        return returnedEle;
+                        }</code></pre>
                 </div>
             </section>
         </div>
