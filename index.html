@@ -57,7 +57,27 @@
 	    font-family: zibFont;
 	}
 	</style>
-    <ng-include src="'/src/html/navBar.htm'"></ng-include>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand my-header">Chrispo</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="http://chrisp1985.github.io">Home</a></li>
+                    <li><a href="http://chrisp1985.github.io/src/js/menuControl.js">Javascript Source</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://github.com/chrisp1985/chrisp1985.github.io">GitHub</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron hello">
         <div class="container-fluid-chris">
@@ -72,17 +92,17 @@
         <div class="row">
             <div class="col-md-4">
                 <h2 class="my-header">Tools/Frameworks</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p>This is a section devoted to the tools and frameworks that can be used in automating test cases within development. This includes tools to test web applications, desktop applications, APIs and others, and includes examples where appropriate. </p>
                 <p><a class="btn btn-default" href="http://chrisp1985.github.io/src/html/tools.html" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-md-4">
                 <h2 class="my-header">Languages</h2>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p>This is a list of languages used, and where they've been used, in the various projects of which I've been a part. Some have been used more extensively than others. </p>
                 <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div>
             <div class="col-md-4">
                 <h2 class="my-header">This Website</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p>This is just a section briefly explaining why this website was developed, and how. A lot of the concepts tested during unit testing of the UI have helped contribute, as well as a bit of help from bootstrap and various Angular tutorials.</p>
                 <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div>
         </div>
