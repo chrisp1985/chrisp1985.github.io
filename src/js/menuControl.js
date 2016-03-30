@@ -27,9 +27,9 @@
         },
         {
             name:"UI Automation Text",
-            description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application."
+            description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application.",
             examples: {
-               
+
             }
         }
     ];
