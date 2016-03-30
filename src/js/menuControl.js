@@ -18,17 +18,16 @@
     var tabs =
     [
         {
-            name:"Tools and Frameworks",
-            description:"The tools used, like Selenium, UI Automation, TestComplete, Sikuli, RestAssured, "+
-            "RestSharp, Mocha, JMeter, Jasmine/Karma and some others.",
-            jasmine:"This is Jasmine text",
-            mocha:"This is Mocha text",
-            selenium:"This is Selenium text",
-            uiautomation:"This is UIAutomation text",
-            testcomplete:"This is TestComplete text",
-            sikuli:"This is Sikuli text",
-            restassuredsharp:"This is RestAssured text",
-            jmeter:"This is JMeter text"
+            name:"Jasmine Text",
+            description:"Jasmine description."
+        },
+        {
+            name:"Selenium Text",
+            description:"Selenium description."
+        },
+        {
+            name:"UI Automation Text",
+            description:"UI Automation description."
         }
     ];
 })();
