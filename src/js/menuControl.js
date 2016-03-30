@@ -29,9 +29,7 @@
             name:"UI Automation Text",
             description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application."
             examples: {
-                if(a===0) {
-                    scope.click();
-                }
+               
             }
         }
     ];
