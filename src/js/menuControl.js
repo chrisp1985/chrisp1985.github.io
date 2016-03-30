@@ -19,15 +19,20 @@
     [
         {
             name:"Jasmine Text",
-            description:"Jasmine description."
+            description:"Jasmine is a unit testing tool framework that allows developers to verify and validate Javascript components."
         },
         {
             name:"Selenium Text",
-            description:"Selenium description."
+            description:"Selenium is a framework that allows a user to interact with elements in the DOM to test a website."
         },
         {
             name:"UI Automation Text",
-            description:"UI Automation description."
+            description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application."
+            examples: {
+                if(a===0) {
+                    scope.click();
+                }
+            }
         }
     ];
 })();
