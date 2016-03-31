@@ -67,6 +67,9 @@
         .my-header2 {
             font-family: zibFont;
         }
+        .code-block {
+            display:none;
+        }
 
         </style>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -193,7 +196,7 @@
                     <blockquote>{{tab.selects[2].description}}</blockquote>
                     <div class="accordion">
                         <div>Example 1</div>
-                        <pre><code class="language-csharp">
+                        <pre class="code-block"><code class="language-csharp">
         public AutomationElement waitForObject(AutomationElement winRoot,
             TreeNode node, double timeToWait, String elementName, object[] args)
         {
