@@ -31,8 +31,8 @@
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
             $(function() {
-                $( "#accordion" ).accordion({
-                    collapsible: true,
+                $( ".accordion" ).accordion({
+                    collapsible: false,
                     heightStyle: "content"
                 });
             });
@@ -114,7 +114,8 @@
                 </ul>
                 <div ng-show="tab.isSet(1)">
                     <blockquote>{{tab.selects[0].description}}</blockquote>
-                    <p>Example 1</p>
+                    <div class="accordion">
+                        <div>Example 2</div>
                     <pre><code class="language-javascript">
                         describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
                         "use strict";
@@ -182,13 +183,15 @@
                             });
                         });
                     });</code></pre>
+
+                    </div>
                 </div>
                 <div ng-show="tab.isSet(2)">
                     <blockquote>{{tab.selects[1].description}}</blockquote>
                 </div>
-                    <div ng-show="tab.isSet(3)">
+                <div ng-show="tab.isSet(3)">
                     <blockquote>{{tab.selects[2].description}}</blockquote>
-                    <div id="accordion">
+                    <div class="accordion">
                         <div>Example 1</div>
                         <pre><code class="language-csharp">
         public AutomationElement waitForObject(AutomationElement winRoot,
@@ -251,15 +254,9 @@
         }</code></pre>
                     </div>
                 </div>
-                </div>
+
             </section>
         </div>
-        </div>
-
-        <div class="container">
-          <footer>
-            <p>&copy; 2016 Me, PLC.</p>
-          </footer>
         </div>
     </body>
 </html>
