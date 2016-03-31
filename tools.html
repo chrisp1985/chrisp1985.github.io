@@ -103,7 +103,6 @@
                         <a href ng-click="tab.setTab(3)">UI Automation</a></li>
                 </ul>
                 <div ng-show="tab.isSet(1)">
-                    <h4>{{tab.selects[0].name}}</h4>
                     <blockquote>{{tab.selects[0].description}}</blockquote>
                     <p>Example 1</p>
                     <pre><code class="language-javascript">
@@ -175,11 +174,9 @@
                     });</code></pre>
                 </div>
                 <div ng-show="tab.isSet(2)">
-                    <h4>{{tab.selects[1].name}}</h4>
                     <blockquote>{{tab.selects[1].description}}</blockquote>
                 </div>
                 <div ng-show="tab.isSet(3)">
-                    <h4>{{tab.selects[2].name}}</h4>
                     <blockquote>{{tab.selects[2].description}}</blockquote>
                     <p>Example 1</p>
                     <pre><code class="language-csharp">
