@@ -57,6 +57,7 @@
         .my-header2 {
             font-family: zibFont;
         }
+
         </style>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
@@ -105,7 +106,6 @@
                     <h4>{{tab.selects[0].name}}</h4>
                     <blockquote>{{tab.selects[0].description}}</blockquote>
                     <p>Example 1</p>
-                    <div class="syntaxhighlighter  jscript">
                     <pre><code class="language-javascript">
                         describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
                         "use strict";
@@ -128,27 +128,6 @@
                             myCookies = $injector.get('$cookieStore',[]);
                             httpBackend = $injector.get('$httpBackend');
                         }));
-
-                        // *******************************
-                        //  AUTHENTICATED TOKEN SERVICE
-                        // *******************************
-                        describe('Authenticated Token Service',function() {
-
-                            // ***************************
-                            // DELETE AUTHENTICATED TOKEN
-                            // ***************************
-                            describe('deleteAuthenticatedToken',function() {
-                                it('Check that the deleteAuthenticatedToken method is defined.',function() {
-                                    expect(authenticatedTokenService.deleteAuthenticatedToken).not.toEqual(undefined);
-                                });
-
-                                it('Check that the deleteAuthenticatedToken method calls the remove function within cookies.',function() {
-                                    var spyCookies = spyOn(myCookies,'remove');
-                                    authenticatedTokenService.deleteAuthenticatedToken();
-                                    expect(spyCookies).toHaveBeenCalledWith("customAuthToken");
-                                });
-                            });
-                        });
 
                         // ***********************
                         //  AUTHENTICATOR FACTORY
@@ -192,31 +171,6 @@
 
                                 });
                             });
-
-                            // **********
-                            //   LOGOUT
-                            // **********
-                            describe('logout',function() {
-                                it('Check that the logout method is defined.',function() {
-                                    expect(authenticatorService.logout).not.toEqual(undefined);
-                                });
-
-                                it('Check that when the logout method is executed with valid credentials, the successCallback is called.',function() {
-                                    var spyService = spyOn(authenticatedTokenService,'deleteAuthenticatedToken');
-                                    httpBackend.expectDELETE('/tokens/',{"Accept":"application/json, text/plain, */*"}).respond(200, 'LOGGED OUT A-OK');
-                                    authenticatorService.logout();
-                                    httpBackend.flush();
-                                    expect(spyService).toHaveBeenCalled();
-                                });
-
-                                it('Check that when the logout method is executed with valid credentials, the successCallback is called.',function() {
-                                    var spyService = spyOn(authenticatedTokenService,'deleteAuthenticatedToken');
-                                    httpBackend.expectDELETE('/tokens/',{"Accept":"application/json, text/plain, */*"}).respond(500, 'UH-OH.');
-                                    authenticatorService.logout();
-                                    httpBackend.flush();
-                                    expect(spyService).not.toHaveBeenCalled();
-                                });
-                            });
                         });
                     });</code></pre>
                 </div>
@@ -228,8 +182,7 @@
                     <h4>{{tab.selects[2].name}}</h4>
                     <blockquote>{{tab.selects[2].description}}</blockquote>
                     <p>Example 1</p>
-                    <div class="syntaxhighlighter  csharp">
-                    <pre><code>
+                    <pre><code class="language-csharp">
         public AutomationElement waitForObject(AutomationElement winRoot,
             TreeNode node, double timeToWait, String elementName, object[] args)
         {
@@ -288,7 +241,6 @@
         // Return the element.
         return returnedEle;
         }</code></pre>
-                    </div>
                 </div>
             </section>
         </div>
