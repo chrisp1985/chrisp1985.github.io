@@ -32,7 +32,8 @@
         <script>
             $(function() {
                 $( "#accordion" ).accordion({
-                    collapsible: true
+                    collapsible: true;
+                    heightStyle: "content";
                 });
             });
         </script>
@@ -65,9 +66,6 @@
         }
         .my-header2 {
             font-family: zibFont;
-        }
-        .pre-size {
-            height: auto;
         }
 
         </style>
@@ -192,7 +190,7 @@
                     <blockquote>{{tab.selects[2].description}}</blockquote>
                     <div id="accordion">
                         <div>Example 1</div>
-                        <pre class="pre-size"><code class="language-csharp">
+                        <pre><code class="language-csharp">
         public AutomationElement waitForObject(AutomationElement winRoot,
             TreeNode node, double timeToWait, String elementName, object[] args)
         {
