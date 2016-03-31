@@ -67,8 +67,8 @@
         .my-header2 {
             font-family: zibFont;
         }
-        .code-block {
-            display:none;
+        .not-expanded {
+            aria-expanded:false;
         }
 
         </style>
@@ -194,9 +194,9 @@
                 </div>
                 <div ng-show="tab.isSet(3)">
                     <blockquote>{{tab.selects[2].description}}</blockquote>
-                    <div class="accordion">
+                    <div class="accordion not-expanded">
                         <div>Example 1</div>
-                        <pre class="code-block"><code class="language-csharp">
+                        <pre><code class="language-csharp">
         public AutomationElement waitForObject(AutomationElement winRoot,
             TreeNode node, double timeToWait, String elementName, object[] args)
         {
@@ -260,6 +260,11 @@
 
             </section>
         </div>
+
         </div>
+        <br />
+        <footer>
+            <br />
+        </footer>
     </body>
 </html>
