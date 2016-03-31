@@ -27,13 +27,9 @@
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="/src/js/menuControl.js"></script>
 
-        <!-- Include required JS files -->
-        <script type="text/javascript" src="/src/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
-        <script type="text/javascript" src="/src/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+        <script src="/src/syntax/prism.js"></script>
+        <link rel="stylesheet" href="/src/syntax/prism.css">
 
-        <!-- Include *at least* the core style and default theme -->
-        <link href="/src/syntaxhighlighter_3.0.83/src/shCore.css" rel="stylesheet" type="text/css" />
-        <link href="/src/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
@@ -110,7 +106,8 @@
                     <blockquote>{{tab.selects[0].description}}</blockquote>
                     <p>Example 1</p>
                     <div class="syntaxhighlighter  jscript">
-                    <pre><code>describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+                    <pre><code class="language-javascript">
+                        describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
                         "use strict";
 
                         // *******************************
@@ -222,7 +219,6 @@
                             });
                         });
                     });</code></pre>
-                    </div>
                 </div>
                 <div ng-show="tab.isSet(2)">
                     <h4>{{tab.selects[1].name}}</h4>
