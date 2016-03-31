@@ -26,7 +26,16 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="/src/js/menuControl.js"></script>
-
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $( "#accordion" ).accordion({
+                    collapsible: true
+                });
+            });
+        </script>
         <script src="/src/syntax/prism.js"></script>
         <link rel="stylesheet" href="/src/syntax/prism.css">
 
@@ -176,10 +185,11 @@
                 <div ng-show="tab.isSet(2)">
                     <blockquote>{{tab.selects[1].description}}</blockquote>
                 </div>
-                <div ng-show="tab.isSet(3)">
+                    <div ng-show="tab.isSet(3)">
                     <blockquote>{{tab.selects[2].description}}</blockquote>
-                    <p>Example 1</p>
-                    <pre><code class="language-csharp">
+                    <div id="accordion">
+                        <p>Example 1</p>
+                        <pre><code class="language-csharp">
         public AutomationElement waitForObject(AutomationElement winRoot,
             TreeNode node, double timeToWait, String elementName, object[] args)
         {
@@ -238,6 +248,8 @@
         // Return the element.
         return returnedEle;
         }</code></pre>
+                    </div>
+                </div>
                 </div>
             </section>
         </div>
