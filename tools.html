@@ -66,6 +66,9 @@
         .my-header2 {
             font-family: zibFont;
         }
+        #accordian {
+            height: auto;
+        }
 
         </style>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -188,7 +191,7 @@
                     <div ng-show="tab.isSet(3)">
                     <blockquote>{{tab.selects[2].description}}</blockquote>
                     <div id="accordion">
-                        <p>Example 1</p>
+                        <div>Example 1</div>
                         <pre><code class="language-csharp">
         public AutomationElement waitForObject(AutomationElement winRoot,
             TreeNode node, double timeToWait, String elementName, object[] args)
