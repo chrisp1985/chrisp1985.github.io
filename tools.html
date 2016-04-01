@@ -247,7 +247,7 @@
                     <blockquote>{{tab.selects[1].description}}</blockquote>
                     <div class="accordion">
                         <div>Example 1</div>
-                    <pre><code class="language-javascript">
+                    <pre><code class="language-java">
     public class TestClass {
         // Set up general variables
         private static WebDriver driver;
@@ -333,6 +333,21 @@
         }
     }
                 </code></pre>
+                        <div>Example 2</div>
+                    <pre><code class="language-java">
+public void login(String username, String password) {
+    webDriver.get(LOGIN_URL);
+    webDriver.manage().window().setSize(new Dimension(1040,744));
+    if(runOnBrowser.equals("ie") && !webDriver.getTitle().contains("My WebPage")) {
+        // Needed for IE certification issue only.
+        webDriver.get("javascript:document.getElementById('overridelink').click();");
+    }
+    assertThat(webDriver.getTitle(), is("My WebPage - Login"));
+    loginPage.setUserName(username);
+    loginPage.setPassword(password);
+    loginPage.clickLogin();
+}
+                    </code></pre>
                     </div>
                 </div>
                 <div ng-show="tab.isSet(3)">
