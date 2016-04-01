@@ -27,8 +27,11 @@
         },
         {
             name:"UI Automation Text",
-            description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application.",
-            examples: "This is some code"
+            description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application."
+        },
+        {
+            name:"API Text",
+            description:"The REST API uses the URI of HTTP Requests to GET and DELETE resources, whilst using the body of the request to POST or PUT resources."
         }
     ];
 })();
