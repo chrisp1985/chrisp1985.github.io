@@ -32,6 +32,10 @@
         {
             name:"API Text",
             description:"The REST API uses the URI of HTTP Requests to GET and DELETE resources, whilst using the body of the request to POST or PUT resources."
+        },
+        {
+            name:"JMeter",
+            description:"JMeter is a performance testing tool that allows for monitoring of throughputs and response times."
         }
     ];
 })();

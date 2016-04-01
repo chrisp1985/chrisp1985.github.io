@@ -117,6 +117,8 @@
                         <a href ng-click="tab.setTab(3)">UI Automation</a></li>
                     <li ng-class="{ active: tab.isSet(4) }">
                         <a href ng-click="tab.setTab(4)">API</a></li>
+                    <li ng-class="{ active: tab.isSet(5) }">
+                        <a href ng-click="tab.setTab(5)">JMeter</a></li>
                 </ul>
                 <h4><br/></h4>
                 <div ng-show="tab.isSet(1)">
@@ -415,6 +417,9 @@ public void login(String username, String password) {
                 </div>
                 <div ng-show="tab.isSet(4)">
                     <blockquote>{{tab.selects[3].description}}</blockquote>
+                </div>
+                <div ng-show="tab.isSet(5)">
+                    <blockquote>{{tab.selects[4].description}}</blockquote>
                 </div>
 
             </section>
