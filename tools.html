@@ -124,125 +124,123 @@
                     <div class="accordion">
                         <div>Example 1</div>
                         <pre><code class="language-javascript">
-                        describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
-                        "use strict";
+    describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+        "use strict";
 
-                        // *******************************
-                        //  AUTHENTICATOR ANGULAR MODULE
-                        // *******************************
-                        var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
+        // *******************************
+        //  AUTHENTICATOR ANGULAR MODULE
+        // *******************************
+        var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
 
-                        beforeEach(module('authenticator'));
-                        beforeEach(module('ngCookies'));
-                        beforeEach(module(function($provide) {
-                            $window = {location: { replace: jasmine.createSpy()} };
-                            $provide.value('$window', $window);
-                        }));
+        beforeEach(module('authenticator'));
+        beforeEach(module('ngCookies'));
+        beforeEach(module(function($provide) {
+            $window = {location: { replace: jasmine.createSpy()} };
+            $provide.value('$window', $window);
+        }));
 
-                        beforeEach(inject(function($injector) {
-                            authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
-                            authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
-                            myCookies = $injector.get('$cookieStore',[]);
-                            httpBackend = $injector.get('$httpBackend');
-                        }));
+        beforeEach(inject(function($injector) {
+            authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
+            authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
+            myCookies = $injector.get('$cookieStore',[]);
+            httpBackend = $injector.get('$httpBackend');
+        }));
 
-                        // ***********************
-                        //  AUTHENTICATOR FACTORY
-                        // ***********************
-                        describe('Authenticator Factory',function() {
+        // ***********************
+        //  AUTHENTICATOR FACTORY
+        // ***********************
+        describe('Authenticator Factory',function() {
 
-                            // *********
-                            //   LOGIN
-                            // *********
-                            describe('login',function() {
-                                it('Check that the login method is defined.',function() {
-                                    expect(authenticatorService.login).not.toEqual(undefined);
-                                });
+            // *********
+            //   LOGIN
+            // *********
+            describe('login',function() {
+                it('Check that the login method is defined.',function() {
+                    expect(authenticatorService.login).not.toEqual(undefined);
+                });
 
-                                it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
-                                    var creds, successCallbackSpy, errorCallbackSpy;
-                                    creds = {"userName":"admin","password":"admin"};
-                                    successCallbackSpy = jasmine.createSpy();
-                                    errorCallbackSpy = jasmine.createSpy();
+                it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
+                    var creds, successCallbackSpy, errorCallbackSpy;
+                    creds = {"userName":"admin","password":"admin"};
+                    successCallbackSpy = jasmine.createSpy();
+                    errorCallbackSpy = jasmine.createSpy();
 
-                                    httpBackend.expectPOST('/tokens/', creds, function(headers) {
-                                        return headers['Content-Type'] === 'application/json';
-                                    }).respond(200, 'HELLO');
-                                    authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
-                                    httpBackend.flush();
-                                    expect(successCallbackSpy).toHaveBeenCalled();
-                                });
+                    httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                        return headers['Content-Type'] === 'application/json';
+                    }).respond(200, 'HELLO');
+                    authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
+                    httpBackend.flush();
+                    expect(successCallbackSpy).toHaveBeenCalled();
+                });
 
-                                it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
-                                    var invalidcreds, successCallbackSpy, errorCallbackSpy;
-                                    invalidcreds = {"userName":"admin2","password":"admin2"};
-                                    successCallbackSpy = jasmine.createSpy();
-                                    errorCallbackSpy = jasmine.createSpy();
+                it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
+                    var invalidcreds, successCallbackSpy, errorCallbackSpy;
+                    invalidcreds = {"userName":"admin2","password":"admin2"};
+                    successCallbackSpy = jasmine.createSpy();
+                    errorCallbackSpy = jasmine.createSpy();
 
-                                    httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
-                                    return headers['Content-Type'] === 'application/json';
-                                    }).respond(500, 'BOO');
-                                    authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
-                                    httpBackend.flush();
-                                    expect(errorCallbackSpy).toHaveBeenCalled();
+                    httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
+                    return headers['Content-Type'] === 'application/json';
+                    }).respond(500, 'BOO');
+                    authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
+                    httpBackend.flush();
+                    expect(errorCallbackSpy).toHaveBeenCalled();
 
-                                });
-                            });
-                        });
-                    });</code></pre>
+                });
+            });
+        });
+    });</code></pre>
                     </div>
                     <div class="accordion">
                         <div>Example 2</div>
                         <pre><code class="language-javascript">
-                            describe('CONTROLLERS - Settings Admin Test Cases', function() {
-                                "use strict";
+    describe('CONTROLLERS - Settings Admin Test Cases', function() {
+        "use strict";
 
-                                // **********************************************
-                                //    MYAPP CONTROLLER ANGULAR MODULE
-                                // **********************************************
-                                var scope,myAppCtrl,toaster,$window,loaderState,state,event;
+        // **********************************************
+        //    MYAPP CONTROLLER ANGULAR MODULE
+        // **********************************************
+        var scope,myAppCtrl,toaster,$window,loaderState,state,event;
 
-                                beforeEach(module(
-                                    'myappctrl',
-                                    'toaster',
-                                    'flow',
-                                    'loaderstate',
-                                ));
-                                beforeEach(module(function($provide) {
-                                    $window = {open: function(url) { return url;} };
-                                    $provide.value('$window', $window);
-                                }));
-                                beforeEach(inject(function($injector,$controller,$rootScope) {
-                                    scope = $rootScope.$new();
-                                    state = { go: function() {}};
-                                    event = {"bubbles":true,"cancelBubble":false,"isTrusted":true,"returnValue":true,"type":"change"};
-                                    toaster = $injector.get('toaster',[]);
-                                    loaderState = $injector.get('LoaderState');
-                                    myAppCtrl = $controller('MyAppCtrl',{
-                                        $scope:scope,
-                                        LoaderState:loaderState,
-                                        toaster:toaster,
-                                        $window:$window,
-                                        $state:state
-                                    });
-                                }));
+        beforeEach(module(
+            'myappctrl',
+            'toaster',
+            'flow',
+            'loaderstate',
+        ));
+        beforeEach(module(function($provide) {
+            $window = {open: function(url) { return url;} };
+            $provide.value('$window', $window);
+        }));
+        beforeEach(inject(function($injector,$controller,$rootScope) {
+            scope = $rootScope.$new();
+            state = { go: function() {}};
+            event = {"bubbles":true,"cancelBubble":false,"isTrusted":true,"returnValue":true,"type":"change"};
+            toaster = $injector.get('toaster',[]);
+            loaderState = $injector.get('LoaderState');
+            myAppCtrl = $controller('MyAppCtrl',{
+                $scope:scope,
+                LoaderState:loaderState,
+                toaster:toaster,
+                $window:$window,
+                $state:state
+            });
+        }));
 
-                                // ********
-                                //  added
-                                // ********
-                                describe('added',function() {
-                                    it('Check that execution of the added method returns true if getExtension returns txt.',function() {
-                                        var $flow = {"support":true,"supportDirectory":true,"files":[],"defaults":{"chunkSize":1048576,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":false,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"multipart","testMethod":"GET","uploadMethod":"POST","prioritizeFirstAndLastChunk":false,"target":"/","testChunks":true,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,415,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false},"opts":{"chunkSize":209715200,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":true,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"octet","testMethod":"GET","uploadMethod":"PUT","prioritizeFirstAndLastChunk":false,"testChunks":false,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false,"minFileSize":0},"events":{"catchall":[null]}};
-                                        var flowFile = {"name":"myFakeFile.txt","getExtension":function() {return "txt"}};
-                                        var toasterSpy = spyOn(toaster,'pop');
+        // ********
+        //  added
+        // ********
+        describe('added',function() {
+            it('Check that execution of the added method returns true if getExtension returns txt.',function() {
+                var $flow = {"support":true,"supportDirectory":true,"files":[],"defaults":{"chunkSize":1048576,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":false,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"multipart","testMethod":"GET","uploadMethod":"POST","prioritizeFirstAndLastChunk":false,"target":"/","testChunks":true,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,415,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false},"opts":{"chunkSize":209715200,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":true,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"octet","testMethod":"GET","uploadMethod":"PUT","prioritizeFirstAndLastChunk":false,"testChunks":false,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false,"minFileSize":0},"events":{"catchall":[null]}};
+                var flowFile = {"name":"myFakeFile.txt","getExtension":function() {return "txt"}};
+                var toasterSpy = spyOn(toaster,'pop');
 
-                                        expect(scope.added(event, $flow, flowFile)).toBe(true);
-                                        expect(toasterSpy).not.toHaveBeenCalled();
-                                    });
-
-                                });
-
-                            });</code></pre>
+                expect(scope.added(event, $flow, flowFile)).toBe(true);
+                expect(toasterSpy).not.toHaveBeenCalled();
+            });
+        });
+    });</code></pre>
                     </div>
                 </div>
                 <div ng-show="tab.isSet(2)">
@@ -250,90 +248,90 @@
                     <div class="accordion">
                         <div>Example 1</div>
                     <pre><code class="language-javascript">
-                    public class TestClass {
-                        // Set up general variables
-                        private static WebDriver driver;
-                        private static AuthenticationFlow authenticationFlow;
-                        private static HomePage homePage;
-                        private String commonBase;
-                        private static MyMethods myMethods;
+    public class TestClass {
+        // Set up general variables
+        private static WebDriver driver;
+        private static AuthenticationFlow authenticationFlow;
+        private static HomePage homePage;
+        private String commonBase;
+        private static MyMethods myMethods;
 
-                        // Add test specific variables
-                        private final Date d = new Date();
+        // Add test specific variables
+        private final Date d = new Date();
 
-                        @Rule
-                        public final TestRule watcher = new TestWatcher() {
-                            @Override
-                            protected void starting(Description description) {
-                                System.out.println("Starting test: " + description.getMethodName());
-                                TabPageTree.setTestName(description.getMethodName());
-                            }
+        @Rule
+        public final TestRule watcher = new TestWatcher() {
+            @Override
+            protected void starting(Description description) {
+                System.out.println("Starting test: " + description.getMethodName());
+                TabPageTree.setTestName(description.getMethodName());
+            }
 
-                            @Override
-                            protected void failed(Throwable e, Description description) {
-                                myMethods.takeAScreenShot(TabPageTree.getTestName());
-                            }
-                        };
+            @Override
+            protected void failed(Throwable e, Description description) {
+                myMethods.takeAScreenShot(TabPageTree.getTestName());
+            }
+        };
 
-                        @Before
-                        public void initializeDriver() {
-                            // Go to the index page.
-                            authenticationFlow.getToStartPosition();
-                            commonBase = String.valueOf(d.getTime());
-                        }
+        @Before
+        public void initializeDriver() {
+            // Go to the index page.
+            authenticationFlow.getToStartPosition();
+            commonBase = String.valueOf(d.getTime());
+        }
 
-                        @BeforeClass
-                        public static void installService() {
-                            // Create the driver
-                            driver = CreateDriver.setupDriver(AuthenticationFlow.runOnBrowser);
+        @BeforeClass
+        public static void installService() {
+            // Create the driver
+            driver = CreateDriver.setupDriver(AuthenticationFlow.runOnBrowser);
 
-                            // Login
-                            authenticationFlow = new AuthenticationFlow(driver);
-                            authenticationFlow.login(AuthenticationFlow.USERNAME, AuthenticationFlow.PASSWORD);
+            // Login
+            authenticationFlow = new AuthenticationFlow(driver);
+            authenticationFlow.login(AuthenticationFlow.USERNAME, AuthenticationFlow.PASSWORD);
 
-                            homePage = new HomePage(driver);
-                            myMethods = new MyMethods(driver);
+            homePage = new HomePage(driver);
+            myMethods = new MyMethods(driver);
 
-                            // Wait for the page to load.
-                            WebDriverWait wait = new WebDriverWait(driver, 6);
-                            wait.until(ExpectedConditions.titleIs("My Web Service"));
-                            new HTTPRequests(driver).addWorkingServicesAndSchemas();
-                        }
+            // Wait for the page to load.
+            WebDriverWait wait = new WebDriverWait(driver, 6);
+            wait.until(ExpectedConditions.titleIs("My Web Service"));
+            new HTTPRequests(driver).addWorkingServicesAndSchemas();
+        }
 
-                        @AfterClass
-                        public static void closeTheDriver() {
-                            driver.quit();
-                        }
+        @AfterClass
+        public static void closeTheDriver() {
+            driver.quit();
+        }
 
-                        @After
-                        public void killContent() {
-                            HTTPRequests chris = new HTTPRequests(driver);
-                            chris.deleteResource("/appconfig/content");
-                        }
+        @After
+        public void killContent() {
+            HTTPRequests chris = new HTTPRequests(driver);
+            chris.deleteResource("/appconfig/content");
+        }
 
-                        @Test
-                        public void checkContentOfBothTabs() {
-                            // Add a new node.
-                            myMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
-                            + commonBase + "_testNode", true);
+        @Test
+        public void checkContentOfBothTabs() {
+            // Add a new node.
+            myMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
+            + commonBase + "_testNode", true);
 
-                            // Check that both tabs are shown.
-                            assertTrue(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed());
+            // Check that both tabs are shown.
+            assertTrue(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed());
 
-                            // Click on tab1
-                            homePage.tab1.click();
+            // Click on tab1
+            homePage.tab1.click();
 
-                            // Check that description and title stuff are shown.
-                            assertTrue(homePage.titleInputField.isDisplayed()
-                            && homePage.descriptionInputField.isDisplayed());
+            // Check that description and title stuff are shown.
+            assertTrue(homePage.titleInputField.isDisplayed()
+            && homePage.descriptionInputField.isDisplayed());
 
-                            // Click on tab2
-                            homePage.tab2.click();
+            // Click on tab2
+            homePage.tab2.click();
 
-                            // Check that the root node part is shown.
-                            assertTrue(homePage.treeRoot().isDisplayed());
-                        }
-                    }
+            // Check that the root node part is shown.
+            assertTrue(homePage.treeRoot().isDisplayed());
+        }
+    }
                 </code></pre>
                     </div>
                 </div>
@@ -342,9 +340,9 @@
                     <div class="accordion not-expanded">
                         <div>Example 1</div>
                         <pre><code class="language-csharp">
-        public AutomationElement waitForObject(AutomationElement winRoot,
-            TreeNode node, double timeToWait, String elementName, object[] args)
-        {
+    public AutomationElement waitForObject(AutomationElement winRoot,
+        TreeNode node, double timeToWait, String elementName, object[] args)
+    {
         // Set the time.
         DateTime timeAtStart = DateTime.Now;
         DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
@@ -399,7 +397,7 @@
 
         // Return the element.
         return returnedEle;
-        }</code></pre>
+    }</code></pre>
                     </div>
                 </div>
                 <div ng-show="tab.isSet(4)">
