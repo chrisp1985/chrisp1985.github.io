@@ -1,4 +1,4 @@
-/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+csharp+http+java+python+sql */
+/* http://prismjs.com/download.html?themes=prism-okaidia&languages=markup+css+clike+javascript+csharp+http+java+python+sql */
 var _self = (typeof window !== 'undefined')
 	? window   // if in browser
 	: (
