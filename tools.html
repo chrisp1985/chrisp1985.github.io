@@ -72,12 +72,22 @@
         .not-expanded {
             aria-expanded:false;
         }
+        .nav-pills > li {
+          float: left;
+        }
+        .nav-pills > li > a {
+          border-radius: 4px;
+        }
+        .nav-pills > li + li {
+          margin-left: 2px;
+        }
         .nav-pills > li.active > a,
         .nav-pills > li.active > a:hover,
         .nav-pills > li.active > a:focus {
-          color: #000000;
-          background-color: #FFFFFF0;
+          color: #fff;
+          background-color: #000000;
         }
+
 
         </style>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -108,6 +118,7 @@
                 <h1 class="my-header2">Tools and Frameworks.</h1>
             </div>
         </div>
+        <h1><br/></h1>
 
         <div class="container-fluid" align="left">
         <h2 class="my-header">Tools, Frameworks and some examples.</h2>
