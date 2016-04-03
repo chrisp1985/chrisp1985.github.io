@@ -72,6 +72,12 @@
         .not-expanded {
             aria-expanded:false;
         }
+        .nav-pills > li.active > a,
+        .nav-pills > li.active > a:hover,
+        .nav-pills > li.active > a:focus {
+          color: #000000;
+          background-color: #FFFFFF0;
+        }
 
         </style>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -102,12 +108,9 @@
                 <h1 class="my-header2">Tools and Frameworks.</h1>
             </div>
         </div>
-        <h1><br/></h1>
-        <h1><br/></h1>
 
         <div class="container-fluid" align="left">
         <h2 class="my-header">Tools, Frameworks and some examples.</h2>
-        <br />
         <div ng-app="myModule">
             <section class="tab container" ng-controller="myCtrl as tab">
                 <ul class="nav nav-pills">
