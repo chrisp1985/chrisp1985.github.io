@@ -403,72 +403,136 @@
                     <div ng-show="tab.isSet(3)">
                         <blockquote>{{tab.selects[2].description}}</blockquote>
                         <!--<p>{{tab.selects[2].example1}}</p>-->
-                        <div class="accordion">
-                            <div>Example 1</div>
-                            <pre><code class="language-csharp">
-        public AutomationElement waitForObject(AutomationElement winRoot,
-            TreeNode node, double timeToWait, String elementName, object[] args)
-        {
-            // Set the time.
-            DateTime timeAtStart = DateTime.Now;
-            DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
-
-            // Set the returned element to be null (so if the element isn't found, null is returned).
-            AutomationElement returnedEle = null;
-
-            // While the timer hasn't expired...
-            while (now.Subtract(timeAtStart).TotalSeconds < timeToWait)
-            {
-                try
-                {
-                    // Create the object here.
-                    MethodInfo method = typeof(ArcGIS_PageObjects).GetMethod(elementName);
-                    AutomationElement root = null;
-
-                    if (winRoot == null)
-                    {
-                        root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
-                    }
-                    else
-                    {
-                        root = winRoot;
-                    }
-
-                    // Invoke the element through reflection.
-                    AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
-
-                    if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
-                    {
-                        // OMG, you found the element.
-                        returnedEle = newEle;
-                        break;
-                    }
-
-                }
-
-                catch
-                {
-                    // Just carry on.
-                }
-
-                // Reset the time.
-                now = DateTime.Now;
-            }
-
-            // Has the timer expired?
-            if (now.Subtract(timeAtStart).TotalSeconds > timeToWait)
-            {
-                Assert.Fail("Wait time was exceeded for element so test failed.");
-            }
-
-            // Return the element.
-            return returnedEle;
-        }</code></pre>
-                        </div>
                     </div>
 
                     <div ng-show="tab.isSet(4)">
                         <blockquote>{{tab.selects[3].description}}</blockquote>
+                        <div class="accordion">
+                            <div>RestAssured</div>
+                            <pre><code class="language-java">
+@Test
+public void validGetRequestRestAssured()
+{
+    // Add the resource
+    credsBasedRequest
+    .putRequest(
+    "trialText",
+    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+    + "_validGetRequest").then().assertThat().statusCode(200);
+
+    // Check the contents
+    assertTrue(credsBasedRequest
+    .getRequest(
+    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+    + "_validGetRequest").asString().contains("trialText"));
+}
+
+@Test
+public void getInvalidURLRestAssured()
+{
+    credsBasedRequest.getRequest(credsBasedRequest.URLString + "path/to/my/con").then()
+    .assertThat().statusCode(404);
+}
+                            </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[3].restassured}}</p>
+
+                        <p><br/></p>
+                        <div class="accordion">
+                            <div>RestSharp</div>
+                            <pre><code class="language-csharp">
+/**
+* *** GET WHATEVER ***
+* Executes a 'GET' command for the request path supplied.
+*
+* @param requestPath
+*      This is the URI for the request.
+*
+* @return
+*      This is the returned content from the response as a string.
+*/
+public String getWhatever(String requestPath)
+{
+    // This needs to be set to avoid SSL issues.
+    ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+    // Set the Client and the Request.
+    RestClient client = new RestClient("https://localhost:9998");
+    RestRequest request = new RestRequest(requestPath, Method.GET);
+
+    // Add the token and the pathToFile to the request.
+    request.AddCookie("customAuthToken", getAToken("admin","admin"));
+
+    // Execute and return the response as a string.
+    return client.Execute(request).Content;
+}
+                            </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[3].restsharp}}</p>
+
+                        <p><br/></p>
+                        <div class="accordion">
+                            <div>Mocha</div>
+                            <pre><code class="language-javascript">
+var should = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\should');
+var request = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\supertest');
+
+describe('Mocha Tests', function() {
+
+    // GENERAL
+    var url = 'http://mylocalservice:8090';
+
+    // USERS
+    var testUser = 'admin';
+
+    describe('2.3.1.2 PUT /path/to/user/{username}', function() {
+        it('PUTUSER-1', function(done) {
+
+        // *******************************************************
+        // Summary
+        // Confirm that the API accepts HTTP PUT requests for creating users when all mandatory fields are set in the body.
+
+        // Preconditions
+        // Fully Operable WebService is available.
+        // WebService is fully licensed.
+        // *******************************************************
+        request(url)
+        .put('/path/to/user/'+testUser) // Set the URI you're trying to PUT.
+        .set('Authorization', 'Basic c2VwdXJhLW9wZW5pZDpwYXNzd29yZA==') // set the Custom Header.
+        .set('Content-Type', 'application/json') // Set the Content Type header.
+        .send({
+            'authtype':'oauth2',
+            'id':testUser,
+            'password':testUser,
+            'name':testUser,
+            'type':'admin',
+            'role':'Manager',
+            'description':'TRIAL USER',
+            'defaultlanguage':'en'
+        }) // Send the Data that is contained within the body of the command.
+        .end(function(err, res) {
+            if (err) {
+               throw err;
+            }
+            // console.log(res.body);
+            res.status.should.be.equal(200); // Check the HTTP Status is 200 (OK)
+            res.should.have.properties("user","status");
+            res.body.status.should.have.property("success",true);
+            done();
+        });
+    });
+});
+                            </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[1].mocha}}</p>
+
+                        <p><br/></p>
                     </div>
 
                     <div ng-show="tab.isSet(5)">

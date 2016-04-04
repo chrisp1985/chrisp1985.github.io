@@ -38,9 +38,9 @@
         {
             name:"API Text",
             description:"The REST API uses the URI of HTTP Requests to GET and DELETE resources, whilst using the body of the request to POST or PUT resources.",
-            mocha:"",
-            restassured:"",
-            restsharp:""
+            mocha:"This is a mocha example.",
+            restassured:"This is a RestAssured example.",
+            restsharp:"This is a RestSharp example."
         },
         {
             name:"JMeter",
