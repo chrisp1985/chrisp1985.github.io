@@ -33,7 +33,7 @@
         {
             name:"UI Automation Text",
             description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application.",
-            example1:"";
+            example1:""
         },
         {
             name:"API Text",
