@@ -63,6 +63,13 @@
             margin-right: auto;
             margin-left: auto;
         }
+        .container-fluid-content {
+            padding-right: 40px;
+            padding-left: 40px;
+            padding-top: 3px;
+            margin-right: auto;
+            margin-left: auto;
+        }
         .my-header {
             font-family: 'Roboto', sans-serif;
         }
@@ -111,367 +118,368 @@
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-
-        <div>
-            <div class="container-fluid-chris">
-                <h1><br/></h1>
-                <h1 class="my-header2">Tools and Frameworks.</h1>
-            </div>
-        </div>
-        <h1><br/></h1>
-
-        <div class="container-fluid" align="left">
-        <h2 class="my-header">Tools, Frameworks and some examples.</h2>
-        <div ng-app="myModule">
-            <section class="tab container" ng-controller="myCtrl as tab">
-                <ul class="nav nav-pills">
-                    <li ng-class="{ active: tab.isSet(1) }">
-                        <a href ng-click="tab.setTab(1)">Jasmine</a></li>
-                    <li ng-class="{ active: tab.isSet(2) }">
-                        <a href ng-click="tab.setTab(2)">Selenium</a></li>
-                    <li ng-class="{ active: tab.isSet(3) }">
-                        <a href ng-click="tab.setTab(3)">UI Automation</a></li>
-                    <li ng-class="{ active: tab.isSet(4) }">
-                        <a href ng-click="tab.setTab(4)">API</a></li>
-                    <li ng-class="{ active: tab.isSet(5) }">
-                        <a href ng-click="tab.setTab(5)">JMeter</a></li>
-                </ul>
-                <h4><br/></h4>
+        <div class="container-fluid-content">
+            <div>
                 <div class="container-fluid-chris">
-                <div ng-show="tab.isSet(1)">
-                    <blockquote>{{tab.selects[0].description}}</blockquote>
-                    <div class="accordion">
-                        <div>Example 1</div>
-                        <pre><code class="language-javascript">
-        describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+                    <h1><br/></h1>
+                    <h1 class="my-header2">Tools and Frameworks.</h1>
+                </div>
+            </div>
+            <h1><br/></h1>
+
+            <div class="container-fluid" align="left">
+            <h2 class="my-header">Tools, Frameworks and some examples.</h2>
+            <div ng-app="myModule">
+                <section class="tab container" ng-controller="myCtrl as tab">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{ active: tab.isSet(1) }">
+                            <a href ng-click="tab.setTab(1)">Jasmine</a></li>
+                        <li ng-class="{ active: tab.isSet(2) }">
+                            <a href ng-click="tab.setTab(2)">Selenium</a></li>
+                        <li ng-class="{ active: tab.isSet(3) }">
+                            <a href ng-click="tab.setTab(3)">UI Automation</a></li>
+                        <li ng-class="{ active: tab.isSet(4) }">
+                            <a href ng-click="tab.setTab(4)">API</a></li>
+                        <li ng-class="{ active: tab.isSet(5) }">
+                            <a href ng-click="tab.setTab(5)">JMeter</a></li>
+                    </ul>
+                    <h4><br/></h4>
+
+                    <div ng-show="tab.isSet(1)">
+                        <blockquote>{{tab.selects[0].description}}</blockquote>
+                        <div class="accordion">
+                            <div>Example 1</div>
+                            <pre><code class="language-javascript">
+            describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+                "use strict";
+
+                // *******************************
+                //  AUTHENTICATOR ANGULAR MODULE
+                // *******************************
+                var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
+
+                beforeEach(module('authenticator'));
+                beforeEach(module('ngCookies'));
+                beforeEach(module(function($provide) {
+                    $window = {location: { replace: jasmine.createSpy()} };
+                    $provide.value('$window', $window);
+                }));
+
+                beforeEach(inject(function($injector) {
+                    authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
+                    authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
+                    myCookies = $injector.get('$cookieStore',[]);
+                    httpBackend = $injector.get('$httpBackend');
+                }));
+
+                // ***********************
+                //  AUTHENTICATOR FACTORY
+                // ***********************
+                describe('Authenticator Factory',function() {
+
+                    // *********
+                    //   LOGIN
+                    // *********
+                    describe('login',function() {
+                        it('Check that the login method is defined.',function() {
+                            expect(authenticatorService.login).not.toEqual(undefined);
+                        });
+
+                        it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
+                            var creds, successCallbackSpy, errorCallbackSpy;
+                            creds = {"userName":"admin","password":"admin"};
+                            successCallbackSpy = jasmine.createSpy();
+                            errorCallbackSpy = jasmine.createSpy();
+
+                            httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                                return headers['Content-Type'] === 'application/json';
+                            }).respond(200, 'HELLO');
+                            authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
+                            httpBackend.flush();
+                            expect(successCallbackSpy).toHaveBeenCalled();
+                        });
+
+                        it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
+                            var invalidcreds, successCallbackSpy, errorCallbackSpy;
+                            invalidcreds = {"userName":"admin2","password":"admin2"};
+                            successCallbackSpy = jasmine.createSpy();
+                            errorCallbackSpy = jasmine.createSpy();
+
+                            httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
+                            return headers['Content-Type'] === 'application/json';
+                            }).respond(500, 'BOO');
+                            authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
+                            httpBackend.flush();
+                            expect(errorCallbackSpy).toHaveBeenCalled();
+
+                        });
+                    });
+                });
+            });</code></pre>
+                        </div>
+                        <p><br/></p>
+
+                            <p>{{tab.selects[0].example1}}</p>
+
+                        <p><br/></p>
+
+                        <div class="accordion">
+                            <div>Example 2</div>
+                            <pre><code class="language-javascript">
+        describe('CONTROLLERS - Settings Admin Test Cases', function() {
             "use strict";
 
-            // *******************************
-            //  AUTHENTICATOR ANGULAR MODULE
-            // *******************************
-            var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
+            // **********************************************
+            //    MYAPP CONTROLLER ANGULAR MODULE
+            // **********************************************
+            var scope,myAppCtrl,toaster,$window,loaderState,state,event;
 
-            beforeEach(module('authenticator'));
-            beforeEach(module('ngCookies'));
+            beforeEach(module(
+                'myappctrl',
+                'toaster',
+                'flow',
+                'loaderstate',
+            ));
             beforeEach(module(function($provide) {
-                $window = {location: { replace: jasmine.createSpy()} };
+                $window = {open: function(url) { return url;} };
                 $provide.value('$window', $window);
             }));
-
-            beforeEach(inject(function($injector) {
-                authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
-                authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
-                myCookies = $injector.get('$cookieStore',[]);
-                httpBackend = $injector.get('$httpBackend');
+            beforeEach(inject(function($injector,$controller,$rootScope) {
+                scope = $rootScope.$new();
+                state = { go: function() {}};
+                event = {"bubbles":true,"cancelBubble":false,"isTrusted":true,"returnValue":true,"type":"change"};
+                toaster = $injector.get('toaster',[]);
+                loaderState = $injector.get('LoaderState');
+                myAppCtrl = $controller('MyAppCtrl',{
+                    $scope:scope,
+                    LoaderState:loaderState,
+                    toaster:toaster,
+                    $window:$window,
+                    $state:state
+                });
             }));
 
-            // ***********************
-            //  AUTHENTICATOR FACTORY
-            // ***********************
-            describe('Authenticator Factory',function() {
+            // ********
+            //  added
+            // ********
+            describe('added',function() {
+                it('Check that execution of the added method returns true if getExtension returns txt.',function() {
+                    var $flow = {"support":true,"supportDirectory":true,"files":[],"defaults":{"chunkSize":1048576,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":false,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"multipart","testMethod":"GET","uploadMethod":"POST","prioritizeFirstAndLastChunk":false,"target":"/","testChunks":true,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,415,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false},"opts":{"chunkSize":209715200,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":true,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"octet","testMethod":"GET","uploadMethod":"PUT","prioritizeFirstAndLastChunk":false,"testChunks":false,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false,"minFileSize":0},"events":{"catchall":[null]}};
+                    var flowFile = {"name":"myFakeFile.txt","getExtension":function() {return "txt"}};
+                    var toasterSpy = spyOn(toaster,'pop');
 
-                // *********
-                //   LOGIN
-                // *********
-                describe('login',function() {
-                    it('Check that the login method is defined.',function() {
-                        expect(authenticatorService.login).not.toEqual(undefined);
-                    });
-
-                    it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
-                        var creds, successCallbackSpy, errorCallbackSpy;
-                        creds = {"userName":"admin","password":"admin"};
-                        successCallbackSpy = jasmine.createSpy();
-                        errorCallbackSpy = jasmine.createSpy();
-
-                        httpBackend.expectPOST('/tokens/', creds, function(headers) {
-                            return headers['Content-Type'] === 'application/json';
-                        }).respond(200, 'HELLO');
-                        authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
-                        httpBackend.flush();
-                        expect(successCallbackSpy).toHaveBeenCalled();
-                    });
-
-                    it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
-                        var invalidcreds, successCallbackSpy, errorCallbackSpy;
-                        invalidcreds = {"userName":"admin2","password":"admin2"};
-                        successCallbackSpy = jasmine.createSpy();
-                        errorCallbackSpy = jasmine.createSpy();
-
-                        httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
-                        return headers['Content-Type'] === 'application/json';
-                        }).respond(500, 'BOO');
-                        authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
-                        httpBackend.flush();
-                        expect(errorCallbackSpy).toHaveBeenCalled();
-
-                    });
+                    expect(scope.added(event, $flow, flowFile)).toBe(true);
+                    expect(toasterSpy).not.toHaveBeenCalled();
                 });
             });
         });</code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[0].example2}}</p>
+
+                        <p><br/></p>
                     </div>
-                    <p><br/></p>
 
-                        <p>{{tab.selects[0].example1}}</p>
+                    <div ng-show="tab.isSet(2)">
+                        <blockquote>{{tab.selects[1].description}}</blockquote>
+                        <div class="accordion">
+                            <div>Example 1</div>
+                            <pre><code class="language-java">
+        public class TestClass {
+            // Set up general variables
+            private static WebDriver driver;
+            private static AuthenticationFlow authenticationFlow;
+            private static HomePage homePage;
+            private String commonBase;
+            private static MyMethods myMethods;
 
-                    <p><br/></p>
+            // Add test specific variables
+            private final Date d = new Date();
 
-                    <div class="accordion">
-                        <div>Example 2</div>
-                        <pre><code class="language-javascript">
-    describe('CONTROLLERS - Settings Admin Test Cases', function() {
-        "use strict";
+            @Rule
+            public final TestRule watcher = new TestWatcher() {
+                @Override
+                protected void starting(Description description) {
+                    System.out.println("Starting test: " + description.getMethodName());
+                    TabPageTree.setTestName(description.getMethodName());
+                }
 
-        // **********************************************
-        //    MYAPP CONTROLLER ANGULAR MODULE
-        // **********************************************
-        var scope,myAppCtrl,toaster,$window,loaderState,state,event;
+                @Override
+                protected void failed(Throwable e, Description description) {
+                    myMethods.takeAScreenShot(TabPageTree.getTestName());
+                }
+            };
 
-        beforeEach(module(
-            'myappctrl',
-            'toaster',
-            'flow',
-            'loaderstate',
-        ));
-        beforeEach(module(function($provide) {
-            $window = {open: function(url) { return url;} };
-            $provide.value('$window', $window);
-        }));
-        beforeEach(inject(function($injector,$controller,$rootScope) {
-            scope = $rootScope.$new();
-            state = { go: function() {}};
-            event = {"bubbles":true,"cancelBubble":false,"isTrusted":true,"returnValue":true,"type":"change"};
-            toaster = $injector.get('toaster',[]);
-            loaderState = $injector.get('LoaderState');
-            myAppCtrl = $controller('MyAppCtrl',{
-                $scope:scope,
-                LoaderState:loaderState,
-                toaster:toaster,
-                $window:$window,
-                $state:state
-            });
-        }));
-
-        // ********
-        //  added
-        // ********
-        describe('added',function() {
-            it('Check that execution of the added method returns true if getExtension returns txt.',function() {
-                var $flow = {"support":true,"supportDirectory":true,"files":[],"defaults":{"chunkSize":1048576,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":false,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"multipart","testMethod":"GET","uploadMethod":"POST","prioritizeFirstAndLastChunk":false,"target":"/","testChunks":true,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,415,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false},"opts":{"chunkSize":209715200,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":true,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"octet","testMethod":"GET","uploadMethod":"PUT","prioritizeFirstAndLastChunk":false,"testChunks":false,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false,"minFileSize":0},"events":{"catchall":[null]}};
-                var flowFile = {"name":"myFakeFile.txt","getExtension":function() {return "txt"}};
-                var toasterSpy = spyOn(toaster,'pop');
-
-                expect(scope.added(event, $flow, flowFile)).toBe(true);
-                expect(toasterSpy).not.toHaveBeenCalled();
-            });
-        });
-    });</code></pre>
-                    </div>
-                    <p><br/></p>
-
-                    <p>{{tab.selects[0].example2}}</p>
-
-                    <p><br/></p>
-                </div>
-
-                <div ng-show="tab.isSet(2)">
-                    <blockquote>{{tab.selects[1].description}}</blockquote>
-                    <div class="accordion">
-                        <div>Example 1</div>
-                        <pre><code class="language-java">
-    public class TestClass {
-        // Set up general variables
-        private static WebDriver driver;
-        private static AuthenticationFlow authenticationFlow;
-        private static HomePage homePage;
-        private String commonBase;
-        private static MyMethods myMethods;
-
-        // Add test specific variables
-        private final Date d = new Date();
-
-        @Rule
-        public final TestRule watcher = new TestWatcher() {
-            @Override
-            protected void starting(Description description) {
-                System.out.println("Starting test: " + description.getMethodName());
-                TabPageTree.setTestName(description.getMethodName());
+            @Before
+            public void initializeDriver() {
+                // Go to the index page.
+                authenticationFlow.getToStartPosition();
+                commonBase = String.valueOf(d.getTime());
             }
 
-            @Override
-            protected void failed(Throwable e, Description description) {
-                myMethods.takeAScreenShot(TabPageTree.getTestName());
+            @BeforeClass
+            public static void installService() {
+                // Create the driver
+                driver = CreateDriver.setupDriver(AuthenticationFlow.runOnBrowser);
+
+                // Login
+                authenticationFlow = new AuthenticationFlow(driver);
+                authenticationFlow.login(AuthenticationFlow.USERNAME, AuthenticationFlow.PASSWORD);
+
+                homePage = new HomePage(driver);
+                myMethods = new MyMethods(driver);
+
+                // Wait for the page to load.
+                WebDriverWait wait = new WebDriverWait(driver, 6);
+                wait.until(ExpectedConditions.titleIs("My Web Service"));
+                new HTTPRequests(driver).addWorkingServicesAndSchemas();
             }
-        };
 
-        @Before
-        public void initializeDriver() {
-            // Go to the index page.
-            authenticationFlow.getToStartPosition();
-            commonBase = String.valueOf(d.getTime());
+            @AfterClass
+            public static void closeTheDriver() {
+                driver.quit();
+            }
+
+            @After
+            public void killContent() {
+                HTTPRequests chris = new HTTPRequests(driver);
+                chris.deleteResource("/appconfig/content");
+            }
+
+            @Test
+            public void checkContentOfBothTabs() {
+                // Add a new node.
+                myMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
+                + commonBase + "_testNode", true);
+
+                // Check that both tabs are shown.
+                assertTrue(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed());
+
+                // Click on tab1
+                homePage.tab1.click();
+
+                // Check that description and title stuff are shown.
+                assertTrue(homePage.titleInputField.isDisplayed()
+                && homePage.descriptionInputField.isDisplayed());
+
+                // Click on tab2
+                homePage.tab2.click();
+
+                // Check that the root node part is shown.
+                assertTrue(homePage.treeRoot().isDisplayed());
+            }
         }
-
-        @BeforeClass
-        public static void installService() {
-            // Create the driver
-            driver = CreateDriver.setupDriver(AuthenticationFlow.runOnBrowser);
-
-            // Login
-            authenticationFlow = new AuthenticationFlow(driver);
-            authenticationFlow.login(AuthenticationFlow.USERNAME, AuthenticationFlow.PASSWORD);
-
-            homePage = new HomePage(driver);
-            myMethods = new MyMethods(driver);
-
-            // Wait for the page to load.
-            WebDriverWait wait = new WebDriverWait(driver, 6);
-            wait.until(ExpectedConditions.titleIs("My Web Service"));
-            new HTTPRequests(driver).addWorkingServicesAndSchemas();
-        }
-
-        @AfterClass
-        public static void closeTheDriver() {
-            driver.quit();
-        }
-
-        @After
-        public void killContent() {
-            HTTPRequests chris = new HTTPRequests(driver);
-            chris.deleteResource("/appconfig/content");
-        }
-
-        @Test
-        public void checkContentOfBothTabs() {
-            // Add a new node.
-            myMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
-            + commonBase + "_testNode", true);
-
-            // Check that both tabs are shown.
-            assertTrue(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed());
-
-            // Click on tab1
-            homePage.tab1.click();
-
-            // Check that description and title stuff are shown.
-            assertTrue(homePage.titleInputField.isDisplayed()
-            && homePage.descriptionInputField.isDisplayed());
-
-            // Click on tab2
-            homePage.tab2.click();
-
-            // Check that the root node part is shown.
-            assertTrue(homePage.treeRoot().isDisplayed());
-        }
-    }
-                </code></pre>
-                    </div>
-                    <p><br/></p>
-
-                        <p>{{tab.selects[1].example1}}</p>
-
-                    <p><br/></p>
-                    <div class="accordion">
-                        <div>Example 2</div>
-                        <pre><code class="language-java">
-public void login(String username, String password) {
-    webDriver.get(LOGIN_URL);
-    webDriver.manage().window().setSize(new Dimension(1040,744));
-    if(runOnBrowser.equals("ie") && !webDriver.getTitle().contains("My WebPage")) {
-        // Needed for IE certification issue only.
-        webDriver.get("javascript:document.getElementById('overridelink').click();");
-    }
-    assertThat(webDriver.getTitle(), is("My WebPage - Login"));
-    loginPage.setUserName(username);
-    loginPage.setPassword(password);
-    loginPage.clickLogin();
-}
                     </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                            <p>{{tab.selects[1].example1}}</p>
+
+                        <p><br/></p>
+                        <div class="accordion">
+                            <div>Example 2</div>
+                            <pre><code class="language-java">
+    public void login(String username, String password) {
+        webDriver.get(LOGIN_URL);
+        webDriver.manage().window().setSize(new Dimension(1040,744));
+        if(runOnBrowser.equals("ie") && !webDriver.getTitle().contains("My WebPage")) {
+            // Needed for IE certification issue only.
+            webDriver.get("javascript:document.getElementById('overridelink').click();");
+        }
+        assertThat(webDriver.getTitle(), is("My WebPage - Login"));
+        loginPage.setUserName(username);
+        loginPage.setPassword(password);
+        loginPage.clickLogin();
+    }
+                        </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                            <p>{{tab.selects[1].example2}}</p>
+
+                        <p><br/></p>
                     </div>
-                    <p><br/></p>
 
-                        <p>{{tab.selects[1].example2}}</p>
-
-                    <p><br/></p>
-                </div>
-
-                <div ng-show="tab.isSet(3)">
-                    <blockquote>{{tab.selects[2].description}}</blockquote>
-                    <!--<p>{{tab.selects[2].example1}}</p>-->
-                    <div class="accordion">
-                        <div>Example 1</div>
-                        <pre><code class="language-csharp">
-    public AutomationElement waitForObject(AutomationElement winRoot,
-        TreeNode node, double timeToWait, String elementName, object[] args)
-    {
-        // Set the time.
-        DateTime timeAtStart = DateTime.Now;
-        DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
-
-        // Set the returned element to be null (so if the element isn't found, null is returned).
-        AutomationElement returnedEle = null;
-
-        // While the timer hasn't expired...
-        while (now.Subtract(timeAtStart).TotalSeconds < timeToWait)
+                    <div ng-show="tab.isSet(3)">
+                        <blockquote>{{tab.selects[2].description}}</blockquote>
+                        <!--<p>{{tab.selects[2].example1}}</p>-->
+                        <div class="accordion">
+                            <div>Example 1</div>
+                            <pre><code class="language-csharp">
+        public AutomationElement waitForObject(AutomationElement winRoot,
+            TreeNode node, double timeToWait, String elementName, object[] args)
         {
-            try
+            // Set the time.
+            DateTime timeAtStart = DateTime.Now;
+            DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
+
+            // Set the returned element to be null (so if the element isn't found, null is returned).
+            AutomationElement returnedEle = null;
+
+            // While the timer hasn't expired...
+            while (now.Subtract(timeAtStart).TotalSeconds < timeToWait)
             {
-                // Create the object here.
-                MethodInfo method = typeof(ArcGIS_PageObjects).GetMethod(elementName);
-                AutomationElement root = null;
-
-                if (winRoot == null)
+                try
                 {
-                    root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
+                    // Create the object here.
+                    MethodInfo method = typeof(ArcGIS_PageObjects).GetMethod(elementName);
+                    AutomationElement root = null;
+
+                    if (winRoot == null)
+                    {
+                        root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
+                    }
+                    else
+                    {
+                        root = winRoot;
+                    }
+
+                    // Invoke the element through reflection.
+                    AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
+
+                    if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
+                    {
+                        // OMG, you found the element.
+                        returnedEle = newEle;
+                        break;
+                    }
+
                 }
-                else
+
+                catch
                 {
-                    root = winRoot;
+                    // Just carry on.
                 }
 
-                // Invoke the element through reflection.
-                AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
-
-                if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
-                {
-                    // OMG, you found the element.
-                    returnedEle = newEle;
-                    break;
-                }
-
+                // Reset the time.
+                now = DateTime.Now;
             }
 
-            catch
+            // Has the timer expired?
+            if (now.Subtract(timeAtStart).TotalSeconds > timeToWait)
             {
-                // Just carry on.
+                Assert.Fail("Wait time was exceeded for element so test failed.");
             }
 
-            // Reset the time.
-            now = DateTime.Now;
-        }
-
-        // Has the timer expired?
-        if (now.Subtract(timeAtStart).TotalSeconds > timeToWait)
-        {
-            Assert.Fail("Wait time was exceeded for element so test failed.");
-        }
-
-        // Return the element.
-        return returnedEle;
-    }</code></pre>
+            // Return the element.
+            return returnedEle;
+        }</code></pre>
+                        </div>
                     </div>
-                </div>
 
-                <div ng-show="tab.isSet(4)">
-                    <blockquote>{{tab.selects[3].description}}</blockquote>
-                </div>
+                    <div ng-show="tab.isSet(4)">
+                        <blockquote>{{tab.selects[3].description}}</blockquote>
+                    </div>
 
-                <div ng-show="tab.isSet(5)">
-                    <blockquote>{{tab.selects[4].description}}</blockquote>
-                </div>
-                </div>
-            </section>
-        </div>
+                    <div ng-show="tab.isSet(5)">
+                        <blockquote>{{tab.selects[4].description}}</blockquote>
+                    </div>
 
+                </section>
+            </div>
+
+            </div>
         </div>
         <br />
         <footer>
