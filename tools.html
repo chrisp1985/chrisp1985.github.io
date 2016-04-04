@@ -140,77 +140,80 @@
                 <div ng-show="tab.isSet(1)">
                     <blockquote>{{tab.selects[0].description}}</blockquote>
                     <div>{{tab.selects[0].example1}}</div>
-                        <div class="accordion">Example 1</div>
-                    <pre><code class="language-javascript">
-    describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
-        "use strict";
+                    <div class="accordion">
+                        <div>Example 1</div>
+                        <pre><code class="language-javascript">
+        describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+            "use strict";
 
-        // *******************************
-        //  AUTHENTICATOR ANGULAR MODULE
-        // *******************************
-        var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
+            // *******************************
+            //  AUTHENTICATOR ANGULAR MODULE
+            // *******************************
+            var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
 
-        beforeEach(module('authenticator'));
-        beforeEach(module('ngCookies'));
-        beforeEach(module(function($provide) {
-            $window = {location: { replace: jasmine.createSpy()} };
-            $provide.value('$window', $window);
-        }));
+            beforeEach(module('authenticator'));
+            beforeEach(module('ngCookies'));
+            beforeEach(module(function($provide) {
+                $window = {location: { replace: jasmine.createSpy()} };
+                $provide.value('$window', $window);
+            }));
 
-        beforeEach(inject(function($injector) {
-            authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
-            authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
-            myCookies = $injector.get('$cookieStore',[]);
-            httpBackend = $injector.get('$httpBackend');
-        }));
+            beforeEach(inject(function($injector) {
+                authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
+                authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
+                myCookies = $injector.get('$cookieStore',[]);
+                httpBackend = $injector.get('$httpBackend');
+            }));
 
-        // ***********************
-        //  AUTHENTICATOR FACTORY
-        // ***********************
-        describe('Authenticator Factory',function() {
+            // ***********************
+            //  AUTHENTICATOR FACTORY
+            // ***********************
+            describe('Authenticator Factory',function() {
 
-            // *********
-            //   LOGIN
-            // *********
-            describe('login',function() {
-                it('Check that the login method is defined.',function() {
-                    expect(authenticatorService.login).not.toEqual(undefined);
-                });
+                // *********
+                //   LOGIN
+                // *********
+                describe('login',function() {
+                    it('Check that the login method is defined.',function() {
+                        expect(authenticatorService.login).not.toEqual(undefined);
+                    });
 
-                it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
-                    var creds, successCallbackSpy, errorCallbackSpy;
-                    creds = {"userName":"admin","password":"admin"};
-                    successCallbackSpy = jasmine.createSpy();
-                    errorCallbackSpy = jasmine.createSpy();
+                    it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
+                        var creds, successCallbackSpy, errorCallbackSpy;
+                        creds = {"userName":"admin","password":"admin"};
+                        successCallbackSpy = jasmine.createSpy();
+                        errorCallbackSpy = jasmine.createSpy();
 
-                    httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                        httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                            return headers['Content-Type'] === 'application/json';
+                        }).respond(200, 'HELLO');
+                        authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
+                        httpBackend.flush();
+                        expect(successCallbackSpy).toHaveBeenCalled();
+                    });
+
+                    it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
+                        var invalidcreds, successCallbackSpy, errorCallbackSpy;
+                        invalidcreds = {"userName":"admin2","password":"admin2"};
+                        successCallbackSpy = jasmine.createSpy();
+                        errorCallbackSpy = jasmine.createSpy();
+
+                        httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
                         return headers['Content-Type'] === 'application/json';
-                    }).respond(200, 'HELLO');
-                    authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
-                    httpBackend.flush();
-                    expect(successCallbackSpy).toHaveBeenCalled();
-                });
+                        }).respond(500, 'BOO');
+                        authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
+                        httpBackend.flush();
+                        expect(errorCallbackSpy).toHaveBeenCalled();
 
-                it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
-                    var invalidcreds, successCallbackSpy, errorCallbackSpy;
-                    invalidcreds = {"userName":"admin2","password":"admin2"};
-                    successCallbackSpy = jasmine.createSpy();
-                    errorCallbackSpy = jasmine.createSpy();
-
-                    httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
-                    return headers['Content-Type'] === 'application/json';
-                    }).respond(500, 'BOO');
-                    authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
-                    httpBackend.flush();
-                    expect(errorCallbackSpy).toHaveBeenCalled();
-
+                    });
                 });
             });
-        });
-    });</code></pre>
+        });</code></pre>
+                    </div>
                     <div>{{tab.selects[0].example2}}</div>
+                    <div class="accordion">
                         <div class="accordion">Example 2</div>
-                    <pre><code class="language-javascript">
+                        <pre><code class="language-javascript">
     describe('CONTROLLERS - Settings Admin Test Cases', function() {
         "use strict";
 
@@ -258,12 +261,15 @@
             });
         });
     });</code></pre>
+                    </div>
                 </div>
+                
                 <div ng-show="tab.isSet(2)">
                     <blockquote>{{tab.selects[1].description}}</blockquote>
                     <div>{{tab.selects[1].example1}}</div>
-                        <div class="accordion">Example 1</div>
-                    <pre><code class="language-java">
+                    <div class="accordion">
+                        <div>Example 1</div>
+                        <pre><code class="language-java">
     public class TestClass {
         // Set up general variables
         private static WebDriver driver;
@@ -349,9 +355,12 @@
         }
     }
                 </code></pre>
+                    </div>
+
                     <div>{{tab.selects[1].example2}}</div>
-                        <div class="accordion">Example 2</div>
-                    <pre><code class="language-java">
+                    <div class="accordion">
+                        <div>Example 2</div>
+                        <pre><code class="language-java">
 public void login(String username, String password) {
     webDriver.get(LOGIN_URL);
     webDriver.manage().window().setSize(new Dimension(1040,744));
@@ -365,11 +374,14 @@ public void login(String username, String password) {
     loginPage.clickLogin();
 }
                     </code></pre>
+                    </div>
                 </div>
+
                 <div ng-show="tab.isSet(3)">
                     <blockquote>{{tab.selects[2].description}}</blockquote>
-                    <div>{{tab.selects[1].example1}}</div>
-                    <div class="accordion">Example 1</div>
+                    <div>{{tab.selects[2].example1}}</div>
+                    <div class="accordion">
+                        <div>Example 1</div>
                         <pre><code class="language-csharp">
     public AutomationElement waitForObject(AutomationElement winRoot,
         TreeNode node, double timeToWait, String elementName, object[] args)
@@ -429,10 +441,13 @@ public void login(String username, String password) {
         // Return the element.
         return returnedEle;
     }</code></pre>
+                    </div>
                 </div>
+
                 <div ng-show="tab.isSet(4)">
                     <blockquote>{{tab.selects[3].description}}</blockquote>
                 </div>
+
                 <div ng-show="tab.isSet(5)">
                     <blockquote>{{tab.selects[4].description}}</blockquote>
                 </div>
