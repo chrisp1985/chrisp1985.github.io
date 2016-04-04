@@ -442,11 +442,11 @@ public AutomationElement waitForObject(AutomationElement winRoot, TreeNode node,
         try
         {
             // Create the object here.
-            MethodInfo method = typeof(ArcGIS_PageObjects).GetMethod(elementName);
+            MethodInfo method = typeof(PageObjects).GetMethod(elementName);
             AutomationElement root = null;
             if (winRoot == null)
             {
-                root = AutomationElement.RootElement.FindChildByProcessId(ArcGIS_AutomationMethods.processId);
+                root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
             }
             else
             {
@@ -454,7 +454,7 @@ public AutomationElement waitForObject(AutomationElement winRoot, TreeNode node,
             }
 
             // Invoke the element through reflection.
-            AutomationElement newEle = (AutomationElement)method.Invoke(new ArcGIS_PageObjects(), args);
+            AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
             if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
             {
                 // OMG, you found the element.
@@ -542,7 +542,7 @@ public String getWhatever(String requestPath)
     ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
     // Set the Client and the Request.
-    RestClient client = new RestClient("https://localhost:9998");
+    RestClient client = new RestClient("https://localhost:7753");
     RestRequest request = new RestRequest(requestPath, Method.GET);
 
     // Add the token and the pathToFile to the request.
