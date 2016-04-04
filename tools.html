@@ -141,6 +141,7 @@
                     <blockquote>{{tab.selects[0].description}}</blockquote>
                     <div class="accordion">
                         <div>Example 1</div>
+                        <div>{{tab.selects[0].example1}}</div>
                     <pre><code class="language-javascript">
     describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
         "use strict";
@@ -209,6 +210,7 @@
         });
     });</code></pre>
                         <div>Example 2</div>
+                        <div>{{tab.selects[0].example2}}</div>
                     <pre><code class="language-javascript">
     describe('CONTROLLERS - Settings Admin Test Cases', function() {
         "use strict";
@@ -263,6 +265,7 @@
                     <blockquote>{{tab.selects[1].description}}</blockquote>
                     <div class="accordion">
                         <div>Example 1</div>
+                        <div>{{tab.selects[1].example2}}</div>
                     <pre><code class="language-java">
     public class TestClass {
         // Set up general variables
@@ -350,6 +353,7 @@
     }
                 </code></pre>
                         <div>Example 2</div>
+                        <div>{{tab.selects[1].example2}}</div>
                     <pre><code class="language-java">
 public void login(String username, String password) {
     webDriver.get(LOGIN_URL);
@@ -368,7 +372,7 @@ public void login(String username, String password) {
                 </div>
                 <div ng-show="tab.isSet(3)">
                     <blockquote>{{tab.selects[2].description}}</blockquote>
-                    <div class="accordion not-expanded">
+                    <div class="accordion">
                         <div>Example 1</div>
                         <pre><code class="language-csharp">
     public AutomationElement waitForObject(AutomationElement winRoot,
