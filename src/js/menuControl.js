@@ -28,19 +28,19 @@
             name:"Selenium Text",
             description:"Selenium is a framework that allows a user to interact with elements in the DOM to test a website.",
             example1:"This pretty simple test logs in to the application as part of the @BeforeClass, and then clicks on each tab in the page and verifies their content. \nOnce the test is complete, the content is cleared so each test begins with the same data present, and at the end of the suite the driver is closed. The @Rule allows for screenshots to be taken on a failing test by overriding the failed method in the abstract TestWatcher jUnit class.",
-            example2:"This is the login method that Example 1 uses in its @BeforeClass. This method shows how to a) resize a window if needed and b) bypasses internet explorers certification requirement. A Javascript executor is used to do this. \nThe Javascript executor method can also extremely useful for scrolling to elements on the page that aren’t visible, and has been used frequently for unhiding hidden browse to file buttons."
+            example2:"This is the login method that Example 1 uses in its @BeforeClass. This method shows how to a) resize a window if needed and b) bypasses internet explorers certification requirement. A Javascript executor is used to do this. \nThe Javascript executor method can also be extremely useful for scrolling to elements on the page that aren’t visible, and has been used frequently for unhiding hidden browse to file buttons."
         },
         {
             name:"UI Automation Text",
             description:"UI Automation is an automation framework developed by Microsoft to automate actions within a desktop application.",
-            example1:"This is a UI Automation example."
+            example1:"This example attempts to mimic Selenium’s waitUntil WebDriverWait method. As each element is returned in its own method within the PageObjects class, the function needs to be able to determine the object to use by its method name. In this case, reflection is used to invoke the method by the element name passed in. The function has to behave in this way because page object is only returned if a scan of the available objects returns a result. If the object was passed in, it would always have the same status (not available) throughout the process because it is an object created from a class and not a dynamic element. If the timer expires, a failure assertion is thrown so the test fails. These tests are executed using nUnit."
         },
         {
             name:"API Text",
             description:"The REST API uses the URI of HTTP Requests to GET and DELETE resources, whilst using the body of the request to POST or PUT resources.",
-            mocha:"This is a mocha example.",
-            restassured:"This is a RestAssured example.",
-            restsharp:"This is a RestSharp example."
+            mocha:"Mocha, like Jasmine, is based on Node and uses the same describe/it syntax. This example sends a PUT request to the server to add a user, with the data held in the body of the message. The test uses ‘should’ to assess the result of the test, reading the status code and body of the response.",
+            restassured:"These simple tests put and get resources via the API. The put is necessary for the get to be able to retrieve the resource. The tests are run using jUnit and follow a BDD syntax (given/when/then) in the putRequest and deleteRequest methods.",
+            restsharp:"RestSharp is pretty similar to RestAssured only for C# rather than Java. This method gets a resource by building up the request, executing it and returning the content of the response for test evaluation."
         },
         {
             name:"JMeter",
