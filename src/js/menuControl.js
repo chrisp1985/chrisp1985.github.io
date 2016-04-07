@@ -39,12 +39,19 @@
             name:"API Text",
             description:"The REST API uses the URI of HTTP Requests to GET and DELETE resources, whilst using the body of the request to POST or PUT resources.",
             mocha:"Mocha, like Jasmine, is based on Node and uses the same describe/it syntax. This example sends a PUT request to the server to add a user, with the data held in the body of the message. The test uses ‘should’ to assess the result of the test, reading the status code and body of the response.",
-            restassured:"These simple tests put and get resources via the API. The put is necessary for the get to be able to retrieve the resource. The tests are run using jUnit and follow a BDD syntax (given/when/then) in the putRequest and deleteRequest methods.",
-            restsharp:"RestSharp is pretty similar to RestAssured only for C# rather than Java. This method gets a resource by building up the request, executing it and returning the content of the response for test evaluation."
+            restassured:"These simple tests put and get resources via the API. The PUT is necessary for the GET to be able to retrieve the resource. The tests are run using jUnit and follow a BDD syntax (given/when/then) in the putRequest and deleteRequest methods.",
+            restsharp:"RestSharp is pretty similar to RestAssured only for C# rather than Java. This method GETs a resource by building up the request, executing it and returning the content of the response for test evaluation."
         },
         {
             name:"JMeter",
             description:"JMeter is a performance testing tool that allows for monitoring of throughputs and response times."
+        },
+        {
+            name:"Other Tools",
+            description:"Other tools used include TestComplete, Sikuli and Robot Framework.",
+            testcomplete:"TestComplete is a tool from SmartBear for automation of mobile, web and desktop apps. Most of the code written with TestComplete was in C#-script, which is a hybrid of Javascript and C# without really being similar to either of them. The framework itself is very easy to get into, as a lot of the heavy lifting is done for you. Whereas with other frameworks you may need to devise your own application object model, TestComplete does this for you. The easiest way to store objects for a test quickly is to record/playback a test case, and then edit the test using the objects that are stored. Tests are easy to create without using record/playback, but require an Object Spy to manually map everything being used before a test can be executed.",
+            sikuli:"Sikuli is a framework that uses image recognition. Relying on image recognition only in test cases has some serious limitations, but combining it with Selenium meant that DOM objects could be manipulated but the actual look and feel of the UI could be verified at the same time. As the tool uses image recognition, a lot of images need to be stored which can bloat a project’s size. The language used in Sikuli is python.",
+            robotframework:"Robot Framework is a very high-level test runner. Tests can be written by piecing together keywords, with the libraries those keywords call sitting underneath. It feels like a cumbersome tool, but was very useful for combing Sikuli and Selenium into one suite."
         }
     ];
 })();
