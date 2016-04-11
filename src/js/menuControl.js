@@ -55,7 +55,7 @@
         },
         {
             name:"Build Environment",
-            description:"Other tools used include TestComplete, Sikuli and Robot Framework.",
+            description:"Build environment tools in a testing context.",
             maven:"Maven uses an XML syntax which is very verbose and not particularly easy on the eye. As all dependency injections and tasks require open/closing tags (as all XML documents do), the actual content of the build environment is pretty minimal compared to the framework that sits around it.",
             gradle:"Gradle uses Groovy, which is a lot easier to view and gives as much flexibility as Maven without the need for tags everywhere. Applying dependencies in Gradle can be performed by using the compile command. The Java plugin allows for the test{ } section to be used, which means the user can access tests by gradlew <module>:test. Custom tasks can also be accessed this way. If I wanted to execute the copyMyApplicationLogs task, I could use gradlew <mymodule>:copyMyApplicationLogs which would only copy logs from one destination to the other. If I chose to run gradlew <mymodule>:installMyApplication, it would first execute the build task in the ‘buildmyapp’ module because of the dependency stated, and then go onto execute this task if the build task was successful."
         }
