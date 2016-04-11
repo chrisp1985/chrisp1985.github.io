@@ -142,7 +142,9 @@
                         <li ng-class="{ active: tab.isSet(5) }">
                             <a href ng-click="tab.setTab(5)">JMeter</a></li>
                         <li ng-class="{ active: tab.isSet(6) }">
-                            <a href ng-click="tab.setTab(6)">Other Tools</a></li>
+                            <a href ng-click="tab.setTab(6)">Other Tools</a>
+                        <li ng-class="{ active: tab.isSet(7) }">
+                            <a href ng-click="tab.setTab(7)">Build Environment</a></li>
                     </ul>
                     <h4><br/></h4>
 
@@ -638,6 +640,191 @@ describe('Mocha Tests', function() {
                         <p>{{tab.selects[5].robotframework}}</p>
                     </div>
 
+                    <div ng-show="tab.isSet(7)">
+                        <blockquote>{{tab.selects[6].description}}</blockquote>
+                        <div class="accordion">
+                            <div>Maven</div>
+                            <pre><code class="language-markup">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>my-test-module</artifactId>
+        <groupId>com.myproject</groupId>
+        <version>1.0.1</version>
+    </parent>
+    <name>My Example Maven Test Suite</name>
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <my.test.driverVersion>chrome</my.test.driverVersion>
+        <webdriver.version>2.53.0</webdriver.version>
+        <webdriver.base.url>http://localhost:6767/${project.serviceName}/</webdriver.base.url>
+    </properties>
+
+    <artifactId>my-test-module</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>2.3.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${webdriver.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>installMyApplication</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <commandlineArgs>/quiet /I</commandlineArgs>
+                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
+                            <skip>${skipTests}</skip>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>uninstallMyApplication</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <commandlineArgs>/quiet /uninstall</commandlineArgs>
+                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
+                            <skip>${skipTests}</skip>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <executions>
+                    <execution>
+                        <id>ui-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <runOrder>alphabetical</runOrder>
+                            <systemPropertyVariables>
+                                <releaseDirectory>${project.build.directory}</releaseDirectory>
+                                <webdriver.driver>provided</webdriver.driver>
+                                <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                                <test.directory>${project.basedir}</test.directory>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+                            </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[6].maven}}</p>
+
+                        <p><br/></p>
+                        <div class="accordion">
+                            <div>Gradle</div>
+                            <pre><code class="language-groovy">
+apply plugin: 'java'
+
+buildscript {
+repositories {
+mavenCentral()
+}
+}
+
+dependencies {
+compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
+compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.+'
+compile 'junit:junit:4.12'
+}
+
+task uninstallMyApplication(type:Exec) {
+def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+commandLine 'msiexec','/quiet','/uninstall',"${text}","/norestart"
+}
+
+task installMyApplication(dependsOn:':buildmyapp:build',type:Exec) {
+def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+commandLine 'msiexec','/quiet','/I',"${text}","/norestart"
+}
+
+task copyMyApplicationLogs(type: Copy) {
+def logsPath = System.getenv("ProgramData")+"\\myCompany\\myApplication\\Logs"
+from file("${logsPath}")
+into "${buildDir}/logsForDebugging"
+}
+
+// Install the application to test
+test.dependsOn installMyApplication
+
+test {
+outputs.upToDateWhen { false }
+}
+
+// Uninstall the application to keep the environment clean, and copy the logs for possible debugging.
+test.finalizedBy(copyMyApplicationLogs)
+test.finalizedBy(uninstallMyApplication)
+                            </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[6].gradle}}</p>
+                        <p><br/></p>
+                    </div>
                 </section>
             </div>
 
