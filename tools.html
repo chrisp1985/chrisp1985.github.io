@@ -645,129 +645,129 @@ describe('Mocha Tests', function() {
                         <div class="accordion">
                             <div>Maven</div>
                             <pre class="language-markup"><code class="language-markup">
-<?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>my-test-module</artifactId>
-        <groupId>com.myproject</groupId>
-        <version>1.0.1</version>
-    </parent>
-    <name>My Example Maven Test Suite</name>
-    <modelVersion>4.0.0</modelVersion>
+                                &lt;<?xml version="1.0" encoding="utf-8"?>
+                                &lt;<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+                                &lt;<parent>
+                                &lt;<artifactId>my-test-module&lt;</artifactId>
+                                &lt;<groupId>com.myproject&lt;</groupId>
+                                &lt;<version>1.0.1&lt;</version>
+                                &lt;</parent>
+                                &lt;<name>My Example Maven Test Suite&lt;</name>
+                                &lt;<modelVersion>4.0.0&lt;</modelVersion>
 
-    <properties>
-        <my.test.driverVersion>chrome</my.test.driverVersion>
-        <webdriver.version>2.53.0</webdriver.version>
-        <webdriver.base.url>http://localhost:6767/${project.serviceName}/</webdriver.base.url>
-    </properties>
+                                &lt;<properties>
+                                &lt;<my.test.driverVersion>chrome&lt;</my.test.driverVersion>
+                                &lt;<webdriver.version>2.53.0&lt;</webdriver.version>
+                                &lt;<webdriver.base.url>http://localhost:6767/${project.serviceName}/&lt;</webdriver.base.url>
+                                &lt;</properties>
 
-    <artifactId>my-test-module</artifactId>
+                                &lt;<artifactId>my-test-module&lt;</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>2.3.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${webdriver.version}</version>
-        </dependency>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <id>parse-version</id>
-                        <goals>
-                            <goal>parse-version</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>installMyApplication</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <commandlineArgs>/quiet /I</commandlineArgs>
-                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
-                            <skip>${skipTests}</skip>
-                            <workingDirectory>${project.build.directory}</workingDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>uninstallMyApplication</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <commandlineArgs>/quiet /uninstall</commandlineArgs>
-                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
-                            <skip>${skipTests}</skip>
-                            <workingDirectory>${project.build.directory}</workingDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <executions>
-                    <execution>
-                        <id>ui-tests</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                        <configuration>
-                            <runOrder>alphabetical</runOrder>
-                            <systemPropertyVariables>
-                                <releaseDirectory>${project.build.directory}</releaseDirectory>
-                                <webdriver.driver>provided</webdriver.driver>
-                                <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-                                <test.directory>${project.basedir}</test.directory>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-</project>
+                                &lt;<dependencies>
+                                &lt;<dependency>
+                                &lt;<groupId>com.jayway.restassured&lt;</groupId>
+                                &lt;<artifactId>rest-assured&lt;</artifactId>
+                                &lt;<version>2.3.4&lt;</version>
+                                &lt;<scope>test&lt;</scope>
+                                &lt;</dependency>
+                                &lt;<dependency>
+                                &lt;<groupId>junit&lt;</groupId>
+                                &lt;<artifactId>junit&lt;</artifactId>
+                                &lt;<version>4.12&lt;</version>
+                                &lt;</dependency>
+                                &lt;<dependency>
+                                &lt;<groupId>org.seleniumhq.selenium&lt;</groupId>
+                                &lt;<artifactId>selenium-java&lt;</artifactId>
+                                &lt;<version>${webdriver.version}&lt;</version>
+                                &lt;</dependency>
+                                &lt;</dependencies>
+                                &lt;<build>
+                                &lt;<plugins>
+                                &lt;<plugin>
+                                &lt;<groupId>org.codehaus.mojo&lt;</groupId>
+                                &lt;<artifactId>build-helper-maven-plugin&lt;</artifactId>
+                                &lt;<version>1.8&lt;</version>
+                                &lt;<executions>
+                                &lt;<execution>
+                                &lt;<id>parse-version&lt;</id>
+                                &lt;<goals>
+                                &lt;<goal>parse-version&lt;</goal>
+                                &lt;</goals>
+                                &lt;</execution>
+                                &lt;</executions>
+                                &lt;</plugin>
+                                &lt;<plugin>
+                                &lt;<groupId>org.apache.maven.plugins&lt;</groupId>
+                                &lt;<artifactId>maven-surefire-plugin&lt;</artifactId>
+                                &lt;<version>2.12&lt;</version>
+                                &lt;<configuration>
+                                &lt;<skip>true&lt;</skip>
+                                &lt;</configuration>
+                                &lt;</plugin>
+                                &lt;<plugin>
+                                &lt;<groupId>org.codehaus.mojo&lt;</groupId>
+                                &lt;<artifactId>exec-maven-plugin&lt;</artifactId>
+                                &lt;<executions>
+                                &lt;<execution>
+                                &lt;<id>installMyApplication&lt;</id>
+                                &lt;<phase>pre-integration-test&lt;</phase>
+                                &lt;<goals>
+                                &lt;<goal>exec&lt;</goal>
+                                &lt;</goals>
+                                &lt;<configuration>
+                                &lt;<commandlineArgs>/quiet /I&lt;</commandlineArgs>
+                                &lt;<executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe&lt;</executable>
+                                &lt;<skip>${skipTests}&lt;</skip>
+                                &lt;<workingDirectory>${project.build.directory}&lt;</workingDirectory>
+                                &lt;</configuration>
+                                &lt;</execution>
+                                &lt;</executions>
+                                &lt;</plugin>
+                                &lt;<plugin>
+                                &lt;<groupId>org.codehaus.mojo&lt;</groupId>
+                                &lt;<artifactId>exec-maven-plugin&lt;</artifactId>
+                                &lt;<executions>
+                                &lt;<execution>
+                                &lt;<id>uninstallMyApplication&lt;</id>
+                                &lt;<phase>post-integration-test&lt;</phase>
+                                &lt;<goals>
+                                &lt;<goal>exec&lt;</goal>
+                                &lt;</goals>
+                                &lt;<configuration>
+                                &lt;<commandlineArgs>/quiet /uninstall&lt;</commandlineArgs>
+                                &lt;<executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe&lt;</executable>
+                                &lt;<skip>${skipTests}&lt;</skip>
+                                &lt;<workingDirectory>${project.build.directory}&lt;</workingDirectory>
+                                &lt;</configuration>
+                                &lt;</execution>
+                                &lt;</executions>
+                                &lt;</plugin>
+                                &lt;<plugin>
+                                &lt;<groupId>org.apache.maven.plugins&lt;</groupId>
+                                &lt;<artifactId>maven-failsafe-plugin&lt;</artifactId>
+                                &lt;<version>2.19.1&lt;</version>
+                                &lt;<executions>
+                                &lt;<execution>
+                                &lt;<id>ui-tests&lt;</id>
+                                &lt;<goals>
+                                &lt;<goal>integration-test&lt;</goal>
+                                &lt;<goal>verify&lt;</goal>
+                                &lt;</goals>
+                                &lt;<configuration>
+                                &lt;<runOrder>alphabetical&lt;</runOrder>
+                                &lt;<systemPropertyVariables>
+                                &lt;<releaseDirectory>${project.build.directory}&lt;</releaseDirectory>
+                                &lt;<webdriver.driver>provided&lt;</webdriver.driver>
+                                &lt;<webdriver.base.url>${webdriver.base.url}&lt;</webdriver.base.url>
+                                &lt;<test.directory>${project.basedir}&lt;</test.directory>
+                                &lt;</systemPropertyVariables>
+                                &lt;</configuration>
+                                &lt;</execution>
+                                &lt;</executions>
+                                &lt;</plugin>
+                                &lt;</plugins>
+                                &lt;</build>
+                                &lt;</project>
                             </code></pre>
                         </div>
                         <p><br/></p>
@@ -781,38 +781,38 @@ describe('Mocha Tests', function() {
 apply plugin: 'java'
 
 buildscript {
-repositories {
-mavenCentral()
-}
+    repositories {
+        mavenCentral()
+    }
 }
 
 dependencies {
-compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
-compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.+'
-compile 'junit:junit:4.12'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
+    compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.+'
+    compile 'junit:junit:4.12'
 }
 
 task uninstallMyApplication(type:Exec) {
-def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
-commandLine 'msiexec','/quiet','/uninstall',"${text}","/norestart"
+    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+    commandLine 'msiexec','/quiet','/uninstall',"${text}","/norestart"
 }
 
 task installMyApplication(dependsOn:':buildmyapp:build',type:Exec) {
-def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
-commandLine 'msiexec','/quiet','/I',"${text}","/norestart"
+    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+    commandLine 'msiexec','/quiet','/I',"${text}","/norestart"
 }
 
 task copyMyApplicationLogs(type: Copy) {
-def logsPath = System.getenv("ProgramData")+"\\myCompany\\myApplication\\Logs"
-from file("${logsPath}")
-into "${buildDir}/logsForDebugging"
+    def logsPath = System.getenv("ProgramData")+"\\myCompany\\myApplication\\Logs"
+    from file("${logsPath}")
+    into "${buildDir}/logsForDebugging"
 }
 
 // Install the application to test
 test.dependsOn installMyApplication
 
 test {
-outputs.upToDateWhen { false }
+    outputs.upToDateWhen { false }
 }
 
 // Uninstall the application to keep the environment clean, and copy the logs for possible debugging.
