@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +56,7 @@
 	    font-family: zibFont;
 	}
 	</style>
-<div ng-app="">
+<div>
     <div ng-include="'navBar.html'"></div>
 </div>
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -83,7 +83,9 @@
 
     <br />
     <footer>
-        <br />
+    <div>
+        <div ng-include="'footer.html'"></div>
+    </div>
     </footer>
 </div> <!-- /container -->
 </body>
