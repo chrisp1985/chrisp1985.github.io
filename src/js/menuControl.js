@@ -44,7 +44,8 @@
         },
         {
             name:"JMeter",
-            description:"JMeter is a performance testing tool that allows for monitoring of throughputs and response times."
+            description:"JMeter is a performance testing tool that allows for monitoring of throughputs and response times.",
+            jmxexample:"JMeter gives a tester a few performance measuring sticks to apply to their service, be it data throughput or coping with stress and load, or for checking that all requests are met with a response. JMeter stores data as .JMX which is basically a JMeter XML file. Getting information directly from the JMX file is difficult, so the GUI is used to parse the data. In this example, the application is being checked by creating, deleting and copying/pasting the data stored within the service. The tests use standard HTTP GET, DELETE, PUT commands to do this. The reports at the bottom show throughput and response times, and allow for manual checking the times fall within the expected ranges. This can be easily tied into a maven or gradle build via plugins, and is currently used to check general stability of each build created with an automated report delivered on completion."
         },
         {
             name:"Other Tools",
