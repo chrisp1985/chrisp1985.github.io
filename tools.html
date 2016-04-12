@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myModule">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -97,27 +97,9 @@
 
 
         </style>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand my-header">Chrispo</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="home.html">Home</a></li>
-                        <li><a href="/src/js/menuControl.js">Javascript Source</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="tools.html">Tools</a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
+        <div ng-app="">
+            <div ng-include="'navBar.html'"></div>
+        </div>
 
         <div class="container-fluid-chris">
             <h1><br/></h1>
@@ -125,7 +107,7 @@
             <h1><br/></h1>
         </div>
 
-        <div class="container-fluid" align="left">
+        <div class="container-fluid" align="left" ng-app="myModule">
             <h2><br/></h2>
             <h2 class="my-header">Tools, Frameworks and some examples.</h2>
             <div ng-app="myModule">
