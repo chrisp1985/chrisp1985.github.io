@@ -101,719 +101,721 @@
             <div ng-include="'navBar.html'"></div>
         </div>
 
-        <div class="container-fluid-chris">
-            <h1><br/></h1>
-            <h1 class="my-header2">Tools and Frameworks.</h1>
-            <h1><br/></h1>
-        </div>
+        <div ng-app="myModule">
+            <div class="container-fluid-chris">
+                <h1><br/></h1>
+                <h1 class="my-header2">Tools and Frameworks.</h1>
+                <h1><br/></h1>
+            </div>
 
-        <div class="container-fluid" align="left" ng-app="myModule">
-            <h2><br/></h2>
-            <h2 class="my-header">Tools, Frameworks and some examples.</h2>
-            <div ng-app="myModule">
-                <section class="tab container" ng-controller="myCtrl as tab">
-                    <ul class="nav nav-pills">
-                        <li ng-class="{ active: tab.isSet(1) }">
-                            <a href ng-click="tab.setTab(1)">Jasmine</a></li>
-                        <li ng-class="{ active: tab.isSet(2) }">
-                            <a href ng-click="tab.setTab(2)">Selenium</a></li>
-                        <li ng-class="{ active: tab.isSet(3) }">
-                            <a href ng-click="tab.setTab(3)">UI Automation</a></li>
-                        <li ng-class="{ active: tab.isSet(4) }">
-                            <a href ng-click="tab.setTab(4)">API</a></li>
-                        <li ng-class="{ active: tab.isSet(5) }">
-                            <a href ng-click="tab.setTab(5)">JMeter</a></li>
-                        <li ng-class="{ active: tab.isSet(6) }">
-                            <a href ng-click="tab.setTab(6)">Other Tools</a></li>
-                        <li ng-class="{ active: tab.isSet(7) }">
-                            <a href ng-click="tab.setTab(7)">Build Environment</a></li>
-                    </ul>
-                    <h4><br/></h4>
+            <div class="container-fluid" align="left">
+                <h2><br/></h2>
+                <h2 class="my-header">Tools, Frameworks and some examples.</h2>
+                <div ng-app="myModule">
+                    <section class="tab container" ng-controller="myCtrl as tab">
+                        <ul class="nav nav-pills">
+                            <li ng-class="{ active: tab.isSet(1) }">
+                                <a href ng-click="tab.setTab(1)">Jasmine</a></li>
+                            <li ng-class="{ active: tab.isSet(2) }">
+                                <a href ng-click="tab.setTab(2)">Selenium</a></li>
+                            <li ng-class="{ active: tab.isSet(3) }">
+                                <a href ng-click="tab.setTab(3)">UI Automation</a></li>
+                            <li ng-class="{ active: tab.isSet(4) }">
+                                <a href ng-click="tab.setTab(4)">API</a></li>
+                            <li ng-class="{ active: tab.isSet(5) }">
+                                <a href ng-click="tab.setTab(5)">JMeter</a></li>
+                            <li ng-class="{ active: tab.isSet(6) }">
+                                <a href ng-click="tab.setTab(6)">Other Tools</a></li>
+                            <li ng-class="{ active: tab.isSet(7) }">
+                                <a href ng-click="tab.setTab(7)">Build Environment</a></li>
+                        </ul>
+                        <h4><br/></h4>
 
-                    <div ng-show="tab.isSet(1)">
-                        <blockquote>{{tab.selects[0].description}}</blockquote>
-                        <div class="accordion">
-                            <div>Example 1</div>
-                            <pre><code class="language-javascript">
-describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
-    "use strict";
+                        <div ng-show="tab.isSet(1)">
+                            <blockquote>{{tab.selects[0].description}}</blockquote>
+                            <div class="accordion">
+                                <div>Example 1</div>
+                                <pre><code class="language-javascript">
+    describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+        "use strict";
 
-    // *******************************
-    //  AUTHENTICATOR ANGULAR MODULE
-    // *******************************
-    var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
+        // *******************************
+        //  AUTHENTICATOR ANGULAR MODULE
+        // *******************************
+        var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
 
-    beforeEach(module('authenticator'));
-    beforeEach(module('ngCookies'));
-    beforeEach(module(function($provide) {
-        $window = {location: { replace: jasmine.createSpy()} };
-        $provide.value('$window', $window);
-    }));
+        beforeEach(module('authenticator'));
+        beforeEach(module('ngCookies'));
+        beforeEach(module(function($provide) {
+            $window = {location: { replace: jasmine.createSpy()} };
+            $provide.value('$window', $window);
+        }));
 
-    beforeEach(inject(function($injector) {
-        authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
-        authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
-        myCookies = $injector.get('$cookieStore',[]);
-        httpBackend = $injector.get('$httpBackend');
-    }));
+        beforeEach(inject(function($injector) {
+            authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
+            authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
+            myCookies = $injector.get('$cookieStore',[]);
+            httpBackend = $injector.get('$httpBackend');
+        }));
 
-    // ***********************
-    //  AUTHENTICATOR FACTORY
-    // ***********************
-    describe('Authenticator Factory',function() {
+        // ***********************
+        //  AUTHENTICATOR FACTORY
+        // ***********************
+        describe('Authenticator Factory',function() {
 
-        // *********
-        //   LOGIN
-        // *********
-        describe('login',function() {
-            it('Check that the login method is defined.',function() {
-                expect(authenticatorService.login).not.toEqual(undefined);
-            });
+            // *********
+            //   LOGIN
+            // *********
+            describe('login',function() {
+                it('Check that the login method is defined.',function() {
+                    expect(authenticatorService.login).not.toEqual(undefined);
+                });
 
-            it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
-                var creds, successCallbackSpy, errorCallbackSpy;
-                creds = {"userName":"admin","password":"admin"};
-                successCallbackSpy = jasmine.createSpy();
-                errorCallbackSpy = jasmine.createSpy();
+                it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
+                    var creds, successCallbackSpy, errorCallbackSpy;
+                    creds = {"userName":"admin","password":"admin"};
+                    successCallbackSpy = jasmine.createSpy();
+                    errorCallbackSpy = jasmine.createSpy();
 
-                httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                    httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                        return headers['Content-Type'] === 'application/json';
+                    }).respond(200, 'HELLO');
+                    authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
+                    httpBackend.flush();
+                    expect(successCallbackSpy).toHaveBeenCalled();
+                });
+
+                it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
+                    var invalidcreds, successCallbackSpy, errorCallbackSpy;
+                    invalidcreds = {"userName":"admin2","password":"admin2"};
+                    successCallbackSpy = jasmine.createSpy();
+                    errorCallbackSpy = jasmine.createSpy();
+
+                    httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
                     return headers['Content-Type'] === 'application/json';
-                }).respond(200, 'HELLO');
-                authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
-                httpBackend.flush();
-                expect(successCallbackSpy).toHaveBeenCalled();
-            });
+                    }).respond(500, 'BOO');
+                    authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
+                    httpBackend.flush();
+                    expect(errorCallbackSpy).toHaveBeenCalled();
 
-            it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
-                var invalidcreds, successCallbackSpy, errorCallbackSpy;
-                invalidcreds = {"userName":"admin2","password":"admin2"};
-                successCallbackSpy = jasmine.createSpy();
-                errorCallbackSpy = jasmine.createSpy();
-
-                httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
-                return headers['Content-Type'] === 'application/json';
-                }).respond(500, 'BOO');
-                authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
-                httpBackend.flush();
-                expect(errorCallbackSpy).toHaveBeenCalled();
-
+                });
             });
         });
-    });
-});</code></pre>
-                        </div>
-                        <p><br/></p>
+    });</code></pre>
+                            </div>
+                            <p><br/></p>
 
-                            <p>{{tab.selects[0].example1}}</p>
+                                <p>{{tab.selects[0].example1}}</p>
 
-                        <p><br/></p>
+                            <p><br/></p>
 
-                        <div class="accordion">
-                            <div>Example 2</div>
-                            <pre><code class="language-javascript">
-describe('CONTROLLERS - Settings Admin Test Cases', function() {
-    "use strict";
+                            <div class="accordion">
+                                <div>Example 2</div>
+                                <pre><code class="language-javascript">
+    describe('CONTROLLERS - Settings Admin Test Cases', function() {
+        "use strict";
 
-    // **********************************************
-    //    MYAPP CONTROLLER ANGULAR MODULE
-    // **********************************************
-    var scope,myAppCtrl,toaster,$window,loaderState,state,event;
+        // **********************************************
+        //    MYAPP CONTROLLER ANGULAR MODULE
+        // **********************************************
+        var scope,myAppCtrl,toaster,$window,loaderState,state,event;
 
-    beforeEach(module(
-        'myappctrl',
-        'toaster',
-        'flow',
-        'loaderstate',
-    ));
-    beforeEach(module(function($provide) {
-        $window = {open: function(url) { return url;} };
-        $provide.value('$window', $window);
-    }));
-    beforeEach(inject(function($injector,$controller,$rootScope) {
-        scope = $rootScope.$new();
-        state = { go: function() {}};
-        event = {"bubbles":true,"cancelBubble":false,"isTrusted":true,"returnValue":true,"type":"change"};
-        toaster = $injector.get('toaster',[]);
-        loaderState = $injector.get('LoaderState');
-        myAppCtrl = $controller('MyAppCtrl',{
-            $scope:scope,
-            LoaderState:loaderState,
-            toaster:toaster,
-            $window:$window,
-            $state:state
+        beforeEach(module(
+            'myappctrl',
+            'toaster',
+            'flow',
+            'loaderstate',
+        ));
+        beforeEach(module(function($provide) {
+            $window = {open: function(url) { return url;} };
+            $provide.value('$window', $window);
+        }));
+        beforeEach(inject(function($injector,$controller,$rootScope) {
+            scope = $rootScope.$new();
+            state = { go: function() {}};
+            event = {"bubbles":true,"cancelBubble":false,"isTrusted":true,"returnValue":true,"type":"change"};
+            toaster = $injector.get('toaster',[]);
+            loaderState = $injector.get('LoaderState');
+            myAppCtrl = $controller('MyAppCtrl',{
+                $scope:scope,
+                LoaderState:loaderState,
+                toaster:toaster,
+                $window:$window,
+                $state:state
+            });
+        }));
+
+        // ********
+        //  added
+        // ********
+        describe('added',function() {
+            it('Check that execution of the added method returns true if getExtension returns txt.',function() {
+                var $flow = {"support":true,"supportDirectory":true,"files":[],"defaults":{"chunkSize":1048576,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":false,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"multipart","testMethod":"GET","uploadMethod":"POST","prioritizeFirstAndLastChunk":false,"target":"/","testChunks":true,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,415,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false},"opts":{"chunkSize":209715200,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":true,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"octet","testMethod":"GET","uploadMethod":"PUT","prioritizeFirstAndLastChunk":false,"testChunks":false,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false,"minFileSize":0},"events":{"catchall":[null]}};
+                var flowFile = {"name":"myFakeFile.txt","getExtension":function() {return "txt"}};
+                var toasterSpy = spyOn(toaster,'pop');
+
+                expect(scope.added(event, $flow, flowFile)).toBe(true);
+                expect(toasterSpy).not.toHaveBeenCalled();
+            });
         });
-    }));
+    });</code></pre>
+                            </div>
+                            <p><br/></p>
 
-    // ********
-    //  added
-    // ********
-    describe('added',function() {
-        it('Check that execution of the added method returns true if getExtension returns txt.',function() {
-            var $flow = {"support":true,"supportDirectory":true,"files":[],"defaults":{"chunkSize":1048576,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":false,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"multipart","testMethod":"GET","uploadMethod":"POST","prioritizeFirstAndLastChunk":false,"target":"/","testChunks":true,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,415,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false},"opts":{"chunkSize":209715200,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":true,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"octet","testMethod":"GET","uploadMethod":"PUT","prioritizeFirstAndLastChunk":false,"testChunks":false,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false,"minFileSize":0},"events":{"catchall":[null]}};
-            var flowFile = {"name":"myFakeFile.txt","getExtension":function() {return "txt"}};
-            var toasterSpy = spyOn(toaster,'pop');
+                            <p>{{tab.selects[0].example2}}</p>
 
-            expect(scope.added(event, $flow, flowFile)).toBe(true);
-            expect(toasterSpy).not.toHaveBeenCalled();
-        });
-    });
-});</code></pre>
+                            <p><br/></p>
                         </div>
-                        <p><br/></p>
 
-                        <p>{{tab.selects[0].example2}}</p>
+                        <div ng-show="tab.isSet(2)">
+                            <blockquote>{{tab.selects[1].description}}</blockquote>
+                            <div class="accordion">
+                                <div>Example 1</div>
+                                <pre><code class="language-java">
+    public class TestClass {
+        // Set up general variables
+        private static WebDriver driver;
+        private static AuthenticationFlow authenticationFlow;
+        private static HomePage homePage;
+        private String commonBase;
+        private static MyMethods myMethods;
 
-                        <p><br/></p>
-                    </div>
+        // Add test specific variables
+        private final Date d = new Date();
 
-                    <div ng-show="tab.isSet(2)">
-                        <blockquote>{{tab.selects[1].description}}</blockquote>
-                        <div class="accordion">
-                            <div>Example 1</div>
-                            <pre><code class="language-java">
-public class TestClass {
-    // Set up general variables
-    private static WebDriver driver;
-    private static AuthenticationFlow authenticationFlow;
-    private static HomePage homePage;
-    private String commonBase;
-    private static MyMethods myMethods;
+        @Rule
+        public final TestRule watcher = new TestWatcher() {
+            @Override
+            protected void starting(Description description) {
+                System.out.println("Starting test: " + description.getMethodName());
+                TabPageTree.setTestName(description.getMethodName());
+            }
 
-    // Add test specific variables
-    private final Date d = new Date();
+            @Override
+            protected void failed(Throwable e, Description description) {
+                myMethods.takeAScreenShot(TabPageTree.getTestName());
+            }
+        };
 
-    @Rule
-    public final TestRule watcher = new TestWatcher() {
-        @Override
-        protected void starting(Description description) {
-            System.out.println("Starting test: " + description.getMethodName());
-            TabPageTree.setTestName(description.getMethodName());
+        @Before
+        public void initializeDriver() {
+            // Go to the index page.
+            authenticationFlow.getToStartPosition();
+            commonBase = String.valueOf(d.getTime());
         }
 
-        @Override
-        protected void failed(Throwable e, Description description) {
-            myMethods.takeAScreenShot(TabPageTree.getTestName());
+        @BeforeClass
+        public static void installService() {
+            // Create the driver
+            driver = CreateDriver.setupDriver(AuthenticationFlow.runOnBrowser);
+
+            // Login
+            authenticationFlow = new AuthenticationFlow(driver);
+            authenticationFlow.login(AuthenticationFlow.USERNAME, AuthenticationFlow.PASSWORD);
+
+            homePage = new HomePage(driver);
+            myMethods = new MyMethods(driver);
+
+            // Wait for the page to load.
+            WebDriverWait wait = new WebDriverWait(driver, 6);
+            wait.until(ExpectedConditions.titleIs("My Web Service"));
+            new HTTPRequests(driver).addWorkingServicesAndSchemas();
         }
-    };
 
-    @Before
-    public void initializeDriver() {
-        // Go to the index page.
-        authenticationFlow.getToStartPosition();
-        commonBase = String.valueOf(d.getTime());
+        @AfterClass
+        public static void closeTheDriver() {
+            driver.quit();
+        }
+
+        @After
+        public void killContent() {
+            HTTPRequests chris = new HTTPRequests(driver);
+            chris.deleteResource("/appconfig/content");
+        }
+
+        @Test
+        public void checkContentOfBothTabs() {
+            // Add a new node.
+            myMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
+            + commonBase + "_testNode", true);
+
+            // Check that both tabs are shown.
+            assertTrue(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed());
+
+            // Click on tab1
+            homePage.tab1.click();
+
+            // Check that description and title stuff are shown.
+            assertTrue(homePage.titleInputField.isDisplayed()
+            && homePage.descriptionInputField.isDisplayed());
+
+            // Click on tab2
+            homePage.tab2.click();
+
+            // Check that the root node part is shown.
+            assertTrue(homePage.treeRoot().isDisplayed());
+        }
     }
+                        </code></pre>
+                            </div>
+                            <p><br/></p>
 
-    @BeforeClass
-    public static void installService() {
-        // Create the driver
-        driver = CreateDriver.setupDriver(AuthenticationFlow.runOnBrowser);
+                                <p>{{tab.selects[1].example1}}</p>
 
-        // Login
-        authenticationFlow = new AuthenticationFlow(driver);
-        authenticationFlow.login(AuthenticationFlow.USERNAME, AuthenticationFlow.PASSWORD);
-
-        homePage = new HomePage(driver);
-        myMethods = new MyMethods(driver);
-
-        // Wait for the page to load.
-        WebDriverWait wait = new WebDriverWait(driver, 6);
-        wait.until(ExpectedConditions.titleIs("My Web Service"));
-        new HTTPRequests(driver).addWorkingServicesAndSchemas();
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>Example 2</div>
+                                <pre><code class="language-java">
+    public void login(String username, String password) {
+        webDriver.get(LOGIN_URL);
+        webDriver.manage().window().setSize(new Dimension(1040,744));
+        if(runOnBrowser.equals("ie") && !webDriver.getTitle().contains("My WebPage")) {
+            // Needed for IE certification issue only.
+            webDriver.get("javascript:document.getElementById('overridelink').click();");
+        }
+        assertThat(webDriver.getTitle(), is("My WebPage - Login"));
+        loginPage.setUserName(username);
+        loginPage.setPassword(password);
+        loginPage.clickLogin();
     }
+                            </code></pre>
+                            </div>
+                            <p><br/></p>
 
-    @AfterClass
-    public static void closeTheDriver() {
-        driver.quit();
+                                <p>{{tab.selects[1].example2}}</p>
+
+                            <p><br/></p>
+                        </div>
+
+                        <div ng-show="tab.isSet(3)">
+                            <blockquote>{{tab.selects[2].description}}</blockquote>
+                            <div class="accordion">
+                                <div>Example 1</div>
+                                <pre><code class="language-csharp">
+    /**
+    * *** WAIT FOR AN OBJECT ***
+    * This waits for an object to appear in the application by constantly polling the available objects.
+    *
+    * @param winRoot
+    *      The AutomationElement from which to start the search. If it's left blank, it'll query objects from the very top level.
+    *
+    * @param node
+    *      A blank treenode to fill out the childTreeNode stuff.
+    *
+    * @param timeToWait
+    *      The time to wait for the object to appear. If the timer exceeds this time, the method will fail.
+    *
+    * @param elementName
+    *      The name of the element by the Page Objects method. Eg, to find the completion of the progress bar, this is 'progressBarComplete'.
+    *
+    * @param args
+    *      The arguments required by the element as in the Page Objects.
+    *
+    * @return
+    *      Returns the found object.
+    */
+    public AutomationElement waitForObject(AutomationElement winRoot, TreeNode node, double timeToWait, String elementName, object[] args)
+    {
+        // Set the time.
+        DateTime timeAtStart = DateTime.Now;
+        DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
+
+        // Set the returned element to be null (so if the element isn't found, null is returned).
+        AutomationElement returnedEle = null;
+
+        // While the timer hasn't expired...
+        while (now.Subtract(timeAtStart).TotalSeconds < timeToWait)
+        {
+            try
+            {
+                // Create the object here.
+                MethodInfo method = typeof(PageObjects).GetMethod(elementName);
+                AutomationElement root = null;
+                if (winRoot == null)
+                {
+                    root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
+                }
+                else
+                {
+                   root = winRoot;
+                }
+
+                // Invoke the element through reflection.
+                AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
+                if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
+                {
+                    // OMG, you found the element.
+                    returnedEle = newEle;
+                    break;
+                }
+            }
+            catch
+            {
+                // Just carry on.
+            }
+            // Reset the time.
+            now = DateTime.Now;
+        }
+
+        // Has the timer expired?
+        if (now.Subtract(timeAtStart).TotalSeconds > timeToWait)
+        {
+            Assert.Fail("Wait time was exceeded for element so test failed.");
+        }
+
+        // Return the element.
+        return returnedEle;
     }
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
 
-    @After
-    public void killContent() {
-        HTTPRequests chris = new HTTPRequests(driver);
-        chris.deleteResource("/appconfig/content");
+                            <p>{{tab.selects[2].example1}}</p>
+
+                            <p><br/></p>
+                        </div>
+
+                        <div ng-show="tab.isSet(4)">
+                            <blockquote>{{tab.selects[3].description}}</blockquote>
+                            <div class="accordion">
+                                <div>RestAssured</div>
+                                <pre><code class="language-java">
+    @Test
+    public void validGetRequestRestAssured()
+    {
+        // Add the resource
+        credsBasedRequest
+        .putRequest(
+        "trialText",
+        credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+        + "_validGetRequest").then().assertThat().statusCode(200);
+
+        // Check the contents
+        assertTrue(credsBasedRequest
+        .getRequest(
+        credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+        + "_validGetRequest").asString().contains("trialText"));
     }
 
     @Test
-    public void checkContentOfBothTabs() {
-        // Add a new node.
-        myMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
-        + commonBase + "_testNode", true);
-
-        // Check that both tabs are shown.
-        assertTrue(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed());
-
-        // Click on tab1
-        homePage.tab1.click();
-
-        // Check that description and title stuff are shown.
-        assertTrue(homePage.titleInputField.isDisplayed()
-        && homePage.descriptionInputField.isDisplayed());
-
-        // Click on tab2
-        homePage.tab2.click();
-
-        // Check that the root node part is shown.
-        assertTrue(homePage.treeRoot().isDisplayed());
-    }
-}
-                    </code></pre>
-                        </div>
-                        <p><br/></p>
-
-                            <p>{{tab.selects[1].example1}}</p>
-
-                        <p><br/></p>
-                        <div class="accordion">
-                            <div>Example 2</div>
-                            <pre><code class="language-java">
-public void login(String username, String password) {
-    webDriver.get(LOGIN_URL);
-    webDriver.manage().window().setSize(new Dimension(1040,744));
-    if(runOnBrowser.equals("ie") && !webDriver.getTitle().contains("My WebPage")) {
-        // Needed for IE certification issue only.
-        webDriver.get("javascript:document.getElementById('overridelink').click();");
-    }
-    assertThat(webDriver.getTitle(), is("My WebPage - Login"));
-    loginPage.setUserName(username);
-    loginPage.setPassword(password);
-    loginPage.clickLogin();
-}
-                        </code></pre>
-                        </div>
-                        <p><br/></p>
-
-                            <p>{{tab.selects[1].example2}}</p>
-
-                        <p><br/></p>
-                    </div>
-
-                    <div ng-show="tab.isSet(3)">
-                        <blockquote>{{tab.selects[2].description}}</blockquote>
-                        <div class="accordion">
-                            <div>Example 1</div>
-                            <pre><code class="language-csharp">
-/**
-* *** WAIT FOR AN OBJECT ***
-* This waits for an object to appear in the application by constantly polling the available objects.
-*
-* @param winRoot
-*      The AutomationElement from which to start the search. If it's left blank, it'll query objects from the very top level.
-*
-* @param node
-*      A blank treenode to fill out the childTreeNode stuff.
-*
-* @param timeToWait
-*      The time to wait for the object to appear. If the timer exceeds this time, the method will fail.
-*
-* @param elementName
-*      The name of the element by the Page Objects method. Eg, to find the completion of the progress bar, this is 'progressBarComplete'.
-*
-* @param args
-*      The arguments required by the element as in the Page Objects.
-*
-* @return
-*      Returns the found object.
-*/
-public AutomationElement waitForObject(AutomationElement winRoot, TreeNode node, double timeToWait, String elementName, object[] args)
-{
-    // Set the time.
-    DateTime timeAtStart = DateTime.Now;
-    DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
-
-    // Set the returned element to be null (so if the element isn't found, null is returned).
-    AutomationElement returnedEle = null;
-
-    // While the timer hasn't expired...
-    while (now.Subtract(timeAtStart).TotalSeconds < timeToWait)
+    public void getInvalidURLRestAssured()
     {
-        try
-        {
-            // Create the object here.
-            MethodInfo method = typeof(PageObjects).GetMethod(elementName);
-            AutomationElement root = null;
-            if (winRoot == null)
-            {
-                root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
-            }
-            else
-            {
-               root = winRoot;
-            }
-
-            // Invoke the element through reflection.
-            AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
-            if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
-            {
-                // OMG, you found the element.
-                returnedEle = newEle;
-                break;
-            }
-        }
-        catch
-        {
-            // Just carry on.
-        }
-        // Reset the time.
-        now = DateTime.Now;
+        credsBasedRequest.getRequest(credsBasedRequest.URLString + "path/to/my/con").then()
+        .assertThat().statusCode(404);
     }
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
 
-    // Has the timer expired?
-    if (now.Subtract(timeAtStart).TotalSeconds > timeToWait)
+                            <p>{{tab.selects[3].restassured}}</p>
+
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>RestSharp</div>
+                                <pre><code class="language-csharp">
+    /**
+    * *** GET WHATEVER ***
+    * Executes a 'GET' command for the request path supplied.
+    *
+    * @param requestPath
+    *      This is the URI for the request.
+    *
+    * @return
+    *      This is the returned content from the response as a string.
+    */
+    public String getWhatever(String requestPath)
     {
-        Assert.Fail("Wait time was exceeded for element so test failed.");
+        // This needs to be set to avoid SSL issues.
+        ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+        // Set the Client and the Request.
+        RestClient client = new RestClient("https://localhost:7753");
+        RestRequest request = new RestRequest(requestPath, Method.GET);
+
+        // Add the token and the pathToFile to the request.
+        request.AddCookie("customAuthToken", getAToken("admin","admin"));
+
+        // Execute and return the response as a string.
+        return client.Execute(request).Content;
     }
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
 
-    // Return the element.
-    return returnedEle;
-}
-                            </code></pre>
-                        </div>
-                        <p><br/></p>
+                            <p>{{tab.selects[3].restsharp}}</p>
 
-                        <p>{{tab.selects[2].example1}}</p>
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>Mocha</div>
+                                <pre><code class="language-javascript">
+    var should = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\should');
+    var request = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\supertest');
 
-                        <p><br/></p>
-                    </div>
+    describe('Mocha Tests', function() {
 
-                    <div ng-show="tab.isSet(4)">
-                        <blockquote>{{tab.selects[3].description}}</blockquote>
-                        <div class="accordion">
-                            <div>RestAssured</div>
-                            <pre><code class="language-java">
-@Test
-public void validGetRequestRestAssured()
-{
-    // Add the resource
-    credsBasedRequest
-    .putRequest(
-    "trialText",
-    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
-    + "_validGetRequest").then().assertThat().statusCode(200);
+        // GENERAL
+        var url = 'http://mylocalservice:8090';
 
-    // Check the contents
-    assertTrue(credsBasedRequest
-    .getRequest(
-    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
-    + "_validGetRequest").asString().contains("trialText"));
-}
+        // USERS
+        var testUser = 'admin';
 
-@Test
-public void getInvalidURLRestAssured()
-{
-    credsBasedRequest.getRequest(credsBasedRequest.URLString + "path/to/my/con").then()
-    .assertThat().statusCode(404);
-}
-                            </code></pre>
-                        </div>
-                        <p><br/></p>
+        describe('2.3.1.2 PUT /path/to/user/{username}', function() {
+            it('PUTUSER-1', function(done) {
 
-                        <p>{{tab.selects[3].restassured}}</p>
+            // *******************************************************
+            // Summary
+            // Confirm that the API accepts HTTP PUT requests for creating users when all mandatory fields are set in the body.
 
-                        <p><br/></p>
-                        <div class="accordion">
-                            <div>RestSharp</div>
-                            <pre><code class="language-csharp">
-/**
-* *** GET WHATEVER ***
-* Executes a 'GET' command for the request path supplied.
-*
-* @param requestPath
-*      This is the URI for the request.
-*
-* @return
-*      This is the returned content from the response as a string.
-*/
-public String getWhatever(String requestPath)
-{
-    // This needs to be set to avoid SSL issues.
-    ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-
-    // Set the Client and the Request.
-    RestClient client = new RestClient("https://localhost:7753");
-    RestRequest request = new RestRequest(requestPath, Method.GET);
-
-    // Add the token and the pathToFile to the request.
-    request.AddCookie("customAuthToken", getAToken("admin","admin"));
-
-    // Execute and return the response as a string.
-    return client.Execute(request).Content;
-}
-                            </code></pre>
-                        </div>
-                        <p><br/></p>
-
-                        <p>{{tab.selects[3].restsharp}}</p>
-
-                        <p><br/></p>
-                        <div class="accordion">
-                            <div>Mocha</div>
-                            <pre><code class="language-javascript">
-var should = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\should');
-var request = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\supertest');
-
-describe('Mocha Tests', function() {
-
-    // GENERAL
-    var url = 'http://mylocalservice:8090';
-
-    // USERS
-    var testUser = 'admin';
-
-    describe('2.3.1.2 PUT /path/to/user/{username}', function() {
-        it('PUTUSER-1', function(done) {
-
-        // *******************************************************
-        // Summary
-        // Confirm that the API accepts HTTP PUT requests for creating users when all mandatory fields are set in the body.
-
-        // Preconditions
-        // Fully Operable WebService is available.
-        // WebService is fully licensed.
-        // *******************************************************
-        request(url)
-        .put('/path/to/user/'+testUser) // Set the URI you're trying to PUT.
-        .set('Authorization', 'Basic c2VwdXJhLW9wZW5pZDpwYXNzd29yZA==') // set the Custom Header.
-        .set('Content-Type', 'application/json') // Set the Content Type header.
-        .send({
-            'authtype':'oauth2',
-            'id':testUser,
-            'password':testUser,
-            'name':testUser,
-            'type':'admin',
-            'role':'Manager',
-            'description':'TRIAL USER',
-            'defaultlanguage':'en'
-        }) // Send the Data that is contained within the body of the command.
-        .end(function(err, res) {
-            if (err) {
-               throw err;
-            }
-            // console.log(res.body);
-            res.status.should.be.equal(200); // Check the HTTP Status is 200 (OK)
-            res.should.have.properties("user","status");
-            res.body.status.should.have.property("success",true);
-            done();
+            // Preconditions
+            // Fully Operable WebService is available.
+            // WebService is fully licensed.
+            // *******************************************************
+            request(url)
+            .put('/path/to/user/'+testUser) // Set the URI you're trying to PUT.
+            .set('Authorization', 'Basic c2VwdXJhLW9wZW5pZDpwYXNzd29yZA==') // set the Custom Header.
+            .set('Content-Type', 'application/json') // Set the Content Type header.
+            .send({
+                'authtype':'oauth2',
+                'id':testUser,
+                'password':testUser,
+                'name':testUser,
+                'type':'admin',
+                'role':'Manager',
+                'description':'TRIAL USER',
+                'defaultlanguage':'en'
+            }) // Send the Data that is contained within the body of the command.
+            .end(function(err, res) {
+                if (err) {
+                   throw err;
+                }
+                // console.log(res.body);
+                res.status.should.be.equal(200); // Check the HTTP Status is 200 (OK)
+                res.should.have.properties("user","status");
+                res.body.status.should.have.property("success",true);
+                done();
+            });
         });
     });
-});
-                            </code></pre>
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[3].mocha}}</p>
+
+                            <p><br/></p>
                         </div>
-                        <p><br/></p>
 
-                        <p>{{tab.selects[3].mocha}}</p>
+                        <div ng-show="tab.isSet(5)">
+                            <blockquote>{{tab.selects[4].description}}</blockquote>
+                        </div>
 
-                        <p><br/></p>
-                    </div>
+                        <div ng-show="tab.isSet(6)">
+                            <blockquote>{{tab.selects[5].description}}</blockquote>
+                            <h3>TestComplete</h3>
+                            <p>{{tab.selects[5].testcomplete}}</p>
 
-                    <div ng-show="tab.isSet(5)">
-                        <blockquote>{{tab.selects[4].description}}</blockquote>
-                    </div>
+                            <h4><br /></h4>
+                            <h3>Sikuli</h3>
+                            <p>{{tab.selects[5].sikuli}}</p>
 
-                    <div ng-show="tab.isSet(6)">
-                        <blockquote>{{tab.selects[5].description}}</blockquote>
-                        <h3>TestComplete</h3>
-                        <p>{{tab.selects[5].testcomplete}}</p>
+                            <h4><br /></h4>
+                            <h3>Robot Framework</h3>
+                            <p>{{tab.selects[5].robotframework}}</p>
+                        </div>
 
-                        <h4><br /></h4>
-                        <h3>Sikuli</h3>
-                        <p>{{tab.selects[5].sikuli}}</p>
+                        <div ng-show="tab.isSet(7)">
+                            <blockquote>{{tab.selects[6].description}}</blockquote>
+                            <div class="accordion">
+                                <div>Maven</div>
+                                <pre><code class="language-markup">
+                                <textarea align="left">
+    <?xml version="1.0" encoding="UTF-8"?>
+    <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <parent>
+            <artifactId>my-test-module</artifactId>
+            <groupId>com.myproject</groupId>
+            <version>1.0.1</version>
+        </parent>
+        <name>My Example Maven Test Suite</name>
+        <modelVersion>4.0.0</modelVersion>
 
-                        <h4><br /></h4>
-                        <h3>Robot Framework</h3>
-                        <p>{{tab.selects[5].robotframework}}</p>
-                    </div>
+        <properties>
+            <my.test.driverVersion>chrome</my.test.driverVersion>
+            <webdriver.version>2.53.0</webdriver.version>
+            <webdriver.base.url>http://localhost:6767/${project.serviceName}/</webdriver.base.url>
+        </properties>
 
-                    <div ng-show="tab.isSet(7)">
-                        <blockquote>{{tab.selects[6].description}}</blockquote>
-                        <div class="accordion">
-                            <div>Maven</div>
-                            <pre><code class="language-markup">
-                            <textarea align="left">
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
         <artifactId>my-test-module</artifactId>
-        <groupId>com.myproject</groupId>
-        <version>1.0.1</version>
-    </parent>
-    <name>My Example Maven Test Suite</name>
-    <modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <my.test.driverVersion>chrome</my.test.driverVersion>
-        <webdriver.version>2.53.0</webdriver.version>
-        <webdriver.base.url>http://localhost:6767/${project.serviceName}/</webdriver.base.url>
-    </properties>
+        <dependencies>
+            <dependency>
+                <groupId>com.jayway.restassured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>2.3.4</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${webdriver.version}</version>
+            </dependency>
+        </dependencies>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.8</version>
+                    <executions>
+                        <execution>
+                            <id>parse-version</id>
+                            <goals>
+                                <goal>parse-version</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>installMyApplication</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                                <commandlineArgs>/quiet /I</commandlineArgs>
+                                <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
+                                <skip>${skipTests}</skip>
+                                <workingDirectory>${project.build.directory}</workingDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>uninstallMyApplication</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                                <commandlineArgs>/quiet /uninstall</commandlineArgs>
+                                <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
+                                <skip>${skipTests}</skip>
+                                <workingDirectory>${project.build.directory}</workingDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <executions>
+                        <execution>
+                            <id>ui-tests</id>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                            <configuration>
+                                <runOrder>alphabetical</runOrder>
+                                <systemPropertyVariables>
+                                    <releaseDirectory>${project.build.directory}</releaseDirectory>
+                                    <webdriver.driver>provided</webdriver.driver>
+                                    <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                                    <test.directory>${project.basedir}</test.directory>
+                                </systemPropertyVariables>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </project>
+                                </textarea>
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
 
-    <artifactId>my-test-module</artifactId>
+                            <p>{{tab.selects[6].maven}}</p>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>2.3.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${webdriver.version}</version>
-        </dependency>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <id>parse-version</id>
-                        <goals>
-                            <goal>parse-version</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>installMyApplication</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <commandlineArgs>/quiet /I</commandlineArgs>
-                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
-                            <skip>${skipTests}</skip>
-                            <workingDirectory>${project.build.directory}</workingDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>uninstallMyApplication</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <commandlineArgs>/quiet /uninstall</commandlineArgs>
-                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
-                            <skip>${skipTests}</skip>
-                            <workingDirectory>${project.build.directory}</workingDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <executions>
-                    <execution>
-                        <id>ui-tests</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                        <configuration>
-                            <runOrder>alphabetical</runOrder>
-                            <systemPropertyVariables>
-                                <releaseDirectory>${project.build.directory}</releaseDirectory>
-                                <webdriver.driver>provided</webdriver.driver>
-                                <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-                                <test.directory>${project.basedir}</test.directory>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-</project>
-                            </textarea>
-                            </code></pre>
-                        </div>
-                        <p><br/></p>
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>Gradle</div>
+                                <pre><code class="language-groovy">
+    apply plugin: 'java'
 
-                        <p>{{tab.selects[6].maven}}</p>
-
-                        <p><br/></p>
-                        <div class="accordion">
-                            <div>Gradle</div>
-                            <pre><code class="language-groovy">
-apply plugin: 'java'
-
-buildscript {
-    repositories {
-        mavenCentral()
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
     }
-}
 
-dependencies {
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
-    compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.+'
-    compile 'junit:junit:4.12'
-}
+    dependencies {
+        compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
+        compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.+'
+        compile 'junit:junit:4.12'
+    }
 
-task uninstallMyApplication(type:Exec) {
-    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
-    commandLine 'msiexec','/quiet','/uninstall',"${text}","/norestart"
-}
+    task uninstallMyApplication(type:Exec) {
+        def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+        commandLine 'msiexec','/quiet','/uninstall',"${text}","/norestart"
+    }
 
-task installMyApplication(dependsOn:':buildmyapp:build',type:Exec) {
-    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
-    commandLine 'msiexec','/quiet','/I',"${text}","/norestart"
-}
+    task installMyApplication(dependsOn:':buildmyapp:build',type:Exec) {
+        def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+        commandLine 'msiexec','/quiet','/I',"${text}","/norestart"
+    }
 
-task copyMyApplicationLogs(type: Copy) {
-    def logsPath = System.getenv("ProgramData")+"\\myCompany\\myApplication\\Logs"
-    from file("${logsPath}")
-    into "${buildDir}/logsForDebugging"
-}
+    task copyMyApplicationLogs(type: Copy) {
+        def logsPath = System.getenv("ProgramData")+"\\myCompany\\myApplication\\Logs"
+        from file("${logsPath}")
+        into "${buildDir}/logsForDebugging"
+    }
 
-// Install the application to test
-test.dependsOn installMyApplication
+    // Install the application to test
+    test.dependsOn installMyApplication
 
-test {
-    outputs.upToDateWhen { false }
-}
+    test {
+        outputs.upToDateWhen { false }
+    }
 
-// Uninstall the application to keep the environment clean, and copy the logs for possible debugging.
-test.finalizedBy(copyMyApplicationLogs)
-test.finalizedBy(uninstallMyApplication)
-                            </code></pre>
+    // Uninstall the application to keep the environment clean, and copy the logs for possible debugging.
+    test.finalizedBy(copyMyApplicationLogs)
+    test.finalizedBy(uninstallMyApplication)
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[6].gradle}}</p>
+                            <p><br/></p>
                         </div>
-                        <p><br/></p>
+                    </section>
+                </div>
 
-                        <p>{{tab.selects[6].gradle}}</p>
-                        <p><br/></p>
-                    </div>
-                </section>
-            </div>
-
-</div>
-        <br />
+    </div>
+            <br />
+        </div>
         <footer>
             <br />
         </footer>
