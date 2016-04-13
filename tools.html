@@ -1746,7 +1746,43 @@
                             <div class="accordion">
                                 <div>Git</div>
                                 <pre><code class="language-git">
+                                    <textarea>
+chrisp@chrisp-Aspire-2920:~$ cd /home/chrisp/Documents/chrisp1985.github.io/
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+(use "git add file..." to update what will be committed)
+(use "git checkout -- file..." to discard changes in working directory)
 
+modified:   src/js/menuControl.js
+modified:   tools.html
+
+Untracked files:
+(use "git add file..." to include in what will be committed)
+
+.idea/
+out/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git add src/
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git add tools.html
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git commit -m"Added GIT description to menuControl, and plumbed into HTML."
+[master dfd5e3b] Added GIT description to menuControl, and plumbed into HTML.
+2 files changed, 13 insertions(+), 2 deletions(-)
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git push -u origin master
+Username for 'https://github.com': chrisp1985
+Password for 'https://chrisp1985@github.com':
+Counting objects: 6, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 1.08 KiB | 0 bytes/s, done.
+Total 6 (delta 3), reused 0 (delta 0)
+To https://github.com/chrisp1985/chrisp1985.github.io
+ffdcae5..dfd5e3b  master -> master
+Branch master set up to track remote branch master from origin.
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
+                                </textarea>
                                 </code></pre>
                             </div>
                             <p><br/></p>
