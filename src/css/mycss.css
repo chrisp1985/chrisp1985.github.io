@@ -1,0 +1,48 @@
+@font-face {
+    font-family: zibFont;
+    src: url(http://chrisp1985.github.io/src/imgs/KBZipaDeeDooDah.ttf);
+}
+.hello {
+    background-color: #FFFFFF;
+    color: #000000;
+    height: 14pc;
+}
+.container-fluid-chris {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 3px;
+    height: 8pc;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-fluid-content {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 3px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.my-header {
+    font-family: 'Roboto', sans-serif;
+}
+.my-header2 {
+    font-family: zibFont;
+}
+.not-expanded {
+    aria-expanded:false;
+}
+.nav-pills > li {
+  float: left;
+}
+.nav-pills > li > a {
+  border-radius: 4px;
+}
+.nav-pills > li + li {
+  margin-left: 2px;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #fff;
+  background-color: #000000;
+}
