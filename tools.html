@@ -111,7 +111,7 @@
             <div class="container-fluid" align="left">
                 <h2><br/></h2>
                 <h2 class="my-header">Tools, Frameworks and some examples.</h2>
-                <div ng-app="myModule">
+                <div>
                     <section class="tab container" ng-controller="myCtrl as tab">
                         <ul class="nav nav-pills">
                             <li ng-class="{ active: tab.isSet(1) }">
@@ -1742,6 +1742,16 @@
                             <p><br/></p>
 
                             <p>{{tab.selects[6].gradle}}</p>
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>Git</div>
+                                <pre><code class="language-git">
+
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[6].git}}</p>
                             <p><br/></p>
                         </div>
                     </section>
