@@ -418,6 +418,115 @@
                             <p>{{tab.selects[2].example1}}</p>
 
                             <p><br/></p>
+                            <div class="accordion">
+                                <div>Example 2</div>
+                                <pre><code class="language-csharp">
+/*
+* *** STOP A SERVICE ***
+* This can stop the process to allow for checking that valid errors are displayed when a connection is lost.
+*
+* @param stop
+*      If stop is true, the service is stopped. If it's false, it's started.
+*
+* @param service
+*      This is the name of the service to stop.
+*/
+public void stopASpecificService(bool stop, String serviceName)
+{
+    // Set services, and then get them.
+    ServiceController[] scServices;
+    scServices = ServiceController.GetServices();
+
+    // Iterate over the available services until...
+    foreach (ServiceController scTemp in scServices)
+    {
+        // ... you have found metadata service!
+        if (scTemp.ServiceName.Equals(serviceName))
+        {
+            if (stop)
+            {
+                // Stop the service and wait until it's stopped.
+                scTemp.Stop();
+                scTemp.WaitForStatus(ServiceControllerStatus.Stopped);
+            }
+            else
+            {
+            // Start the service and wait until it's started.
+            scTemp.Start();
+            scTemp.WaitForStatus(ServiceControllerStatus.Running);
+            }
+
+        // Wait until the service has stopped/started.
+        Thread.Sleep(2000);
+        }
+    }
+}</code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[2].example2}}</p>
+
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>Example 3</div>
+                                <pre><code class="language-csharp">
+[Test]
+public void Test1()
+{
+    /*
+    * SUMMARY: Disconnect the service and check that valid error messages are displayed to the user when attempting to use the service.
+    *
+    * Test Steps
+    * 1. Add data to the application.
+    * 2. Disconnect the service.
+    * 3. Attempt to execute the run task.
+    *
+    * Expected Outcomes
+    * 1. The data is added successfully and all of the nodes are populated in the application.
+    * 2. The service is disconnected.
+    * 3. A popup is displayed, informing the user that the request cannot be processed.
+    */
+
+    Console.WriteLine("Starting Test 1");
+
+    // Run the stuff before the test.
+    beforeTest();
+    int processId = MyApp_AutomationMethods.processId;
+
+    // Set the Main Window.
+    TreeNode node = new TreeNode();
+    MyApp_AutomationMethods ext = new MyApp_AutomationMethods();
+
+    UIAutomationMethods meths = new UIAutomationMethods();
+
+    // 2. Disconnect the service.
+    try {
+
+        meths.stopASpecificService(true, "MyCompany:MyApplication");
+
+        // 3. Attempt to execute the ‘Run’ task.
+        AutomationElement mainWindow = AutomationElement.RootElement.FindChildByProcessId(processId);
+        ext.clickRun();
+
+        // Check for the error and dismiss it.
+        new MyApp_AutomationMethods().readAndDismissError(AutomationElement.RootElement.FindChildByProcessId(processId),
+        node, "Could not execute the task. Please check if the application is running.");
+
+        Console.WriteLine("Test 5 Passed!");
+    }
+    finally
+    {
+        // Restart the service.
+        meths.stopASpecificService(false, "MyCompany:MyApplication");
+    }
+}
+                                </code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[2].example3}}</p>
+
+                            <p><br/></p>
                         </div>
 
                         <div ng-show="tab.isSet(4)">
@@ -1507,7 +1616,7 @@
                             <div class="accordion">
                                 <div>Maven</div>
                                 <pre><code class="language-markup">
-                                <textarea align="left">
+                                <textarea>
     <?xml version="1.0" encoding="UTF-8"?>
     <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
         <parent>
