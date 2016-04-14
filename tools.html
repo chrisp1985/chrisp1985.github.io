@@ -501,7 +501,6 @@ public void Test1()
 
     // 2. Disconnect the service.
     try {
-
         meths.stopASpecificService(true, "MyCompany:MyApplication");
 
         // 3. Attempt to execute the ‘Run’ task.
@@ -512,7 +511,7 @@ public void Test1()
         new MyApp_AutomationMethods().readAndDismissError(AutomationElement.RootElement.FindChildByProcessId(processId),
         node, "Could not execute the task. Please check if the application is running.");
 
-        Console.WriteLine("Test 5 Passed!");
+        Console.WriteLine("Test 1 Passed!");
     }
     finally
     {
