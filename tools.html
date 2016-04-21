@@ -52,7 +52,7 @@
                 <h1><br/></h1>
             </div>
 
-            <div class="container-fluid" align="left">
+            <div class="container" align="left">
                 <div class="row">
                     <div class="col-md-9">
                         <h2><br/></h2>
@@ -122,7 +122,7 @@
 
                         it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
                             var creds, successCallbackSpy, errorCallbackSpy;
-                            creds = {"userName":"admin","password":"admin"};
+                            creds = {"userName":"administrator","password":"admin"};
                             successCallbackSpy = jasmine.createSpy();
                             errorCallbackSpy = jasmine.createSpy();
 
@@ -546,29 +546,77 @@
                                     <div class="accordion">
                                         <div>RestAssured</div>
                                         <pre><code class="language-java">
-            @Test
-            public void validGetRequestRestAssured()
-            {
-                // Add the resource
-                credsBasedRequest
-                .putRequest(
-                "trialText",
-                credsBasedRequest.URLString + "path/to/my/content/" + commonBase
-                + "_validGetRequest").then().assertThat().statusCode(200);
+/**
+* *** GET TOKEN VIA REST-ASSURED ***
+* This creates a request for a token, and returns the string response.
+*
+* @param username
+*            The user of the service.
+* @param password
+*            The password of the user of the service.
+* @return A string of the token response to use embedded in cookies.
+*/
+public String getTokenRestAssured(String username, String password)
+{
+    return RestAssured.given().relaxedHTTPSValidation().contentType(ContentType.JSON).request()
+    .body("{\n" + "    userName:\"" + username + "\",\n" + "    password:\"" + password + "\"\n" + "    }")
+    .when().post("https://localhost:7753/tokenPath/").asString();
+}
 
-                // Check the contents
-                assertTrue(credsBasedRequest
-                .getRequest(
-                credsBasedRequest.URLString + "path/to/my/content/" + commonBase
-                + "_validGetRequest").asString().contains("trialText"));
-            }
+/**
+* *** GET REQUEST VIA REST-ASSURED ***
+* This creates a request to a resource location, and returns the response.
+*
+* @param resourceLocation
+*            The resource location to get.
+* @return The response as a Rest Assured response, allowing further
+*         querying of status codes, messages etc.
+*/
+public Response getRequest(String resourceLocation)
+{
+    return RestAssured.given().relaxedHTTPSValidation()
+    .cookie("customAuthToken", getTokenRestAssured("administrator", "admin")).when().get(resourceLocation);
+}
 
-            @Test
-            public void getInvalidURLRestAssured()
-            {
-                credsBasedRequest.getRequest(credsBasedRequest.URLString + "path/to/my/con").then()
-                .assertThat().statusCode(404);
-            }
+/**
+* *** PUT REQUEST VIA REST-ASSURED ***
+* This creates a PUT request for a resource, and returns the response.
+*
+* @param bodyText
+*            The body of text to add to the request.
+* @param resourceLocation
+*            The resource location to get.
+* @return The response as a Rest Assured response, allowing further
+*         querying of status codes, messages etc.
+*/
+public Response putRequest(String bodyText, String resourceLocation)
+{
+    return RestAssured.given().relaxedHTTPSValidation()
+    .cookie("customAuthToken", getTokenRestAssured("administrator", "admin")).request().body(bodyText).when()
+    .put(resourceLocation);
+}
+
+@Test
+public void validGetRequestRestAssured()
+{
+    // Add the resource
+    putRequest(
+    "trialText",
+    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+    + "_validGetRequest").then().assertThat().statusCode(200);
+
+    // Check the contents
+    assertTrue(getRequest(
+    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+    + "_validGetRequest").asString().contains("trialText"));
+}
+
+@Test
+public void getInvalidURLRestAssured()
+{
+    getRequest(credsBasedRequest.URLString + "path/to/my/con").then()
+    .assertThat().statusCode(404);
+}
                                         </code></pre>
                                     </div>
                                     <p><br/></p>
@@ -579,31 +627,55 @@
                                     <div class="accordion">
                                         <div>RestSharp</div>
                                         <pre><code class="language-csharp">
-            /**
-            * *** GET WHATEVER ***
-            * Executes a 'GET' command for the request path supplied.
-            *
-            * @param requestPath
-            *      This is the URI for the request.
-            *
-            * @return
-            *      This is the returned content from the response as a string.
-            */
-            public String getWhatever(String requestPath)
-            {
-                // This needs to be set to avoid SSL issues.
-                ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
-                // Set the Client and the Request.
-                RestClient client = new RestClient("https://localhost:7753");
-                RestRequest request = new RestRequest(requestPath, Method.GET);
+* *** GET THE TOKEN ***
+* Executes a 'POST' command to get a token string back, which can then be used in cookies for further requests.
+*
+* @param userName
+*      This is the name of the ... user... for the metadata service.
+*
+* @param passWord
+*      This is the password that the user logs into the web service with.
+*/
+public String getAToken(String userName, String passWord)
+{
+    // This needs to be set to avoid SSL issues.
+    ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
-                // Add the token and the pathToFile to the request.
-                request.AddCookie("customAuthToken", getAToken("admin","admin"));
+    // Set the Client and the Request.
+    var client = new RestClient("https://localhost:7753");
+    var request = new RestRequest("tokens", Method.POST);
 
-                // Execute and return the response as a string.
-                return client.Execute(request).Content;
-            }
+    // Add the details and get the token string.
+    request.AddParameter("application/json", "{userName:\"" + userName + "\",password:\"" + passWord + "\"}", ParameterType.RequestBody);
+    return client.Execute(request).Content;
+}
+
+/**
+* *** GET WHATEVER ***
+* Executes a 'GET' command for the request path supplied.
+*
+* @param requestPath
+*      This is the URI for the request.
+*
+* @return
+*      This is the returned content from the response as a string.
+*/
+public String getWhatever(String requestPath)
+{
+    // This needs to be set to avoid SSL issues.
+    ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+    // Set the Client and the Request.
+    RestClient client = new RestClient("https://localhost:7753");
+    RestRequest request = new RestRequest(requestPath, Method.GET);
+
+    // Add the token and the pathToFile to the request.
+    request.AddCookie("customAuthToken", getAToken("administrator","admin"));
+
+    // Execute and return the response as a string.
+    return client.Execute(request).Content;
+}
                                         </code></pre>
                                     </div>
                                     <p><br/></p>
@@ -620,7 +692,7 @@
             describe('Mocha Tests', function() {
 
                 // GENERAL
-                var url = 'http://mylocalservice:8090';
+                var url = 'https://mylocalservice:7753';
 
                 // USERS
                 var testUser = 'admin';
