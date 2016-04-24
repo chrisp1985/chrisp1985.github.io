@@ -1,4 +1,25 @@
-    <div class="container-fluid-chris">
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+            $(function() {
+                $( ".accordion" ).accordion({
+                    collapsible: true,
+                    heightStyle: "content",
+                    active: false
+                });
+            });
+        </script>
+    <script src="/src/syntax/prism.js"></script>
+    <link rel="stylesheet" href="/src/syntax/prism.css">
+    <link rel="stylesheet" href="/src/css/mycss.css">
+</head>
+<body>
+
+<div>
+
+<div class="container-fluid-chris">
         <h1><br/></h1>
         <h1 class="my-header2">Tools and Frameworks.</h1>
         <h1><br/></h1>
@@ -1895,3 +1916,5 @@
     </div>
 
     <div ui-view></div>
+</div>
+</body>
