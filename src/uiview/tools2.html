@@ -170,12 +170,14 @@
 
                                 <p><br/></p>
                             </div>
+                            <div>
+                                <div ng-show="tab.isSet(2)">
+                                    <blockquote ng-cloak>{{tab.selects[1].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[1].languages}}</p>
+                                    </blockquote>
+                                </div>
 
-                            <div ng-show="tab.isSet(2)">
-                                <blockquote ng-cloak>{{tab.selects[1].description}}
-                                    <p><br /></p>
-                                    <p>Languages: {{tab.selects[1].languages}}</p>
-                                </blockquote>
                                 <div class="accordion">
                                     <div>Example 1</div>
                                             <pre><code class="language-java">
