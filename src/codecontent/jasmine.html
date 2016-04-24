@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/src/css/mycss.css">
+    <script src="/src/js/menuControl.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+            $(function() {
+                $( ".accordion" ).accordion({
+                    collapsible: true,
+                    heightStyle: "content",
+                    active: false
+                });
+            });
+        </script>
+    <script src="/src/syntax/prism.js"></script>
+    <link rel="stylesheet" href="../../syntax/prism.css">
+    <link rel="stylesheet" href="../../css/mycss.css">
+</head>
+<body>
+
 <blockquote>{{tab.selects[0].description}}
     <p><br /></p>
     <p>Languages: {{tab.selects[0].languages}}</p>
@@ -134,3 +157,4 @@
 <p>{{tab.selects[0].example2}}</p>
 
 <p><br/></p>
+</body>
