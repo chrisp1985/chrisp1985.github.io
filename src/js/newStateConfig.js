@@ -1,10 +1,10 @@
 (function() {
-    var app = angular.module("uiViewModule",['ui.router','myModule']);
+    var app = angular.module("uiViewModule",['ui.router']);
 
     app.config(function($stateProvider, $urlRouterProvider){
 
         // For any unmatched url, send to /home
-        $urlRouterProvider.otherwise("/home")
+        $urlRouterProvider.otherwise("/home");
 
         $stateProvider
             .state('home', {
@@ -18,6 +18,6 @@
             .state('this_site', {
                 url: "/this_site",
                 templateUrl: "this_site2.html"
-            })
+            });
     });
 })();

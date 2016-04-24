@@ -14,15 +14,15 @@
                         <section class="tab container" ng-controller="myCtrl as tab">
                             <ul class="nav nav-pills">
                                 <li ng-class="{ active: tab.isSet(1) }">
-                                    <a href ng-click="tab.setTab(1)">Jasmine</a></li>
+                                    <a ui-sref ng-click="tab.setTab(1)">Jasmine</a></li>
                                 <li ng-class="{ active: tab.isSet(2) }">
-                                    <a href ng-click="tab.setTab(2)">Selenium</a></li>
+                                    <a ui-sref ng-click="tab.setTab(2)">Selenium</a></li>
                                 <li ng-class="{ active: tab.isSet(3) }">
-                                    <a href ng-click="tab.setTab(3)">UI Automation</a></li>
+                                    <a ui-sref ng-click="tab.setTab(3)">UI Automation</a></li>
                                 <li ng-class="{ active: tab.isSet(4) }">
-                                    <a href ng-click="tab.setTab(4)">API</a></li>
+                                    <a ui-sref ng-click="tab.setTab(4)">API</a></li>
                                 <li ng-class="{ active: tab.isSet(5) }">
-                                    <a href ng-click="tab.setTab(5)">JMeter</a></li>
+                                    <a ui-sref ng-click="tab.setTab(5)">JMeter</a></li>
                                 <li ng-class="{ active: tab.isSet(6) }">
                                     <a href ng-click="tab.setTab(6)">Other Tools</a></li>
                                 <li ng-class="{ active: tab.isSet(7) }">
@@ -172,7 +172,6 @@
                             </div>
                             <div>
                                 <div ng-show="tab.isSet(2)">
-                                    <blockquote>Selenium</blockquote>
                                     <blockquote ng-cloak>{{tab.selects[1].description}}
                                         <p><br /></p>
                                         <p>Languages: {{tab.selects[1].languages}}</p>
