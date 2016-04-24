@@ -30,11 +30,13 @@
                             </ul>
                             <h4><br/></h4>
 
-                            <div ng-show="tab.isSet(1)">
-                                <blockquote ng-cloak>{{tab.selects[0].description}}
-                                    <p><br /></p>
-                                    <p>Languages: {{tab.selects[0].languages}}</p>
-                                </blockquote>
+                            <div>
+                                <div ng-show="tab.isSet(1)">
+                                    <blockquote ng-cloak>{{tab.selects[0].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[0].languages}}</p>
+                                    </blockquote>
+                                </div>
                                 <div class="accordion">
                                     <div>Example 1</div>
                                             <pre><code class="language-javascript">
@@ -107,7 +109,7 @@
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[0].example1}}</p>
+                                <p ng-cloak>{{tab.selects[0].example1}}</p>
 
                                 <p><br/></p>
 
@@ -164,7 +166,7 @@
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[0].example2}}</p>
+                                <p ng-cloak>{{tab.selects[0].example2}}</p>
 
                                 <p><br/></p>
                             </div>
