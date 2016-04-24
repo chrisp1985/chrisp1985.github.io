@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="My Website.">
+    <meta name="author" content="Chris Parsons">
+
+    <title>Chris Parsons WebSite</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script src="https://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <link rel="stylesheet" href="/src/css/mycss.css">
+    <script src="/src/js/menuControl.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+            $(function() {
+                $( ".accordion" ).accordion({
+                    collapsible: true,
+                    heightStyle: "content",
+                    active: false
+                });
+            });
+        </script>
+    <script src="/src/syntax/prism.js"></script>
+    <link rel="stylesheet" href="/src/syntax/prism.css">
+    <link rel="stylesheet" href="/src/css/mycss.css">
+</head>
+<body>
+    <div>
+        <div ng-include="'navBar.html'"></div>
+    </div>
+    <div ui-view></div>
+    <hr>
+    <br />
+    <footer>
+        <div>
+            <div ng-include="'footer.html'"></div>
+        </div>
+    </footer>
+</body>
+</html>
