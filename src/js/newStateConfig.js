@@ -1,5 +1,5 @@
 (function() {
-    var app = angular.module("uiViewModule",['ui.router']);
+    var app = angular.module("uiViewModule",['ui.router','myModule']);
 
     app.config(function($stateProvider, $urlRouterProvider){
 
