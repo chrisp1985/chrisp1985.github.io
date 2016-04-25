@@ -24,6 +24,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
     <script src="https://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
     <link rel="stylesheet" href="/src/css/mycss.css">
+    <script src="../syntax/prism.js"></script>
+    <link rel="stylesheet" href="../syntax/prism.css">
     <script src="../js/newStateConfig.js"></script>
     <script src="../js/menuControl2.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -38,17 +40,15 @@
               });
           });
       </script>
-    <script src="../syntax/prism.js"></script>
-    <link rel="stylesheet" href="../syntax/prism.css">
 </head>
 <body>
     <div>
         <div ng-include="'navBar.html'"></div>
     </div>
     <div ui-view></div>
-    <hr>
-    <br />
     <footer>
+        <hr>
+        <br />
         <div>
             <div ng-include="'footer.html'"></div>
         </div>
