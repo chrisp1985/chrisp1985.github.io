@@ -40,14 +40,14 @@
                             </ul>
                             <h4><br/></h4>
 							<div ng-show="tab.isSet(1)">
-								<blockquote >{{tab.selects[0].description}}
+								<blockquote ng-cloak>{{tab.selects[0].description}}
 									<p><br /></p>
 									<p>Languages: {{tab.selects[0].languages}}</p>
 								</blockquote>
 								<div class="accordion">
 									<div>Example 1</div>
                                     <pre>
-                                                <code class="language-javascript">
+                                                <code class="language-javascript" ng-cloak>
 describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
 	"use strict";
 
