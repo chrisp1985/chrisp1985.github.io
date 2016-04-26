@@ -1,5 +1,4 @@
 <div>
-    <script src="/src/syntax/prism.js"></script>
     <script>
     $(function() {
       $( ".accordion" ).accordion({
@@ -21,6 +20,7 @@
                     <h2><br/></h2>
                     <h2 class="my-header">Tools, Frameworks and some examples.</h2>
                     <div>
+                        <script src="/src/syntax/prism.js"></script>
                         <section class="tab container" ng-controller="myCtrl as tab">
                             <ul class="nav nav-pills">
                                 <li ng-class="{ active: tab.isSet(1) }">
@@ -39,6 +39,7 @@
                                     <a href ng-click="tab.setTab(7)">Build Environment</a></li>
                             </ul>
                             <h4><br/></h4>
+
 							<div ng-show="tab.isSet(1)">
 								<blockquote ng-cloak>{{tab.selects[0].description}}
 									<p><br /></p>
