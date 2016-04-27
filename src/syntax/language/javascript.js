@@ -92,5 +92,3 @@ Rainbow.extend('javascript', [
     }
 ]);
 
-Rainbow.addAlias('js', 'javascript');
-
