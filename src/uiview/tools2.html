@@ -8,6 +8,13 @@
       });
     });
     </script>
+    <script>
+    require(['jquery', 'prism'], function($, prism) {
+        $(function() {
+            prism.highlightAll();
+        });
+    });
+    </script>
     <div class="container-fluid-chris">
             <h1><br/></h1>
             <h1 class="my-header2">Tools and Frameworks.</h1>
@@ -20,7 +27,6 @@
                     <h2><br/></h2>
                     <h2 class="my-header">Tools, Frameworks and some examples.</h2>
                     <div>
-                        <script src="/src/syntax/prism.js"></script>
                         <section class="tab container" ng-controller="myCtrl as tab">
                             <ul class="nav nav-pills">
                                 <li ng-class="{ active: tab.isSet(1) }">
@@ -719,6 +725,7 @@ describe('Mocha Tests', function() {
                                     
                                     <div>Example JMX</div>
                                             <pre class="language-markup"><code class="language-markup">
+                                                <textarea>
 
 <?xml version="1.0" encoding="UTF-8"?>
     <jmeterTestPlan version="1.2" properties="2.8" jmeter="2.13 r1665067">
@@ -1634,7 +1641,7 @@ describe('Mocha Tests', function() {
             <hashTree/>
         </hashTree>
     </jmeterTestPlan>
-
+</textarea>
                                             </code></pre>
 
                                 </div>
@@ -1677,6 +1684,7 @@ describe('Mocha Tests', function() {
                                     <div>Maven</div>
 
                                             <pre class="language-markup"><code class="language-markup">
+                                                <textarea>
 
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -1802,6 +1810,8 @@ describe('Mocha Tests', function() {
     </build>
 </project>
 
+
+                                            </textarea>
                                             </code></pre>
                                 </div>
                                 <p><br/></p>
