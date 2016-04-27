@@ -48,6 +48,12 @@ body {
   display: table-cell;
   vertical-align: top;
 }
+.site-wrapper-inner-right {
+  display: table-cell;
+  vertical-align: top;
+  horizontal-align: right;
+}
+
 .cover-container {
   margin-right: auto;
   margin-left: auto;
