@@ -1935,6 +1935,62 @@ test.finalizedBy(uninstallMyApplication)
                                     <p>{{tab.selects[6].git}}</p>
                                     <p><br/></p>
                                 </div>
+
+                                <div ng-show="tab.isSet(8)">
+                                    <blockquote ng-cloak>{{tab.selects[7].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[7].languages}}</p>
+                                    </blockquote>
+                                    <div class="accordion">
+                                        <div>Example 1</div>
+
+                                            <pre>
+                                                <code class="language-javascript">
+// Import the methods.
+var myServiceMethods = require("./libs/my-service-methods.js");
+
+// Import the objects
+var homePage = require("./pageobjs/homePage.js");
+var commonBase;
+
+describe("First Test Suite", function() {
+    "use strict";
+
+    beforeEach(function() {
+        myServiceMethods.login("admin","admin");
+        commonBase= new Date().getTime();
+    });
+
+    it('Check that the content of both tabs is correct.',function() {
+        // Add a new tree node.
+        myServiceMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
+        + commonBase + "_testNode", true);
+
+        // Check that both tabs are shown.
+        expect(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed()).toBeTruthy();
+
+        // Click on tab1
+        homePage.tab1.click();
+
+        // Check that description and title stuff are shown.
+        expect(homePage.titleInputField.isDisplayed()
+        && homePage.descriptionInputField.isDisplayed()).toBeTruthy();
+
+        // Click on tab2
+        homePage.tab2.click();
+
+        // Check that the root node part is shown.
+        expect(homePage.treeRoot().isDisplayed()).toBeTruthy();
+    });
+});
+                                                </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[7].protractor}}</p>
+
+                                    <p><br/></p>
+                                </div>
                             </section>
                         </div>
                     </div>
