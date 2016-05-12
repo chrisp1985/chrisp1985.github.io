@@ -20,10 +20,13 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-        <link rel="stylesheet" href="/src/css/mycss.css">
+
+        <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
+
         <script src="/src/js/menuControl.js"></script>
+        <!--<script src="/MyWebPage/src/js/menuControl.js"></script>-->
+
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -39,24 +42,35 @@
         <script src="/src/syntax/prism.js"></script>
         <link rel="stylesheet" href="/src/syntax/prism.css">
         <link rel="stylesheet" href="/src/css/mycss.css">
+        <!--<link rel="stylesheet" href="/MyWebPage/src/css/mycss.css">-->
     </head>
     <body>
+    <style>
+        .opacity {
+            background:url("http://www.seleniumhq.org/images/big-logo.png");
+            background-repeat:no-repeat;
+            background-position:-50px -50px;
+            background-size: 380px 380px;
+            background-color: #777;
+        }
+    </style>
         <div>
             <div ng-include="'navBar.html'"></div>
         </div>
 
-        <div>
-            <div class="container-fluid-chris">
-                <h1><br/></h1>
-                <h1 class="my-header2">Tools and Frameworks.</h1>
-                <h1><br/></h1>
+        <div class="jumbotron2 opacity">
+            <div class="container">
+                <h1 class="my-header2">Tools and Frameworks</h1>
+                <p>Covering an assortment of tools and frameworks for a range of testing written in a few different languages.</p>
             </div>
+        </div>
 
+        <div>
             <div class="container" align="left">
                 <div class="row">
                     <div class="col-md-9">
-                        <h2><br/></h2>
-                        <h2 class="my-header">Tools, Frameworks and some examples.</h2>
+
+                        <br />
                         <div>
                             <section class="tab container" ng-controller="myCtrl as tab">
                                 <ul class="nav nav-pills">

@@ -18,25 +18,37 @@
     <!-- Custom styles for this template -->
     <link href="cover.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://getbootstrap.com/dist/css/bootstrap.css"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
     <link rel="stylesheet" href="/src/css/mycss.css">
+    <!--<link rel="stylesheet" href="/MyWebPage/src/css/mycss.css">-->
 </head>
 
 <body>
+<style>
+        .opacity {
+            background:url("http://chrisp1985.github.io/src/imgs/bootstrap.png");
+            background-repeat:no-repeat;
+            background-position:-50px -50px;
+            background-size: 380px 380px;
+            background-color: #777;
+        }
+    </style>
 <div>
     <div ng-include="'navBar.html'"></div>
 </div>
-<div>
-    <div class="container-fluid-chris my-header">
-        <h1><br/></h1>
-        <h1 class="my-header2">Why have I done this?</h1>
-        <br />
+
+<div class="jumbotron2 opacity">
+    <div class="container">
+        <h1 class="my-header2">Why Have I Done This?</h1>
+        <p>A bit of Bootstrap, a bit of AngularJS, and a lot of CSS and HTML editing.</p>
     </div>
 </div>
-<h1><br/></h1>
 <div class="container" align="left">
     <div class="row">
         <div class="col-md-9">
