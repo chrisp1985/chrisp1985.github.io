@@ -11,6 +11,35 @@
   color: inherit;
   background-color: #eee;
 }
+.jumbotron-billboard .img {
+    margin-bottom: 0px;
+    opacity: 0.2;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    background-color: #777;
+    overflow: hidden;
+    position:absolute;
+    top:0;left:0;
+    z-index:1;
+}
+.jumbotron-billboard .tools {
+    background: #000 url("http://www.seleniumhq.org/images/big-logo.png") center center;
+    background-repeat:no-repeat;
+    background-position:-50px -50px;
+    background-size: 380px 380px;
+}
+.jumbotron-billboard .site {
+    background: #000 url("http://chrisp1985.github.io/src/imgs/bootstrap.png") center center;
+    background-repeat:no-repeat;
+    background-position:-50px -50px;
+    background-size: 380px 380px;
+}
+.jumbotron {position:relative;background-color: #777;}
+.jumbotron .container {z-index:2;
+ position:relative;
+  z-index:2;
+}
 .jumbotron2 h1,
 .jumbotron2 .h1 {
   color: inherit;
@@ -31,8 +60,10 @@
   padding-left: 15px;
   border-radius: 6px;
 }
-.jumbotron2 .container {
-  max-width: 100%;
+.jumbotron .container {z-index:2;
+ position:relative;
+  z-index:2;
+  max-width:100%;
 }
 @media screen and (min-width: 768px) {
   .jumbotron2 {
