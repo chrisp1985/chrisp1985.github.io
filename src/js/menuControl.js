@@ -82,7 +82,6 @@
             sikuli:"Sikuli is a framework that uses image recognition. Relying on image recognition only in test cases has some serious limitations, but combining it with Selenium meant that DOM objects could be manipulated but the actual look and feel of the UI could be verified at the same time. As the tool uses image recognition, a lot of images need to be stored which can bloat a project’s size. The language used in Sikuli is python.",
             robotframework:"Robot Framework is a very high-level test runner. Tests can be written by piecing together keywords, with the libraries those keywords call sitting underneath. It feels like a cumbersome tool, but was very useful for combing Sikuli and Selenium into one suite."
         },
-
     ];
 
     var otherTabs =
@@ -97,13 +96,14 @@
             name:"npm",
             description:"NPM, the package manager for the installation of Node modules.",
             languages:"Javascript",
-            example1:"NPM text."
+            example1:"Modules can be installed directly from npm using ‘npm install <modulename> --save-dev’. npm has been used to install a lot of node modules, including karma, jasmine and protractor as test frameworks/runners, as well as supplementary functions like require and should."
         },
         {
             name:"Mocking Text",
             description:"Mocking of services, for component testing or to replicate a third party service.",
             languages:"Javascript, Java",
-            example1:"Mocking text."
+            example1:"The mockserver here allows for an external service on which my application is dependent to be mocked, so that any requests my application makes can be responded to correctly. For example, if my application was to send a GET request to /path/to/my/rest/services, I could expect a response containing my service data which would allow me to carry on testing my application. Without the mock, I would only be able to test up until the point that a request is made. Mockserver is a netty-based service, and can be installed from mavencentral using a compile 'org.mock-server:mockserver-netty:3.10.4' in the build.gradle file for the test suite.",
+            example2:"These examples use Angular’s HTTPBackend to mock service responses for Jasmine tests. The first example checks the data returned matches what is expected, while the second example checks that an action occurs as a result of an error callback in the request."
         },
         {
             name:"Linux Text",

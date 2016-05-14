@@ -49,73 +49,17 @@
                             <div class="accordion">
                                 <div>Example 1</div>
                                     <pre>
-                                                <code class="language-javascript">
-                                                    describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
-                                                    "use strict";
+                                                <code class="language-bash">
+queueValue=`curl -X GET jenkins:8080/view/MyProject/job/myApp/api/json?pretty=true | grep 'queueItem'`
 
-                                                    // *******************************
-                                                    //  AUTHENTICATOR ANGULAR MODULE
-                                                    // *******************************
-                                                    var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
-
-                                                    beforeEach(module('authenticator'));
-                                                    beforeEach(module('ngCookies'));
-                                                    beforeEach(module(function($provide) {
-                                                    $window = {location: { replace: jasmine.createSpy()} };
-                                                    $provide.value('$window', $window);
-                                                    }));
-
-                                                    beforeEach(inject(function($injector) {
-                                                    authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
-                                                    authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
-                                                    myCookies = $injector.get('$cookieStore',[]);
-                                                    httpBackend = $injector.get('$httpBackend');
-                                                    }));
-
-                                                    // ***********************
-                                                    //  AUTHENTICATOR FACTORY
-                                                    // ***********************
-                                                    describe('Authenticator Factory',function() {
-
-                                                    // *********
-                                                    //   LOGIN
-                                                    // *********
-                                                    describe('login',function() {
-                                                    it('Check that the login method is defined.',function() {
-                                                    expect(authenticatorService.login).not.toEqual(undefined);
-                                                    });
-
-                                                    it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
-                                                    var creds, successCallbackSpy, errorCallbackSpy;
-                                                    creds = {"userName":"administrator","password":"admin"};
-                                                    successCallbackSpy = jasmine.createSpy();
-                                                    errorCallbackSpy = jasmine.createSpy();
-
-                                                    httpBackend.expectPOST('/tokens/', creds, function(headers) {
-                                                    return headers['Content-Type'] === 'application/json';
-                                                    }).respond(200, 'HELLO');
-                                                    authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
-                                                    httpBackend.flush();
-                                                    expect(successCallbackSpy).toHaveBeenCalled();
-                                                    });
-
-                                                    it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
-                                                    var invalidcreds, successCallbackSpy, errorCallbackSpy;
-                                                    invalidcreds = {"userName":"admin2","password":"admin2"};
-                                                    successCallbackSpy = jasmine.createSpy();
-                                                    errorCallbackSpy = jasmine.createSpy();
-
-                                                    httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
-                                                    return headers['Content-Type'] === 'application/json';
-                                                    }).respond(500, 'BOO');
-                                                    authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
-                                                    httpBackend.flush();
-                                                    expect(errorCallbackSpy).toHaveBeenCalled();
-
-                                                    });
-                                                    });
-                                                    });
-                                                    });
+# If there are no builds in the queue, start the job.
+if [[ "$queueValue" == *"null"* ]]; then
+    echo "Trigger Build!"
+    mkdir -p $WORKSPACE/mytests/build/tmp
+    echo "Trigger Build!" > $WORKSPACE/ mytests /build/tmp/noqueue.txt;
+else
+    echo "DONT Trigger Build!";
+fi
                                                 </code>
                                     </pre>
                             </div>
@@ -177,10 +121,73 @@
                                 <p>Languages: {{tab.selects[2].languages}}</p>
                             </blockquote>
                             <div class="accordion">
-                                <div>Example 1</div>
+                                <div>MockServer</div>
                                             <pre>
-                                                <code class="language-csharp">
+                                                <code class="language-java">
+/**
+* *** MOCK SERVICE FOR AN EXTERNAL SERVICE DEPENDENCY ***
+*/
+public void setUpMockService() {
+    MockServerClient mockServer = startClientAndServer(MyProperties.portNo);
 
+    // Respond with an OK when a PUT request is sent to the services.
+    mockServer
+    .when(request()
+        .withMethod("PUT")
+        .withPath("/path/to/my/rest/services")
+    )
+    .respond(response()
+        .withStatusCode(200)
+    );
+
+    // Respond with a token when a successful POST request is made to my token generation.
+    mockServer
+    .when(request()
+        .withMethod("POST")
+        .withPath("/path/to/my/tokens/makeMyToken")
+        .withBody("username=admin&password=SecretStuff")
+    )
+    .respond(response("{\n" +
+    "  \"token\": \"TMm3CKdPjv1m8_h9tv9T4C2nCGcT2QnpLJ9V28hdujWUanQUR67-RDU5TiQsn6AE\",\n" +
+    "  \"expires\": \"1462351478419\"\n" +
+    "}")
+        .withStatusCode(200)
+        .withBody("TMm3CKdPjv1m8_h9tv9T4C2nCGcT2QnpLJ9V28hdujWUanQUR67-RDU5TiQsn6AE")
+    );
+
+    // Respond with a 'not authorized' when an invalid POST request is made to my token generation.
+    mockServer
+    .when(request()
+        .withMethod("POST")
+        .withPath("/path/to/my/tokens/makeMyToken")
+        .withBody("username=whoDat&password=NoDat")
+    )
+    .respond(response("not authorized")
+        .withStatusCode(401)
+        .withBody("not authorized")
+    );
+
+    // Respond with a 'not authorized' when an invalid GET request is made to my REST services.
+    mockServer
+    .when(request()
+        .withMethod("GET")
+        .withPath("/path/to/my/rest/services")
+        .withQueryStringParameter("token","InvalidToken")
+    )
+    .respond(response("not authorized")
+        .withStatusCode(503)
+    );
+
+    // Respond with an OK when a valid GET request is made to my REST services.
+    mockServer
+    .when(request()
+        .withMethod("GET")
+        .withPath("/path/to/my/rest/services")
+    )
+    .respond(response("{\"currentVersion\":v1.1,\"services\":[{\"name\":\"MyServiceName\",\"type\":\"A_Service\"}]}")
+        .withStatusCode(200)
+    );
+}
                                                 </code></pre>
                             </div>
                             <p><br/></p>
@@ -188,27 +195,33 @@
                             <p>{{tab.selects[2].example1}}</p>
 
                             <p><br/></p>
+
                             <div class="accordion">
-                                <div>Example 2</div>
+                                <div>Angular HTTP Backend Example 1</div>
                                             <pre>
-                                                <code class="language-csharp">
-                                                    </code></pre>
-                            </div>
-                            <p><br/></p>
-
-                            <p>{{tab.selects[2].example2}}</p>
-
-                            <p><br/></p>
-                            <div class="accordion">
-                                <div>Example 3</div>
-                                            <pre>
-                                                <code class="language-csharp">
-
+                                                <code class="language-javascript">
+$httpBackend.expectGET(/\/path\/to\/my\/files\/file.json\?noCache=(.+)/).respond(responseString);
+service.getResource(fileName).get().then(function(data){
+    expect(JSON.stringify(data)).toContain(JSON.stringify(responseString));
+});
+$httpBackend.flush();
                                                 </code></pre>
                             </div>
                             <p><br/></p>
 
-                            <p>{{tab.selects[2].example3}}</p>
+                            <div class="accordion">
+                                <div>Angular HTTP Backend Example 1</div>
+                                            <pre>
+                                                <code class="language-javascript">
+httpBackend.expectPOST(/\/path\/to\/my\/files\?noCache=(.+)/).respond(500,'Internal Server Error');
+scope.getFiles(myFiles[0]);
+httpBackend.flush();
+expect(toasterSpy).toHaveBeenCalledWith('error', 'Failed to get your file.');
+                                                </code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[2].example2}}</p>
 
                             <p><br/></p>
                         </div>
