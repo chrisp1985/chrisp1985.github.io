@@ -31,19 +31,17 @@
                                 <li ng-class="{ active: tab.isSet(1) }">
                                     <a href ng-click="tab.setTab(1)">Jasmine</a></li>
                                 <li ng-class="{ active: tab.isSet(2) }">
-                                    <a href ng-click="tab.setTab(2)">Selenium</a></li>
+                                    <a href ng-click="tab.setTab(2)">Protractor</a></li>
                                 <li ng-class="{ active: tab.isSet(3) }">
-                                    <a href ng-click="tab.setTab(3)">UI Automation</a></li>
+                                    <a href ng-click="tab.setTab(3)">Selenium</a></li>
                                 <li ng-class="{ active: tab.isSet(4) }">
-                                    <a href ng-click="tab.setTab(4)">API</a></li>
+                                    <a href ng-click="tab.setTab(4)">UI Automation</a></li>
                                 <li ng-class="{ active: tab.isSet(5) }">
-                                    <a href ng-click="tab.setTab(5)">JMeter</a></li>
+                                    <a href ng-click="tab.setTab(5)">API</a></li>
                                 <li ng-class="{ active: tab.isSet(6) }">
-                                    <a href ng-click="tab.setTab(6)">Other Tools</a></li>
+                                    <a href ng-click="tab.setTab(6)">JMeter</a></li>
                                 <li ng-class="{ active: tab.isSet(7) }">
-                                    <a href ng-click="tab.setTab(7)">Build Environment</a></li>
-                                <li ng-class="{ active: tab.isSet(8) }">
-                                    <a href ng-click="tab.setTab(8)">Protractor</a></li>
+                                    <a href ng-click="tab.setTab(7)">Other Tools</a></li>
                             </ul>
                             <h4><br/></h4>
 
@@ -190,10 +188,65 @@ describe('CONTROLLERS - Settings Admin Test Cases', function() {
 								<p><br/></p>
 					 
 							</div>
-							<div ng-show="tab.isSet(2)">
-                                    <blockquote ng-cloak>{{tab.selects[1].description}}
+                            <div ng-show="tab.isSet(2)">
+                                <blockquote ng-cloak>{{tab.selects[1].description}}
+                                    <p><br /></p>
+                                    <p>Languages: {{tab.selects[1].languages}}</p>
+                                </blockquote>
+                                <div class="accordion">
+                                    <div>Example 1</div>
+
+                                            <pre>
+                                                <code class="language-javascript">
+                                                    // Import the methods.
+                                                    var myServiceMethods = require("./libs/my-service-methods.js");
+
+                                                    // Import the objects
+                                                    var homePage = require("./pageobjs/homePage.js");
+                                                    var commonBase;
+
+                                                    describe("First Test Suite", function() {
+                                                    "use strict";
+
+                                                    beforeEach(function() {
+                                                    myServiceMethods.login("admin","admin");
+                                                    commonBase= new Date().getTime();
+                                                    });
+
+                                                    it('Check that the content of both tabs is correct.',function() {
+                                                    // Add a new tree node.
+                                                    myServiceMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
+                                                    + commonBase + "_testNode", true);
+
+                                                    // Check that both tabs are shown.
+                                                    expect(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed()).toBeTruthy();
+
+                                                    // Click on tab1
+                                                    homePage.tab1.click();
+
+                                                    // Check that description and title stuff are shown.
+                                                    expect(homePage.titleInputField.isDisplayed()
+                                                    && homePage.descriptionInputField.isDisplayed()).toBeTruthy();
+
+                                                    // Click on tab2
+                                                    homePage.tab2.click();
+
+                                                    // Check that the root node part is shown.
+                                                    expect(homePage.treeRoot().isDisplayed()).toBeTruthy();
+                                                    });
+                                                    });
+                                                </code></pre>
+                                </div>
+                                <p><br/></p>
+
+                                <p>{{tab.selects[1].example1}}</p>
+
+                                <p><br/></p>
+                            </div>
+							<div ng-show="tab.isSet(3)">
+                                    <blockquote ng-cloak>{{tab.selects[2].description}}
                                         <p><br /></p>
-                                        <p>Languages: {{tab.selects[1].languages}}</p>
+                                        <p>Languages: {{tab.selects[2].languages}}</p>
                                     </blockquote>
                                 
 
@@ -288,7 +341,7 @@ public class TestClass {
 									</div>
 									<p><br/></p>
 
-									<p>{{tab.selects[1].example1}}</p>
+									<p>{{tab.selects[2].example1}}</p>
 
 									<p><br/></p>
 									<div class="accordion">
@@ -311,15 +364,15 @@ public void login(String username, String password) {
 									</div>
 									<p><br/></p>
 
-									<p>{{tab.selects[1].example2}}</p>
+									<p>{{tab.selects[2].example2}}</p>
 
 									<p><br/></p>
          
 								</div>
-                            <div ng-show="tab.isSet(3)">
-                                <blockquote ng-cloak>{{tab.selects[2].description}}
+                            <div ng-show="tab.isSet(4)">
+                                <blockquote ng-cloak>{{tab.selects[3].description}}
                                     <p><br /></p>
-                                    <p>Languages: {{tab.selects[2].languages}}</p>
+                                    <p>Languages: {{tab.selects[3].languages}}</p>
                                 </blockquote>
                                 <div class="accordion">
                                     <div>Example 1</div>
@@ -403,7 +456,7 @@ public AutomationElement waitForObject(AutomationElement winRoot, TreeNode node,
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[2].example1}}</p>
+                                <p>{{tab.selects[3].example1}}</p>
 
                                 <p><br/></p>
                                 <div class="accordion">
@@ -453,7 +506,7 @@ public void stopASpecificService(bool stop, String serviceName)
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[2].example2}}</p>
+                                <p>{{tab.selects[3].example2}}</p>
 
                                 <p><br/></p>
                                 <div class="accordion">
@@ -513,14 +566,14 @@ public void Test1()
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[2].example3}}</p>
+                                <p>{{tab.selects[3].example3}}</p>
 
                                 <p><br/></p>
                             </div>
-                            <div ng-show="tab.isSet(4)">
-                                <blockquote ng-cloak>{{tab.selects[3].description}}
+                            <div ng-show="tab.isSet(5)">
+                                <blockquote ng-cloak>{{tab.selects[4].description}}
                                     <p><br /></p>
-                                    <p>Languages: {{tab.selects[3].languages}}</p>
+                                    <p>Languages: {{tab.selects[4].languages}}</p>
                                 </blockquote>
                                 <div class="accordion">
                                     <div>RestAssured</div>
@@ -601,7 +654,7 @@ public void getInvalidURLRestAssured()
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[3].restassured}}</p>
+                                <p>{{tab.selects[4].restassured}}</p>
 
                                 <p><br/></p>
                                 <div class="accordion">
@@ -661,7 +714,7 @@ public String getWhatever(String requestPath)
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[3].restsharp}}</p>
+                                <p>{{tab.selects[4].restsharp}}</p>
 
                                 <p><br/></p>
                                 <div class="accordion">
@@ -720,14 +773,14 @@ describe('Mocha Tests', function() {
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[3].mocha}}</p>
+                                <p>{{tab.selects[4].mocha}}</p>
 
                                 <p><br/></p>
                             </div>
-                            <div ng-show="tab.isSet(5)">
-                                <blockquote ng-cloak>{{tab.selects[4].description}}
+                            <div ng-show="tab.isSet(6)">
+                                <blockquote ng-cloak>{{tab.selects[5].description}}
                                     <p><br /></p>
-                                    <p>Languages: {{tab.selects[4].languages}}</p>
+                                    <p>Languages: {{tab.selects[5].languages}}</p>
                                 </blockquote>
                                 <div class="accordion">
                                     
@@ -1664,323 +1717,25 @@ describe('Mocha Tests', function() {
                                 </div>
                                 <p><br/></p>
 
-                                <p>{{tab.selects[4].jmxexample}}</p>
+                                <p>{{tab.selects[5].jmxexample}}</p>
 
                                 <p><br/></p>
-                            </div>
-                            <div ng-show="tab.isSet(6)">
-                                <blockquote ng-cloak>{{tab.selects[5].description}}
-                                    <p><br /></p>
-                                    <p>Languages: {{tab.selects[5].languages}}</p>
-                                </blockquote>
-                                <h3>TestComplete</h3>
-                                <p>{{tab.selects[5].testcomplete}}</p>
-
-                                <h4><br /></h4>
-                                <h3>Sikuli</h3>
-                                <p>{{tab.selects[5].sikuli}}</p>
-
-                                <h4><br /></h4>
-                                <h3>Robot Framework</h3>
-                                <p>{{tab.selects[5].robotframework}}</p>
                             </div>
                             <div ng-show="tab.isSet(7)">
                                 <blockquote ng-cloak>{{tab.selects[6].description}}
                                     <p><br /></p>
                                     <p>Languages: {{tab.selects[6].languages}}</p>
                                 </blockquote>
-                                <div class="accordion">
-                                    <div>Maven</div>
+                                <h3>TestComplete</h3>
+                                <p>{{tab.selects[6].testcomplete}}</p>
 
-                                            <pre>
-                                                <code class="language-markup">
-                                                <textarea>
+                                <h4><br /></h4>
+                                <h3>Sikuli</h3>
+                                <p>{{tab.selects[6].sikuli}}</p>
 
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>my-test-module</artifactId>
-        <groupId>com.myproject</groupId>
-        <version>1.0.1</version>
-    </parent>
-    <name>My Example Maven Test Suite</name>
-    <modelVersion>4.0.0</modelVersion>
-
-    <properties>
-        <my.test.driverVersion>chrome</my.test.driverVersion>
-        <webdriver.version>2.53.0</webdriver.version>
-        <webdriver.base.url>http://localhost:6767/${project.serviceName}/</webdriver.base.url>
-    </properties>
-
-    <artifactId>my-test-module</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>2.3.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${webdriver.version}</version>
-        </dependency>
-    </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <id>parse-version</id>
-                        <goals>
-                            <goal>parse-version</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.12</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>installMyApplication</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <commandlineArgs>/quiet /I</commandlineArgs>
-                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
-                            <skip>${skipTests}</skip>
-                            <workingDirectory>${project.build.directory}</workingDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>uninstallMyApplication</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <commandlineArgs>/quiet /uninstall</commandlineArgs>
-                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
-                            <skip>${skipTests}</skip>
-                            <workingDirectory>${project.build.directory}</workingDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <executions>
-                    <execution>
-                        <id>ui-tests</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                        <configuration>
-                            <runOrder>alphabetical</runOrder>
-                            <systemPropertyVariables>
-                                <releaseDirectory>${project.build.directory}</releaseDirectory>
-                                <webdriver.driver>provided</webdriver.driver>
-                                <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-                                <test.directory>${project.basedir}</test.directory>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-</project>
-
-
-                                            </textarea>
-                                            </code></pre>
-                                </div>
-                                <p><br/></p>
-
-                                <p>{{tab.selects[6].maven}}</p>
-
-                                <p><br/></p>
-                                <div class="accordion">
-                                    <div>Gradle</div>
-                                            <pre>
-                                                <code class="language-groovy">
-apply plugin: 'java'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
-dependencies {
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
-    compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.+'
-    compile 'junit:junit:4.12'
-}
-
-task uninstallMyApplication(type:Exec) {
-    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
-    commandLine 'msiexec','/quiet','/uninstall',"${text}","/norestart"
-}
-
-task installMyApplication(dependsOn:':buildmyapp:build',type:Exec) {
-    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
-    commandLine 'msiexec','/quiet','/I',"${text}","/norestart"
-}
-
-task copyMyApplicationLogs(type: Copy) {
-    def logsPath = System.getenv("ProgramData")+"\\myCompany\\myApplication\\Logs"
-    from file("${logsPath}")
-    into "${buildDir}/logsForDebugging"
-}
-
-// Install the application to test
-test.dependsOn installMyApplication
-
-test {
-    outputs.upToDateWhen { false }
-}
-
-// Uninstall the application to keep the environment clean, and copy the logs for possible debugging.
-test.finalizedBy(copyMyApplicationLogs)
-test.finalizedBy(uninstallMyApplication)
-                                            </code></pre>
-                                </div>
-                                <p><br/></p>
-
-                                <p>{{tab.selects[6].gradle}}</p>
-                                <p><br/></p>
-                                <div class="accordion">
-                                    <div>Git</div>
-                                            <pre>
-                                                <code class="language-git">
-            <textarea>
-chrisp@chrisp-Aspire-2920:~$ cd /home/chrisp/Documents/chrisp1985.github.io/
-chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
-Changes not staged for commit:
-(use "git add file..." to update what will be committed)
-(use "git checkout -- file..." to discard changes in working directory)
-
-modified:   src/js/menuControl.js
-modified:   tools.html
-
-Untracked files:
-(use "git add file..." to include in what will be committed)
-
-.idea/
-out/
-
-no changes added to commit (use "git add" and/or "git commit -a")
-chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git add src/
-chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git add tools.html
-chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git commit -m"Added GIT description to menuControl, and plumbed into HTML."
-[master dfd5e3b] Added GIT description to menuControl, and plumbed into HTML.
-2 files changed, 13 insertions(+), 2 deletions(-)
-chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git push -u origin master
-Username for 'https://github.com': chrisp1985
-Password for 'https://chrisp1985@github.com':
-Counting objects: 6, done.
-Delta compression using up to 2 threads.
-Compressing objects: 100% (5/5), done.
-Writing objects: 100% (6/6), 1.08 KiB | 0 bytes/s, done.
-Total 6 (delta 3), reused 0 (delta 0)
-To https://github.com/chrisp1985/chrisp1985.github.io
-ffdcae5..dfd5e3b  master -> master
-Branch master set up to track remote branch master from origin.
-chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
-                                            </textarea>
-                                            </code></pre>
-                                </div>
-                                <p><br/></p>
-
-                                <p>{{tab.selects[6].git}}</p>
-                                <p><br/></p>
-                            </div>
-                            <div ng-show="tab.isSet(8)">
-                                <blockquote ng-cloak>{{tab.selects[7].description}}
-                                    <p><br /></p>
-                                    <p>Languages: {{tab.selects[7].languages}}</p>
-                                </blockquote>
-                                <div class="accordion">
-                                    <div>Example 1</div>
-
-                                            <pre>
-                                                <code class="language-javascript">
-// Import the methods.
-var myServiceMethods = require("./libs/my-service-methods.js");
-
-// Import the objects
-var homePage = require("./pageobjs/homePage.js");
-var commonBase;
-
-describe("First Test Suite", function() {
-    "use strict";
-
-    beforeEach(function() {
-        myServiceMethods.login("admin","admin");
-        commonBase= new Date().getTime();
-    });
-
-    it('Check that the content of both tabs is correct.',function() {
-        // Add a new tree node.
-        myServiceMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
-        + commonBase + "_testNode", true);
-
-        // Check that both tabs are shown.
-        expect(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed()).toBeTruthy();
-
-        // Click on tab1
-        homePage.tab1.click();
-
-        // Check that description and title stuff are shown.
-        expect(homePage.titleInputField.isDisplayed()
-        && homePage.descriptionInputField.isDisplayed()).toBeTruthy();
-
-        // Click on tab2
-        homePage.tab2.click();
-
-        // Check that the root node part is shown.
-        expect(homePage.treeRoot().isDisplayed()).toBeTruthy();
-    });
-});
-                                               </code></pre>
-                                </div>
-                                <p><br/></p>
-
-                                <p>{{tab.selects[7].example1}}</p>
-
-                                <p><br/></p>
+                                <h4><br /></h4>
+                                <h3>Robot Framework</h3>
+                                <p>{{tab.selects[6].robotframework}}</p>
                             </div>
                         </section>
                     </div>

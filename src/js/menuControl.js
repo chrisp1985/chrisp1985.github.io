@@ -15,6 +15,20 @@
         };
     });
 
+    app.controller("myOtherCtrl", function() {
+        this.tab = 1;
+
+        this.selects = otherTabs;
+
+        this.setTab = function(newValue){
+          this.tab = newValue;
+        };
+
+        this.isSet = function(tabName){
+          return this.tab === tabName;
+        };
+    });
+
     var tabs =
     [
         {
@@ -24,6 +38,12 @@
             example1:"This code checks the login method in an authentication module. The login method was a factory that executed a $http POST request, and returned a success or error callback. \nA challenge of testing HTTP requests is that a mock backend server needs to be in place, returning a known result to test against. The angular-supplied $httpBackend allows expectXXX methods to set up the responses for the request made. \nIn this example, it is expected that if the user supplies invalid credentials a 500 error should be returned, while valid credentials would return 200 success. \nOnce the method is executed, the backend must be flushed to allow the request to be made and for the server to execute the expected response. If the backend is not flushed, the test will get to the .success and then not go any further. The spy at the end of the test verifies that the callback is successfully executed.",
             example2:"This code checks that when a file is uploaded, it is seen as ‘added’ if it contains a .txt extension. The ‘flow’ module an angular extension that allows for a button click or drag and drop of a file to upload to a server, so the test has to first set up the mock file to upload. \nOne of the main difficulties in this test involves mocking a window so that when the window opens a new URL, you don’t get a ‘Some of your tests did a full page reload!’ error. \nMocking is a large part of the setup for Jasmine tests. The tests can often take minutes to write, with the environment setup taking the bulk of the time.",
             example3:""
+        },
+        {
+            name:"Protractor",
+            description:"A Javascript framework allowing developers to use Jasmine syntax for E2E testing.",
+            languages:"Javascript",
+            example1:"Protractor works by loading a Selenium server instance and executing selenium tests on the browser set in the capabilities of the config file. The code here is basically identical to that of the Selenium example, except written in Javascript. Libraries are used and imported using ‘require’, and assert() has been replaced by the expect() which is also used in Jasmine syntax. For writing both unit and E2E tests together, Protractor offers a lot of syntactical benefits. However, browser.waits are often fairly brittle and even built in expected conditions are susceptible to stale element errors."
         },
         {
             name:"Selenium Text",
@@ -62,6 +82,35 @@
             sikuli:"Sikuli is a framework that uses image recognition. Relying on image recognition only in test cases has some serious limitations, but combining it with Selenium meant that DOM objects could be manipulated but the actual look and feel of the UI could be verified at the same time. As the tool uses image recognition, a lot of images need to be stored which can bloat a project’s size. The language used in Sikuli is python.",
             robotframework:"Robot Framework is a very high-level test runner. Tests can be written by piecing together keywords, with the libraries those keywords call sitting underneath. It feels like a cumbersome tool, but was very useful for combing Sikuli and Selenium into one suite."
         },
+
+    ];
+
+    var otherTabs =
+    [
+        {
+            name:"Jenkins Text",
+            description:"Jenkins.",
+            languages:"Bash",
+            example1:"Jenkins text."
+        },
+        {
+            name:"npm",
+            description:"NPM.",
+            languages:"Javascript",
+            example1:"NPM text."
+        },
+        {
+            name:"Mocking Text",
+            description:"Mocking.",
+            languages:"Javascript, Java",
+            example1:"Mocking text."
+        },
+        {
+            name:"Linux Text",
+            description:"Linux.",
+            languages:"Shell",
+            example1:"Linux text."
+        },
         {
             name:"Build Environment",
             description:"Build environment tools in a testing context.",
@@ -70,12 +119,5 @@
             gradle:"Gradle uses Groovy, which is a lot easier to view and gives as much flexibility as Maven without the need for tags everywhere. Applying dependencies in Gradle can be performed by using the compile command. The Java plugin allows for the test{ } section to be used, which means the user can access tests by gradlew <module>:test. Custom tasks can also be accessed this way. If I wanted to execute the copyMyApplicationLogs task, I could use gradlew <mymodule>:copyMyApplicationLogs which would only copy logs from one destination to the other. If I chose to run gradlew <mymodule>:installMyApplication, it would first execute the build task in the ‘buildmyapp’ module because of the dependency stated, and then go onto execute this task if the build task was successful.",
             git:"Git can be used to collect or submit data to a private or public repository. The example shows some fairly basic examples, but the notable ones are clone, pull, status, add, commit and push. Clone allows a user to clone a whole repository, for example from GitHub or Bitbucket. If a repository has already been cloned, the ‘git pull’ command collects the latest versions of any updated files between the user’s current working copy and the latest one. Once changes are made (which can be viewed with git status), git add will add all of the data to the staging area. Git commit –m”<Message>” will commit the data to a stored push request. Git push –u <dest> <source> then pushes the changes into the repository for other people to use. All of this website has been changed using Git (it’s on GitHub…). All of these commands are run through the console which in this case is being executed on Ubuntu."
         },
-        {
-            name:"Protractor",
-            description:"A Javascript framework allowing developers to use Jasmine syntax for E2E testing.",
-            languages:"Javascript",
-            example1:"Protractor works by loading a Selenium server instance and executing selenium tests on the browser set in the capabilities of the config file. The code here is basically identical to that of the Selenium example, except written in Javascript. Libraries are used and imported using ‘require’, and assert() has been replaced by the expect() which is also used in Jasmine syntax. For writing both unit and E2E tests together, Protractor offers a lot of syntactical benefits. However, browser.waits are often fairly brittle and even built in expected conditions are susceptible to stale element errors."
-        }
-
     ];
 })();
