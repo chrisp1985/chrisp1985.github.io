@@ -89,27 +89,27 @@
     [
         {
             name:"Jenkins Text",
-            description:"Jenkins.",
+            description:"The Continuous Integration system that executes tasks according to a schedule or specific trigger.",
             languages:"Bash",
             example1:"Jenkins text."
         },
         {
             name:"npm",
-            description:"NPM.",
+            description:"NPM, the package manager for the installation of Node modules.",
             languages:"Javascript",
             example1:"NPM text."
         },
         {
             name:"Mocking Text",
-            description:"Mocking.",
+            description:"Mocking of services, for component testing or to replicate a third party service.",
             languages:"Javascript, Java",
             example1:"Mocking text."
         },
         {
             name:"Linux Text",
-            description:"Linux.",
+            description:"Linux - including Raspbian, Ubuntu, Mint and SLES.",
             languages:"Shell",
-            example1:"Linux text."
+            linux:"Ubuntu text."
         },
         {
             name:"Build Environment",
