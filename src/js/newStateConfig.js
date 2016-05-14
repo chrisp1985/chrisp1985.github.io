@@ -18,7 +18,7 @@
             .state('this_site', {
                 url: "/this_site",
                 templateUrl: "this_site2.html"
-            });
+            })
             .state('othertools', {
                 url: "/othertools",
                 templateUrl: "other_tools.html"
