@@ -35,6 +35,12 @@
     background-position:-50px -50px;
     background-size: 380px 380px;
 }
+.jumbotron-billboard .othertools {
+    background: #000 url("../src/imgs/jenkins.png") center center;
+    background-repeat:no-repeat;
+    background-position:-50px -50px;
+    background-size: 380px 380px;
+}
 .jumbotron {position:relative;background-color: #777;}
 .jumbotron .container {z-index:2;
  position:relative;
