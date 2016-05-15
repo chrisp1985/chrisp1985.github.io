@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="My Website.">
+    <meta name="author" content="Chris Parsons">
+
+    <title>Chris Parsons WebSite</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
+
+    <script src="src/js/menuControl.js"></script>
+    <!--<script src="/MyWebPage/src/js/menuControl.js"></script>-->
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+            $(function() {
+                $( ".accordion" ).accordion({
+                    collapsible: true,
+                    heightStyle: "content",
+                    active: false
+                });
+            });
+        </script>
+    <script src="src/syntax/prism.js"></script>
+    <link rel="stylesheet" href="src/syntax/prism.css">
+    <link rel="stylesheet" href="src/css/mycss.css">
+    <!--<link rel="stylesheet" href="/MyWebPage/src/css/mycss.css">-->
+</head>
+<body>
+<div>
+    <div ng-include="'navBar.html'"></div>
+</div>
+<div class="jumbotron jumbotron-billboard">
+    <div class="img othertools"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="my-header2">Other Tools</h1>
+                <p>The accompanying software and tools that are used as aides to testing, rather than the frameworks themselves.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" align="left">
+    <div class="row">
+        <div class="col-md-9">
+            <div>
+                <section class="tab container" ng-controller="myOtherCtrl as tab">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{ active: tab.isSet(1) }">
+                            <a href ng-click="tab.setTab(1)">Jenkins</a></li>
+                        <li ng-class="{ active: tab.isSet(2) }">
+                            <a href ng-click="tab.setTab(2)">npm</a></li>
+                        <li ng-class="{ active: tab.isSet(3) }">
+                            <a href ng-click="tab.setTab(3)">Mocking</a></li>
+                        <li ng-class="{ active: tab.isSet(4) }">
+                            <a href ng-click="tab.setTab(4)">Linux</a></li>
+                        <li ng-class="{ active: tab.isSet(5) }">
+                            <a href ng-click="tab.setTab(5)">Build Environment</a></li>
+                    </ul>
+                    <h4><br/></h4>
+
+                    <div ng-show="tab.isSet(1)">
+                        <blockquote ng-cloak>{{tab.selects[0].description}}
+                            <p><br /></p>
+                            <p>Languages: {{tab.selects[0].languages}}</p>
+                        </blockquote>
+                        <div class="accordion">
+                            <div>Example 1</div>
+                                    <pre>
+                                                <code class="language-bash">
+queueValue=`curl -X GET jenkins:8080/view/MyProject/job/myApp/api/json?pretty=true | grep 'queueItem'`
+
+# If there are no builds in the queue, start the job.
+if [[ "$queueValue" == *"null"* ]]; then
+    echo "Trigger Build!"
+    mkdir -p $WORKSPACE/mytests/build/tmp
+    echo "Trigger Build!" > $WORKSPACE/ mytests /build/tmp/noqueue.txt;
+else
+    echo "DONT Trigger Build!";
+fi
+                                                </code>
+                                    </pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p >{{tab.selects[0].example1}}</p>
+
+                        <p><br/></p>
+
+                    </div>
+                    <div ng-show="tab.isSet(2)">
+                        <blockquote ng-cloak>{{tab.selects[1].description}}
+                            <p><br /></p>
+                            <p>Languages: {{tab.selects[1].languages}}</p>
+                        </blockquote>
+
+
+                        <div class="accordion">
+                            <div>Example 1</div>
+												<pre>
+                                                    <code class="language-java">
+
+                                                    </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[1].example1}}</p>
+
+                        <p><br/></p>
+
+                    </div>
+                    <div ng-show="tab.isSet(3)">
+                        <blockquote ng-cloak>{{tab.selects[2].description}}
+                            <p><br /></p>
+                            <p>Languages: {{tab.selects[2].languages}}</p>
+                        </blockquote>
+                        <div class="accordion">
+                            <div>MockServer</div>
+                                            <pre>
+                                                <code class="language-java">
+/**
+* *** MOCK SERVICE FOR AN EXTERNAL SERVICE DEPENDENCY ***
+*/
+public void setUpMockService() {
+    MockServerClient mockServer = startClientAndServer(MyProperties.portNo);
+
+    // Respond with an OK when a PUT request is sent to the services.
+    mockServer
+    .when(request()
+        .withMethod("PUT")
+        .withPath("/path/to/my/rest/services")
+    )
+    .respond(response()
+        .withStatusCode(200)
+    );
+
+    // Respond with a token when a successful POST request is made to my token generation.
+    mockServer
+    .when(request()
+        .withMethod("POST")
+        .withPath("/path/to/my/tokens/makeMyToken")
+        .withBody("username=admin&password=SecretStuff")
+    )
+    .respond(response("{\n" +
+    "  \"token\": \"TMm3CKdPjv1m8_h9tv9T4C2nCGcT2QnpLJ9V28hdujWUanQUR67-RDU5TiQsn6AE\",\n" +
+    "  \"expires\": \"1462351478419\"\n" +
+    "}")
+        .withStatusCode(200)
+        .withBody("TMm3CKdPjv1m8_h9tv9T4C2nCGcT2QnpLJ9V28hdujWUanQUR67-RDU5TiQsn6AE")
+    );
+
+    // Respond with a 'not authorized' when an invalid POST request is made to my token generation.
+    mockServer
+    .when(request()
+        .withMethod("POST")
+        .withPath("/path/to/my/tokens/makeMyToken")
+        .withBody("username=whoDat&password=NoDat")
+    )
+    .respond(response("not authorized")
+        .withStatusCode(401)
+        .withBody("not authorized")
+    );
+
+    // Respond with a 'not authorized' when an invalid GET request is made to my REST services.
+    mockServer
+    .when(request()
+        .withMethod("GET")
+        .withPath("/path/to/my/rest/services")
+        .withQueryStringParameter("token","InvalidToken")
+    )
+    .respond(response("not authorized")
+        .withStatusCode(503)
+    );
+
+    // Respond with an OK when a valid GET request is made to my REST services.
+    mockServer
+    .when(request()
+        .withMethod("GET")
+        .withPath("/path/to/my/rest/services")
+    )
+    .respond(response("{\"currentVersion\":v1.1,\"services\":[{\"name\":\"MyServiceName\",\"type\":\"A_Service\"}]}")
+        .withStatusCode(200)
+    );
+}
+                                                </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[2].example1}}</p>
+
+                        <p><br/></p>
+
+                        <div class="accordion">
+                            <div>Angular HTTP Backend Example 1</div>
+                                            <pre>
+                                                <code class="language-javascript">
+$httpBackend.expectGET(/\/path\/to\/my\/files\/file.json\?noCache=(.+)/).respond(responseString);
+service.getResource(fileName).get().then(function(data){
+    expect(JSON.stringify(data)).toContain(JSON.stringify(responseString));
+});
+$httpBackend.flush();
+                                                </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <div class="accordion">
+                            <div>Angular HTTP Backend Example 1</div>
+                                            <pre>
+                                                <code class="language-javascript">
+httpBackend.expectPOST(/\/path\/to\/my\/files\?noCache=(.+)/).respond(500,'Internal Server Error');
+scope.getFiles(myFiles[0]);
+httpBackend.flush();
+expect(toasterSpy).toHaveBeenCalledWith('error', 'Failed to get your file.');
+                                                </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[2].example2}}</p>
+
+                        <p><br/></p>
+                    </div>
+                    <div ng-show="tab.isSet(4)">
+                        <blockquote ng-cloak>{{tab.selects[3].description}}
+                            <p><br /></p>
+                            <p>Languages: {{tab.selects[3].languages}}</p>
+                        </blockquote>
+                        <div class="accordion">
+                            <div>Example 1</div>
+                                            <pre>
+                                                <code class="language-java">
+
+                                                </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[3].linux}}</p>
+
+                        <p><br/></p>
+                    </div>
+                    <div ng-show="tab.isSet(5)">
+                        <blockquote ng-cloak>{{tab.selects[4].description}}
+                            <p><br /></p>
+                            <p>Languages: {{tab.selects[4].languages}}</p>
+                        </blockquote>
+                        <div class="accordion">
+                            <div>Maven</div>
+
+                                            <pre>
+                                                <code class="language-markup">
+                                                <textarea>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>my-test-module</artifactId>
+        <groupId>com.myproject</groupId>
+        <version>1.0.1</version>
+    </parent>
+    <name>My Example Maven Test Suite</name>
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <my.test.driverVersion>chrome</my.test.driverVersion>
+        <webdriver.version>2.53.0</webdriver.version>
+        <webdriver.base.url>http://localhost:6767/${project.serviceName}/</webdriver.base.url>
+    </properties>
+
+    <artifactId>my-test-module</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>2.3.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${webdriver.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>installMyApplication</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <commandlineArgs>/quiet /I</commandlineArgs>
+                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
+                            <skip>${skipTests}</skip>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>uninstallMyApplication</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <commandlineArgs>/quiet /uninstall</commandlineArgs>
+                            <executable>${project.build.directory}\holdingarea\myapplication-${project.version}.exe</executable>
+                            <skip>${skipTests}</skip>
+                            <workingDirectory>${project.build.directory}</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <executions>
+                    <execution>
+                        <id>ui-tests</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <runOrder>alphabetical</runOrder>
+                            <systemPropertyVariables>
+                                <releaseDirectory>${project.build.directory}</releaseDirectory>
+                                <webdriver.driver>provided</webdriver.driver>
+                                <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+                                <test.directory>${project.basedir}</test.directory>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+                                            </textarea>
+                                                </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[4].maven}}</p>
+
+                        <p><br/></p>
+                        <div class="accordion">
+                            <div>Gradle</div>
+                                            <pre>
+                                                <code class="language-groovy">
+apply plugin: 'java'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
+    compile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.+'
+    compile 'junit:junit:4.12'
+}
+
+task uninstallMyApplication(type:Exec) {
+    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+    commandLine 'msiexec','/quiet','/uninstall',"${text}","/norestart"
+}
+
+task installMyApplication(dependsOn:':buildmyapp:build',type:Exec) {
+    def text =  project(':buildmyapp').file("/build/holdingarea/myapplication-${project.version}.msi")
+    commandLine 'msiexec','/quiet','/I',"${text}","/norestart"
+}
+
+task copyMyApplicationLogs(type: Copy) {
+    def logsPath = System.getenv("ProgramData")+"\\myCompany\\myApplication\\Logs"
+    from file("${logsPath}")
+    into "${buildDir}/logsForDebugging"
+}
+
+// Install the application to test
+test.dependsOn installMyApplication
+
+test {
+    outputs.upToDateWhen { false }
+}
+
+// Uninstall the application to keep the environment clean, and copy the logs for possible debugging.
+test.finalizedBy(copyMyApplicationLogs)
+test.finalizedBy(uninstallMyApplication)
+                                                </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[4].gradle}}</p>
+                        <p><br/></p>
+                        <div class="accordion">
+                            <div>Git</div>
+                                            <pre>
+                                                <code class="language-git">
+            <textarea>
+chrisp@chrisp-Aspire-2920:~$ cd /home/chrisp/Documents/chrisp1985.github.io/
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+(use "git add file..." to update what will be committed)
+(use "git checkout -- file..." to discard changes in working directory)
+
+modified:   src/js/menuControl.js
+modified:   tools.html
+
+Untracked files:
+(use "git add file..." to include in what will be committed)
+
+.idea/
+out/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git add src/
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git add tools.html
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git commit -m"Added GIT description to menuControl, and plumbed into HTML."
+[master dfd5e3b] Added GIT description to menuControl, and plumbed into HTML.
+2 files changed, 13 insertions(+), 2 deletions(-)
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$ git push -u origin master
+Username for 'https://github.com': chrisp1985
+Password for 'https://chrisp1985@github.com':
+Counting objects: 6, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (6/6), 1.08 KiB | 0 bytes/s, done.
+Total 6 (delta 3), reused 0 (delta 0)
+To https://github.com/chrisp1985/chrisp1985.github.io
+ffdcae5..dfd5e3b  master -> master
+Branch master set up to track remote branch master from origin.
+chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
+                                            </textarea>
+                                                </code></pre>
+                        </div>
+                        <p><br/></p>
+
+                        <p>{{tab.selects[4].git}}</p>
+                        <p><br/></p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <hr>
+    <br />
+    <div>
+        <div ng-include="'footer.html'"></div>
+    </div>
+</footer>
+</body>
+</html>
