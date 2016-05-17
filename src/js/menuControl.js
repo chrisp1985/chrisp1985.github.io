@@ -90,7 +90,7 @@
             name:"Jenkins Text",
             description:"The Continuous Integration system that executes tasks according to a schedule or specific trigger.",
             languages:"Bash",
-            example1:"Jenkins text."
+            example1:"Jenkins is a web service used to execute tasks set by a trigger. The service can be deployed by a web server as a WAR, or as an installed Windows service. I have Jenkins installed on Raspbian as a service under /etc/init.d/Jenkins and on a Windows machine as a service. As of Jenkins 2.0, Maven projects require a plugin to run as a Maven-specific project, otherwise all projects are considered Freestyle. The POM or build.gradle location is set in the configuration and trigger options set. In the example, the build is only triggered if there are no builds in the queue. This uses a bash script employing curl to interrogate the Jenkins API, and then greps the queueitem and makes a decision based on that value.  This is quite useful to easing up blockages in the build pipeline so longer projects downstream are triggered with a lower priority to their upstream projects."
         },
         {
             name:"npm",
@@ -109,7 +109,9 @@
             name:"Linux Text",
             description:"Linux - including Raspbian, Ubuntu, Mint and SLES.",
             languages:"Shell",
-            linux:"Ubuntu text."
+            ssh:"This example shows login and file permission editing through SSH. In this case, the SSH application is used but programs like PuTTY do the same thing. Files can be transferred across to a remote Linux machine using an FTP application like Filezilla. These methods are particularly useful when setting up a server with no GUI, such as a Raspberry Pi. This website has been maintained using Ubuntu 15.10, and sits on a partitioned laptop with Mint 17.3. I’ve also used SUSE Linux Enterprise Server in a previous role.",
+            raspbian:"This is Raspbian Jessie, based on Debian. The image here uses VNC Viewer on my phone to remote into the Pi. The Pi zero is very, very slow when running the Jenkins UI, but responds well to general text-based SSH-type commands. And it only costs £4. My Pi Zero initially needed a UI to set up the connected Wifi dongle, but once this was done I was able to install applications through SSH and view the UI through VNC Viewer.",
+            aptget:"Apt-get is a really easy way to install programs on linux. Some apps may need you to install via a .deb or .rpm file, or by unpacking a tar.gz, but apt-get allows for a user with admin permission to install programs through ‘sudo apt-get install <program>’. Sudo is needed as root permissions are needed to install software (similar to Admin privileges on Windows)."
         },
         {
             name:"Build Environment",
