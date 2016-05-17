@@ -178,15 +178,13 @@ public void setUpMockService() {
                                 <div>Angular HTTP Backend Example 1</div>
                                             <pre>
                                                 <code class="language-javascript">
-                                                    $httpBackend.expectGET(/\/path\/to\/my\/files\/file.json\?noCache=(.+)/).respond(responseString);
-                                                    service.getResource(fileName).get().then(function(data){
-                                                    expect(JSON.stringify(data)).toContain(JSON.stringify(responseString));
-                                                    });
-                                                    $httpBackend.flush();
+$httpBackend.expectGET(/\/path\/to\/my\/files\/file.json\?noCache=(.+)/).respond(responseString);
+service.getResource(fileName).get().then(function(data){
+expect(JSON.stringify(data)).toContain(JSON.stringify(responseString));
+});
+$httpBackend.flush();
                                                 </code></pre>
                             </div>
-                            <p><br/></p>
-
                             <div class="accordion">
                                 <div>Angular HTTP Backend Example 1</div>
                                             <pre>
@@ -233,7 +231,7 @@ pi@raspberrypi:~ $ sudo vim /etc/network/interfaces
                             <p><br/></p>
                             <div class="accordion">
                                 <div>Example 2</div>
-                                <img style="background-color: #FFFFFF;" src="../imgs/raspbian.PNG" />
+                                <img style="background-color: #FFFFFF;" src="../imgs/raspbian.png" />
                             </div>
                             <p><br/></p>
 
