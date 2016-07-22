@@ -403,6 +403,212 @@ public void login(String username, String password) {
                                         <p>{{tab.selects[2].example2}}</p>
 
                                     <p><br/></p>
+                                    <div class="accordion">
+										<div>Python Create Driver</div>
+												<pre>
+                                                    <code class="language-python">
+# CREATE DRIVER #
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import *
+from selenium.webdriver.support import expected_conditions
+
+
+class CreateDriver(object):
+    def __init__(self):
+        print "new CreateDriver"
+
+    @staticmethod
+    def setupdriver(browser):
+
+        ###############
+        # FIREFOX SETUP
+        ##############
+        if browser == "firefox":
+            ffprofile = webdriver.FirefoxProfile()
+            ffprofile.set_preference("browser.helperApps.neverAsk.saveToDisk",
+                                     "application/zip,text/json")
+            ffprofile.set_preference("browser.download.folderList", 2)
+            ffprofile.set_preference("app.update.enabled", False)
+
+            driver = webdriver.Firefox(ffprofile)
+
+        ##############
+        # CHROME SETUP
+        ##############
+        else:
+            prefs = {"download.default_directory": "C:\\Chrome_Download_Dir"}
+            chromeopts = webdriver.ChromeOptions()
+            chromeopts.add_experimental_option("prefs", prefs)
+            driver = webdriver.Chrome("C:\\chromedriver.exe", chrome_options=chromeopts)
+
+        return driver
+
+
+def main():
+    driver = CreateDriver().setupdriver("chrome")
+    driver.get("http://www.google.com")
+    search_button = WebDriverWait(driver, 5).until(
+        expected_conditions.visibility_of_element_located((By.XPATH, "//input[contains(@value, 'Feeling Lucky')]")))
+    search_button.click()
+    WebDriverWait(driver, 10).until(expected_conditions.title_is("Google Doodles"))
+
+
+if __name__ == "__main__":
+    main()
+												</code></pre>
+									</div>
+									<p><br/></p>
+
+									<p>{{tab.selects[2].pythondriver}}</p>
+
+									<p><br/></p>
+
+									<div class="accordion">
+										<div>Python Page Objects</div>
+												<pre>
+                                                    <code class="language-python">
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import *
+from selenium.webdriver.support import expected_conditions
+
+
+class AuthenticationObjects(object):
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    def username_text_box(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH, "//input[@placeholder='username']")))
+
+    def password_text_box(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH, "//input[@placeholder='password']")))
+
+    def submit_button(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+
+    def fail_popup(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH,
+                             "//div[contains(@class,'pop-up-box')][contains(text(),'Invalid Credentials.')]")))
+												</code></pre>
+									</div>
+     								<div class="accordion">
+										<div>Python Methods</div>
+												<pre>
+                                                    <code class="language-python">
+from AuthenticationObjects import AuthenticationObjects
+import time
+
+
+class LoginFlow(object):
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    def send_user_name(self, username_string):
+        AuthenticationObjects(self.driver).username_text_box().send_keys(username_string)
+
+    def send_password(self, password_string):
+        AuthenticationObjects(self.driver).password_text_box().send_keys(password_string)
+
+    def click_submit(self):
+        AuthenticationObjects(self.driver).submit_button().click()
+
+    def check_for_popup(self, fail_bool):
+        if fail_bool:
+            AuthenticationObjects(self.driver).fail_popup().click()
+        else:
+            pass
+
+    def wait_for_string_to_be_url(self, url_string, time_to_wait):
+        count = 0
+        while url_string not in self.driver.current_url:
+                if count != time_to_wait:
+                    time.sleep(1)
+                    count = + 1
+                else:
+                    raise Exception("Test failed because", url_string,
+                                    "was not found after ", time_to_wait, "seconds.")</code></pre>
+									</div>
+     								<div class="accordion">
+										<div>Python Tests</div>
+												<pre>
+                                                    <code class="language-python">
+import unittest
+
+from Libs.Methods.create_driver import CreateDriver
+from Libs.Methods.login_flow import *
+
+
+class AuthenticationTestSuite(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = CreateDriver().setupdriver("firefox")
+        self.login_flow = LoginFlow(self.driver)
+        self.login_address = "http://chrisp1985.ddns.net:9998/login.html"
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def login_succeeds_if_password_and_user_are_correct_test(self):
+
+        # Get the login page.
+        self.driver.get(self.login_address)
+
+        # Send the user/password and press submit.
+        self.login_flow.send_user_name("admin")
+        self.login_flow.send_password("admin")
+        self.login_flow.click_submit()
+
+        # Wait for the url to contain the search string.
+        self.login_flow.wait_for_string_to_be_url("index", 10)
+
+        # Check that the title of the page is correct.
+        self.assertIn("Metadata Service", self.driver.title)
+
+    def login_fails_if_password_is_incorrect_test(self):
+        # Get the login page.
+        self.driver.get(self.login_address)
+
+        # Send the user/password and press submit.
+        self.login_flow.send_user_name("admin")
+        self.login_flow.send_password("noob")
+        self.login_flow.click_submit()
+
+        # Check for the error popup
+        self.login_flow.check_for_popup(True)
+
+    def login_fails_if_username_is_incorrect_test(self):
+        self.driver.get(self.login_address)
+
+        self.login_flow.send_user_name("noob")
+        self.login_flow.send_password("admin")
+        self.login_flow.click_submit()
+
+        # Check for the error popup
+        self.login_flow.check_for_popup(True)
+
+    def login_fails_if_username_and_password_are_incorrect_test(self):
+        # Get the login page.
+        self.driver.get(self.login_address)
+
+        # Send the user/password and press submit.
+        self.login_flow.send_user_name("noob")
+        self.login_flow.send_password("noob")
+        self.login_flow.click_submit()
+
+        # Check for the error popup
+        self.login_flow.check_for_popup(True)</code></pre>
+									</div>
+									<p><br/></p>
+
+									<p>{{tab.selects[2].python1}}</p>
+
+									<p><br/></p>
                                 </div>
 
                                 <div ng-show="tab.isSet(4)">
