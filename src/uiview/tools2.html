@@ -533,7 +533,7 @@ class AuthenticationTestSuite(unittest.TestCase):
         self.login_flow.wait_for_string_to_be_url("index", 10)
 
         # Check that the title of the page is correct.
-        self.assertIn("Metadata Service", self.driver.title)
+        self.assertIn("Chris Parsons Website", self.driver.title)
 
     def login_fails_if_password_is_incorrect_test(self):
         # Get the login page.
