@@ -1,9 +1,6 @@
-package net.ddns.chrisp1985.chrisp1985;
+package net.ddns.chrisp1985;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.ddns.tests.chrisp1985.R;
+
 public class ChrisPNavDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -20,24 +19,19 @@ public class ChrisPNavDrawer extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chris_pnav_drawer);
+
+        // Set the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        // Set the drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        // Set the navigation view.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -80,17 +74,28 @@ public class ChrisPNavDrawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        // If the selection is 'Android Source'...
+        if (id == R.id.android_source) {
 
-        } else if (id == R.id.nav_slideshow) {
+        }
+        // If the selection is 'Github'...
+        else if (id == R.id.github) {
 
-        } else if (id == R.id.nav_manage) {
+        }
+        // If the selection is 'linkedin'...
+        else if (id == R.id.linkedin) {
 
-        } else if (id == R.id.nav_share) {
+        }
+        // If the selection is 'Tools'...
+        else if (id == R.id.tools) {
 
-        } else if (id == R.id.nav_send) {
+        }
+        // If the selection is 'Other Tools'...
+        else if (id == R.id.other_tools) {
+
+        }
+        // If the selection is 'This App'...
+        else if (id == R.id.this_app) {
 
         }
 

@@ -1,4 +1,4 @@
-package net.ddns.chrisp1985.chrisp1985;
+package net.ddns.tests.chrisp1985;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

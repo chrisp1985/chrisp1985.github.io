@@ -9,11 +9,23 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="net.ddns.chrisp1985.chrisp1985.ChrisPNavDrawer"
-    tools:showIn="@layout/app_bar_chris_pnav_drawer">
+    tools:context="net.ddns.tests.chrisp1985.ChrisPNavDrawer"
+    tools:showIn="@layout/app_bar_chris_pnav_drawer"
+    android:background="@drawable/abc_list_selector_background_transition_holo_dark">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Hello World!"
+        android:id="@+id/textView2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginBottom="160dp" />
 </RelativeLayout>
