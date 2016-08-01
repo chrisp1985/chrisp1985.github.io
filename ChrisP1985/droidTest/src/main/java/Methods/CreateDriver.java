@@ -1,5 +1,7 @@
 package Methods;
 
+import io.appium.java_client.AppiumSetting;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -24,7 +26,11 @@ public class CreateDriver {
         File applicationDirectory = new File(projectDirectory, "app\\build\\outputs\\apk\\app-debug.apk");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("deviceName", "Galaxy S5");
         capabilities.setCapability("app", applicationDirectory.getAbsolutePath());
+        capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
+        capabilities.setCapability("platformVersion", "4.4.2");
+        capabilities.setCapability("platformName", "Android");
 
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);

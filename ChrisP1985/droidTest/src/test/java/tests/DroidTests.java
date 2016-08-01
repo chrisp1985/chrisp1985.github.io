@@ -1,5 +1,6 @@
 package tests;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import java.net.MalformedURLException;
 
@@ -10,6 +11,7 @@ import io.appium.java_client.android.AndroidDriver;
 /**
  * Created by chrisp on 01/08/2016.
  */
+@Ignore
 public class DroidTests {
 
     private AndroidDriver driver;
