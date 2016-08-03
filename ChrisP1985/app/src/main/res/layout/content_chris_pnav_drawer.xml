@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="net.ddns.tests.chrisp1985.ChrisPNavDrawer"
     tools:showIn="@layout/app_bar_chris_pnav_drawer"
-    android:background="@drawable/line_slanting_dark_background_surface_texture_50392_3840x2400">
+    android:background="@drawable/design_snackbar_background">
 
     <TextView
         android:layout_width="wrap_content"
