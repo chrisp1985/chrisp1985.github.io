@@ -12,4 +12,6 @@ dependencies {
 test.dependsOn(":app:build")
 test {
     outputs.upToDateWhen { false }
+    println(rootDir)
+    systemProperty 'projectDir', rootDir
 }

@@ -20,6 +20,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_chris_pnav_drawer"
-        app:menu="@menu/activity_chris_pnav_drawer_drawer" />
+        app:menu="@menu/activity_chris_pnav_drawer_drawer"
+        android:background="@drawable/line_slanting_dark_background_surface_texture_50392_3840x2400" />
 
 </android.support.v4.widget.DrawerLayout>

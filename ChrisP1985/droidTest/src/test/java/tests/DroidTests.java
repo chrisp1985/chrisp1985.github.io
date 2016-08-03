@@ -10,6 +10,8 @@ import io.appium.java_client.android.AndroidDriver;
 
 /**
  * Created by chrisp on 01/08/2016.
+ *
+ *
  */
 @Ignore
 public class DroidTests {
