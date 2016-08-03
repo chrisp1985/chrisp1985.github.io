@@ -1,5 +1,6 @@
 package net.ddns.chrisp1985;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -88,7 +89,7 @@ public class ChrisPNavDrawer extends AppCompatActivity
         }
         // If the selection is 'Tools'...
         else if (id == R.id.tools) {
-
+            startActivity(new Intent(ChrisPNavDrawer.this, ToolsActivity.class));
         }
         // If the selection is 'Other Tools'...
         else if (id == R.id.other_tools) {
@@ -101,6 +102,9 @@ public class ChrisPNavDrawer extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        while(!drawer.isDrawerOpen(GravityCompat.START)) {
+            // Wait
+        }
         return true;
     }
 }

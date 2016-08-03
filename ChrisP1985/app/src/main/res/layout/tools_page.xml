@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/design_snackbar_background"
+    android:weightSum="1">
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/webView"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tools"
+        android:id="@+id/textView3"
+        android:textColor="#ffffff"
+        android:layout_weight="0.04"
+        android:textSize="28dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Covering an assortment of tools and frameworks for a range of testing written in a few different languages"
+        android:id="@+id/textView4"
+        android:layout_weight="0.92"
+        android:textColor="#ffffff" />
+</LinearLayout>
