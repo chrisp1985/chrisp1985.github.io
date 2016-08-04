@@ -1,14 +1,22 @@
 package layout;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.ddns.tests.chrisp1985.R;
+
+import java.util.Locale;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +67,11 @@ public class ToolsFrag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        AssetManager am = this.getContext().getApplicationContext().getAssets();
+        Typeface typeface = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "KBZipaDeeDooDah.ttf"));
+        new TextView(this.getContext()).setTypeface(typeface);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package net.ddns.chrisp1985;
 
 import android.app.ListFragment;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.chrisp.myapplication.ItemFragment;
 import com.example.chrisp.myapplication.dummy.DummyContent;
