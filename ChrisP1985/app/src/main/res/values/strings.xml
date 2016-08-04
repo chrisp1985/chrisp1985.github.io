@@ -8,5 +8,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="home_heading">My Home Page</string>
+    <string name="title_home">This should be a carousel soon…</string>
+
+    <string name="tools_heading">Tools and Frameworks</string>
     <string name="title_activity_tools">Covering an assortment of tools and frameworks for a range of testing written in a few different languages</string>
+
+    <string name="this_site_heading">Why have I done this?</string>
+    <string name="this_site_desc">A bit of Android, a bit of Java, some Gradle and some TeamCity.</string>
+
+    <string name="examples_link">* For examples, see http://chrisp1985.github.io</string>
 </resources>

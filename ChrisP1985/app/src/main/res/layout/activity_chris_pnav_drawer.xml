@@ -21,6 +21,9 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_chris_pnav_drawer"
         app:menu="@menu/activity_chris_pnav_drawer_drawer"
-        android:background="@color/switch_thumb_disabled_material_dark" />
+        app:itemTextColor="#ffffff"
+        app:itemIconTint="#ffffff"
+
+        android:background="@color/secondary_text_default_material_light" />
 
 </android.support.v4.widget.DrawerLayout>

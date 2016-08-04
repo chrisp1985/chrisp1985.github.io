@@ -1,7 +1,6 @@
 package net.ddns.chrisp1985;
 
 import android.app.ListFragment;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,18 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.example.chrisp.myapplication.ItemFragment;
-import com.example.chrisp.myapplication.dummy.DummyContent;
+import com.example.chrisp.myapplication.Home_Fragment;
+import com.example.chrisp.myapplication.ThisApplication;
 
 import net.ddns.tests.chrisp1985.R;
 
 import layout.ToolsFrag;
 
 public class ChrisPNavDrawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ToolsFrag.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener {
-
+        implements NavigationView.OnNavigationItemSelectedListener,
+                    Home_Fragment.OnFragmentInteractionListener,
+                    ToolsFrag.OnFragmentInteractionListener,
+                    ThisApplication.OnFragmentInteractionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +36,7 @@ public class ChrisPNavDrawer extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         Fragment fragment = null;
-        Class fragmentClass = null;
-        fragmentClass = ItemFragment.class;
+        Class fragmentClass = Home_Fragment.class;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -121,7 +120,7 @@ public class ChrisPNavDrawer extends AppCompatActivity
         }
         // If the selection is 'This App'...
         else if (id == R.id.this_app) {
-            fragmentClass = ListFragment.class;
+            fragmentClass = ThisApplication.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -144,8 +143,4 @@ public class ChrisPNavDrawer extends AppCompatActivity
 
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 }

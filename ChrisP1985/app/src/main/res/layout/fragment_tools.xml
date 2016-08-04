@@ -6,21 +6,49 @@
     android:background="@color/background_floating_material_dark">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="441dp"
-        android:text="@string/title_activity_tools"
-        android:layout_gravity="center_horizontal|bottom"
-        android:textColor="#ffffff" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="338dp"
+        android:layout_height="119dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Tools"
+        android:text="@string/tools_heading"
         android:id="@+id/textView3"
-        android:layout_gravity="left|top"
+        android:layout_gravity="center_horizontal|top"
         android:textColor="#ffffff"
-        android:textSize="36dp" />
+        android:textSize="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/title_activity_tools"
+            android:id="@+id/textView2"
+            android:layout_marginTop="147dp"
+            android:textColor="#ffffff"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/examples_link"
+            android:id="@+id/textView4"
+            android:textColor="#ffffff"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_alignEnd="@+id/textView2" />
+
+    </RelativeLayout>
 
 </FrameLayout>

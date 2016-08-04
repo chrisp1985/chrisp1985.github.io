@@ -1,4 +1,4 @@
-package layout;
+package com.example.chrisp.myapplication;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -16,13 +16,12 @@ import net.ddns.tests.chrisp1985.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ToolsFrag.OnFragmentInteractionListener} interface
+ * {@link Home_Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ToolsFrag#newInstance} factory method to
+ * Use the {@link Home_Fragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
-public class ToolsFrag extends Fragment {
+public class Home_Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,25 +33,26 @@ public class ToolsFrag extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    public Home_Fragment() {
+        // Required empty public constructor
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ToolsFrag.
+     * @return A new instance of fragment Home_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ToolsFrag newInstance(String param1, String param2) {
-        ToolsFrag fragment = new ToolsFrag();
+    public static Home_Fragment newInstance(String param1, String param2) {
+        Home_Fragment fragment = new Home_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-    public ToolsFrag() {
-        // Required empty public constructor
     }
 
     @Override
@@ -66,8 +66,8 @@ public class ToolsFrag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle     savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_tools, container, false);
-        TextView txt = (TextView) v.findViewById(R.id.textView3);
+        View v = inflater.inflate(R.layout.fragment_home_, container, false);
+        TextView txt = (TextView) v.findViewById(R.id.textView8);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/KBZipaDeeDooDah.ttf");
         txt.setTypeface(font);
         return v;
@@ -102,7 +102,7 @@ public class ToolsFrag extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
