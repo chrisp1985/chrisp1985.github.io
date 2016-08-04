@@ -1,8 +1,11 @@
 package net.ddns.chrisp1985;
 
-import android.content.Intent;
+import android.app.ListFragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,10 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.chrisp.myapplication.ItemFragment;
+import com.example.chrisp.myapplication.dummy.DummyContent;
+
 import net.ddns.tests.chrisp1985.R;
 
+import layout.ToolsFrag;
+
 public class ChrisPNavDrawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ToolsFrag.OnFragmentInteractionListener, ItemFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +32,18 @@ public class ChrisPNavDrawer extends AppCompatActivity
         // Set the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Fragment fragment = null;
+        Class fragmentClass = null;
+        fragmentClass = ItemFragment.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         // Set the drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -74,6 +94,8 @@ public class ChrisPNavDrawer extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
+        Class fragmentClass = null;
 
         // If the selection is 'Android Source'...
         if (id == R.id.android_source) {
@@ -89,7 +111,7 @@ public class ChrisPNavDrawer extends AppCompatActivity
         }
         // If the selection is 'Tools'...
         else if (id == R.id.tools) {
-            startActivity(new Intent(ChrisPNavDrawer.this, ToolsActivity.class));
+            fragmentClass = ToolsFrag.class;
         }
         // If the selection is 'Other Tools'...
         else if (id == R.id.other_tools) {
@@ -97,8 +119,15 @@ public class ChrisPNavDrawer extends AppCompatActivity
         }
         // If the selection is 'This App'...
         else if (id == R.id.this_app) {
-
+            fragmentClass = ListFragment.class;
         }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -106,5 +135,15 @@ public class ChrisPNavDrawer extends AppCompatActivity
             // Wait
         }
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }
