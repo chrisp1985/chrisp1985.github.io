@@ -13,9 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.chrisp.myapplication.Home_Fragment;
 import com.example.chrisp.myapplication.ThisApplication;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import net.ddns.tests.chrisp1985.R;
 
@@ -26,6 +29,17 @@ public class ChrisPNavDrawer extends AppCompatActivity
                     Home_Fragment.OnFragmentInteractionListener,
                     ToolsFrag.OnFragmentInteractionListener,
                     ThisApplication.OnFragmentInteractionListener {
+
+
+    int[] sampleImages = {R.drawable.imagery_book, R.drawable.smart_tile};
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +70,14 @@ public class ChrisPNavDrawer extends AppCompatActivity
         // Set the navigation view.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+//
+//        CarouselView carouselView = (CarouselView)
+//                findViewById(R.id.carouselView);
+//        carouselView.setPageCount(sampleImages.length);
+//        carouselView.setImageListener(imageListener);
     }
+
+
 
     @Override
     public void onBackPressed() {
