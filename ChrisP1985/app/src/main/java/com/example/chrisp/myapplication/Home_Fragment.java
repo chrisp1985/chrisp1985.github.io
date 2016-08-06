@@ -8,7 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import net.ddns.tests.chrisp1985.R;
 
@@ -33,6 +37,14 @@ public class Home_Fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    int[] sampleImages = {R.drawable.imagery_book, R.drawable.smart_tile};
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
     public Home_Fragment() {
         // Required empty public constructor
     }
@@ -70,6 +82,11 @@ public class Home_Fragment extends Fragment {
         TextView txt = (TextView) v.findViewById(R.id.textView8);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/KBZipaDeeDooDah.ttf");
         txt.setTypeface(font);
+
+        View myView = v.findViewById(R.id.carouselView);
+        CarouselView carouselView = (CarouselView) myView;
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
         return v;
     }
 

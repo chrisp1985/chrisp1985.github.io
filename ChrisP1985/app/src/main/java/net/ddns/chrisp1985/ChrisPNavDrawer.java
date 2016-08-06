@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.chrisp.myapplication.Home_Fragment;
@@ -30,15 +31,6 @@ public class ChrisPNavDrawer extends AppCompatActivity
                     ToolsFrag.OnFragmentInteractionListener,
                     ThisApplication.OnFragmentInteractionListener {
 
-
-    int[] sampleImages = {R.drawable.imagery_book, R.drawable.smart_tile};
-
-    ImageListener imageListener = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-            imageView.setImageResource(sampleImages[position]);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +62,6 @@ public class ChrisPNavDrawer extends AppCompatActivity
         // Set the navigation view.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-//
-//        CarouselView carouselView = (CarouselView)
-//                findViewById(R.id.carouselView);
-//        carouselView.setPageCount(sampleImages.length);
-//        carouselView.setImageListener(imageListener);
     }
 
 
