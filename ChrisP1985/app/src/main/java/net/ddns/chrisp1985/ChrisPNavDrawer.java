@@ -1,6 +1,5 @@
 package net.ddns.chrisp1985;
 
-import android.app.ListFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,13 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.example.chrisp.myapplication.Home_Fragment;
 import com.example.chrisp.myapplication.ThisApplication;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 import net.ddns.tests.chrisp1985.R;
 
@@ -64,8 +59,6 @@ public class ChrisPNavDrawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -76,28 +69,6 @@ public class ChrisPNavDrawer extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.chris_pnav_drawer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -106,21 +77,12 @@ public class ChrisPNavDrawer extends AppCompatActivity
         Fragment fragment = null;
         Class fragmentClass = null;
 
-        // If the selection is 'Android Source'...
-        if (id == R.id.android_source) {
-
-        }
-        // If the selection is 'Github'...
-        else if (id == R.id.github) {
-
-        }
-        // If the selection is 'linkedin'...
-        else if (id == R.id.linkedin) {
-
-        }
         // If the selection is 'Tools'...
-        else if (id == R.id.tools) {
+        if (id == R.id.tools) {
             fragmentClass = ToolsFrag.class;
+        }
+        else if (id == R.id.home) {
+            fragmentClass = Home_Fragment.class;
         }
         // If the selection is 'Other Tools'...
         else if (id == R.id.other_tools) {

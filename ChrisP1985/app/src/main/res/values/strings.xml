@@ -6,17 +6,25 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="home_heading">My Home Page</string>
-    <string name="title_home">This should be a carousel soon…</string>
-
+    // HOME PAGE
+    <string name="home_heading">My App</string>
     <string name="tools_heading">Tools and Frameworks</string>
     <string name="title_activity_tools">Covering an assortment of tools and frameworks for a range of testing written in a few different languages</string>
 
+    // THIS APP PAGE
     <string name="this_site_heading">Why have I done this?</string>
     <string name="this_site_desc">A bit of Android, a bit of Java, some Gradle and some TeamCity.</string>
 
+    // MENU STRINGS
+    <string name="home_icon">&#xf015;</string>
+    <string name="tools_icon">&#xf013;</string>
+    <string name="other_tools_icon">&#xf17c;</string>
+    <string name="this_app_icon">&#xf17b;</string>
+    <string name="github_icon">&#xf09b;</string>
+
+    // TOOLS PAGE
+    <string name="tools_examples">Jasmine \nSelenium \nProtractor \nAPIs \nUIAutomation</string>
+
+    // ALL PAGES.
     <string name="examples_link">* For examples, see http://chrisp1985.github.io</string>
 </resources>

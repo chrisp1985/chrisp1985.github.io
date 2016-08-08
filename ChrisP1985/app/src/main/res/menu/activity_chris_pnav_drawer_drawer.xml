@@ -3,17 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/android_source"
+            android:id="@+id/home"
             android:icon="@drawable/ic_menu_send"
-            android:title="Android Source" />
-        <item
-            android:id="@+id/github"
-            android:icon="@drawable/ic_menu_send"
-            android:title="GitHub" />
-        <item
-            android:id="@+id/linkedin"
-            android:icon="@drawable/ic_menu_send"
-            android:title="LinkedIn" />
+            android:title="Home" />
     </group>
 
     <item android:title="This Site">

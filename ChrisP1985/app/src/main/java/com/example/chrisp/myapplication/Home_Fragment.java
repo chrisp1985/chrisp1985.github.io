@@ -1,8 +1,11 @@
 package com.example.chrisp.myapplication;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,12 +40,15 @@ public class Home_Fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    int[] sampleImages = {R.drawable.imagery_book, R.drawable.smart_tile};
+    int[] sampleImages = {R.drawable.selenium, R.drawable.jenkins, R.drawable.bootstrap};
+    View v;
 
     ImageListener imageListener = new ImageListener() {
+        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
             imageView.setImageResource(sampleImages[position]);
+            imageView.setImageAlpha(80);
         }
     };
     public Home_Fragment() {
@@ -78,8 +84,8 @@ public class Home_Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle     savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_home_, container, false);
-        TextView txt = (TextView) v.findViewById(R.id.textView8);
+        v = inflater.inflate(R.layout.fragment_home_, container, false);
+        TextView txt = (TextView) v.findViewById(R.id.homeHeading);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/KBZipaDeeDooDah.ttf");
         txt.setTypeface(font);
 
