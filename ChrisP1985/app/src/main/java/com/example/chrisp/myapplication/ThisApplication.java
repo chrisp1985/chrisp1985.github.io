@@ -1,13 +1,16 @@
 package com.example.chrisp.myapplication;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.ddns.tests.chrisp1985.R;
@@ -63,12 +66,16 @@ public class ThisApplication extends Fragment {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle     savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_this_application, container, false);
         TextView txt = (TextView) v.findViewById(R.id.textView5);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/KBZipaDeeDooDah.ttf");
         txt.setTypeface(font);
+
+        ImageView picture = (ImageView) v.findViewById(R.id.bootstrapImage);
+        picture.setImageAlpha(80);
         return v;
     }
 
