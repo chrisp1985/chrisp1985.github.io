@@ -20,7 +20,7 @@ public class CreateDriver {
      *
      * @return The setup driver.
      */
-    public AndroidDriver setupDriver() throws MalformedURLException {
+    public static AndroidDriver setupDriver() throws MalformedURLException {
         // Set the apk path
         File projectDirectory = new File(System.getProperty("projectDir"));
         System.out.println(projectDirectory);
@@ -30,7 +30,7 @@ public class CreateDriver {
         capabilities.setCapability("deviceName", "Galaxy S5");
         capabilities.setCapability("app", applicationDirectory.getAbsolutePath());
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-        capabilities.setCapability("platformVersion", "6.0");
+        capabilities.setCapability("platformVersion", "6.1");
         capabilities.setCapability("platformName", "Android");
 
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);

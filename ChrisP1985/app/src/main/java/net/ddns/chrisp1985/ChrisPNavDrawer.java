@@ -1,6 +1,8 @@
 package net.ddns.chrisp1985;
 
+import android.annotation.TargetApi;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.chrisp.myapplication.Home_Fragment;
 import com.example.chrisp.myapplication.OtherTools;
@@ -29,6 +32,7 @@ public class ChrisPNavDrawer extends AppCompatActivity
                     OtherTools.OnFragmentInteractionListener {
 
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,8 @@ public class ChrisPNavDrawer extends AppCompatActivity
         // Set the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ImageView toolbarImage = (ImageView) toolbar.findViewById(R.id.toolbarImage);
+        toolbarImage.setImageAlpha(80);
 
         Fragment fragment = null;
         Class fragmentClass = Home_Fragment.class;
