@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.chrisp.myapplication.Home_Fragment;
+import com.example.chrisp.myapplication.OtherTools;
 import com.example.chrisp.myapplication.ThisApplication;
 
 import net.ddns.tests.chrisp1985.R;
@@ -24,7 +25,8 @@ public class ChrisPNavDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
                     Home_Fragment.OnFragmentInteractionListener,
                     ToolsFrag.OnFragmentInteractionListener,
-                    ThisApplication.OnFragmentInteractionListener {
+                    ThisApplication.OnFragmentInteractionListener,
+                    OtherTools.OnFragmentInteractionListener {
 
 
     @Override
@@ -86,7 +88,7 @@ public class ChrisPNavDrawer extends AppCompatActivity
         }
         // If the selection is 'Other Tools'...
         else if (id == R.id.other_tools) {
-
+            fragmentClass = OtherTools.class;
         }
         // If the selection is 'This App'...
         else if (id == R.id.this_app) {

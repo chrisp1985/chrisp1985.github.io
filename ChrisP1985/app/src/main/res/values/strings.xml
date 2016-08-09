@@ -8,7 +8,6 @@
 
     // HOME PAGE
     <string name="home_heading">My App</string>
-    <string name="tools_heading">Tools and Frameworks</string>
     <string name="title_activity_tools">Covering an assortment of tools and frameworks for a range of testing written in a few different languages</string>
 
     // THIS APP PAGE
@@ -23,8 +22,16 @@
     <string name="github_icon">&#xf09b;</string>
 
     // TOOLS PAGE
+    <string name="tools_heading">Tools and Frameworks</string>
     <string name="tools_examples">Jasmine \nSelenium \nProtractor \nAPIs \nUIAutomation</string>
+
+    // OTHER TOOLS PAGE
+    <string name="other_tools_heading">Other Tools</string>
+    <string name="other_tools_desc">The accompanying software and tools that are used as aides to testing, rather than the frameworks themselves.</string>
 
     // ALL PAGES.
     <string name="examples_link">* For examples, see http://chrisp1985.github.io</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
