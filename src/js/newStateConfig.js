@@ -19,6 +19,10 @@
                 url: "/this_site",
                 templateUrl: "this_site2.html"
             })
+            .state('android', {
+                url: "/android",
+                templateUrl: "android2.html"
+            })
             .state('othertools', {
                 url: "/othertools",
                 templateUrl: "other_tools.html"
