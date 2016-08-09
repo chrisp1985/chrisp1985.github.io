@@ -5,30 +5,14 @@
     tools:context="com.example.chrisp.myapplication.OtherTools"
     android:background="@color/background_floating_material_dark">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:fillViewport="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="left|top"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/other_tools_image"
-            android:src="@drawable/jenkins"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="250dp"
-            android:layout_marginTop="30dp" />
-    </RelativeLayout>
-
-    <RelativeLayout
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
@@ -43,9 +27,21 @@
             android:text="@string/other_tools_desc"
             android:id="@+id/other_tools_desc"
             android:textColor="#ffffff"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="172dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/other_tools_image"
+            android:src="@drawable/jenkins"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:adjustViewBounds="true"
+            android:layout_alignBottom="@+id/other_tools_heading"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:layout_width="338dp"
@@ -56,64 +52,27 @@
             android:layout_gravity="center_horizontal|top"
             android:textColor="#ffffff"
             android:textSize="48dp"
-            android:layout_above="@+id/other_tools_desc"
+            android:layout_alignBottom="@+id/other_tools_desc"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/examples_link"
-            android:id="@+id/other_tools_examples"
-            android:textColor="#ffffff"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <TabHost
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/tabHost"
-            android:layout_above="@+id/other_tools_heading"
-            android:layout_centerHorizontal="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/other_tools_examples"
+                android:id="@+id/textView4"
+                android:textColor="#ffffff"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/other_tools_desc"
+                android:layout_marginTop="20dp"
+                android:nestedScrollingEnabled="true" />
 
-                <TabWidget
-                    android:id="@android:id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></TabWidget>
 
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+        </RelativeLayout>
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"></LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"></LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"></LinearLayout>
-                </FrameLayout>
-            </LinearLayout>
-        </TabHost>
-
-    </RelativeLayout>
+    </ScrollView>
 
 </FrameLayout>

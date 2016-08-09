@@ -5,26 +5,23 @@
     tools:context="layout.ToolsFrag"
     android:background="@color/background_floating_material_dark">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left|top"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp">
+        android:layout_gravity="center"
+        android:fillViewport="true"
+        android:layout_marginBottom="20dp"
+        android:nestedScrollingEnabled="true">
 
-    </RelativeLayout>
-
-    <RelativeLayout
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+            android:nestedScrollingEnabled="true">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -61,7 +58,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/tools_examples"
             android:id="@+id/textView8"
@@ -69,19 +66,11 @@
             android:layout_below="@+id/textView2"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="48dp" />
+            android:layout_marginTop="20dp"
+            android:nestedScrollingEnabled="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/examples_link"
-            android:id="@+id/textView4"
-            android:textColor="#ffffff"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </ScrollView>
 
 </FrameLayout>

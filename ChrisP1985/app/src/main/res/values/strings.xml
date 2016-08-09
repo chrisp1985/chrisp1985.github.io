@@ -23,11 +23,12 @@
 
     // TOOLS PAGE
     <string name="tools_heading">Tools and Frameworks</string>
-    <string name="tools_examples">Jasmine \nSelenium \nProtractor \nAPIs \nUIAutomation</string>
+    <string name="tools_examples">Jasmine \n\nSelenium \n\nProtractor \n\nRestAssured \n\nRestSharp \n\nJMeter \n\nUIAutomation \n\nTestComplete \n\nSikuli \n\nRobot Framework \n\nAppium \n\n</string>
 
     // OTHER TOOLS PAGE
     <string name="other_tools_heading">Other Tools</string>
     <string name="other_tools_desc">The accompanying software and tools that are used as aides to testing, rather than the frameworks themselves.</string>
+    <string name="other_tools_examples">Linux \n\n NPM \n\n Mocking Services \n\n Jenkins \n\n TeamCity \n\n Maven \n\n Gradle \n\n Git \n\n</string>
 
     // ALL PAGES.
     <string name="examples_link">* For examples, see http://chrisp1985.github.io</string>
