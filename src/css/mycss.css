@@ -29,6 +29,12 @@
     background-position:-50px -50px;
     background-size: 380px 380px;
 }
+.jumbotron-billboard .android {
+    background: #000 url("../imgs/android_icon.png") center center;
+    background-repeat:no-repeat;
+    background-position:-50px -50px;
+    background-size: 380px 380px;
+}
 .jumbotron-billboard .site {
     background: #000 url("../imgs/bootstrap.png") center center;
     background-repeat:no-repeat;
