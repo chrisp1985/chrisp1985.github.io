@@ -7,6 +7,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
+import java.util.Arrays;
+import java.util.List;
 
 import Methods.AutomationMethods;
 import Methods.CreateDriver;
@@ -22,11 +24,16 @@ import static junit.framework.TestCase.assertTrue;
  *
  */
 @Ignore
-public class DroidTests {
-
+public class HomeTests {
     private static AndroidDriver driver;
     private HomeObjects homeObjects;
     private AutomationMethods methods;
+
+	private static List<String> expectedNavLinks = Arrays.asList(
+            "Home",
+            "Tools",
+            "Other Tools",
+            "This App");
 
     @BeforeClass
     public static void setupSuite() throws MalformedURLException {
@@ -87,11 +94,16 @@ public class DroidTests {
 
     @Ignore
     public void contentOfTheDrawerIsCorrect() {
-
+		// Open the drawer.
+		
+		// Iterate over items, check that each expected item is in the list.
     }
 
     @Ignore
     public void linksToAllFragmentsAreCorrect() {
-
+		// Open the drawer.
+		
+		// Check that each a href is correct.
+		
     }
 }
