@@ -18,7 +18,8 @@
         android:layout_margin="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp" >
+        android:layout_marginRight="15dp"
+            android:paddingTop="25dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/other_tools_examples"
+                android:text="@string/other_tools_linux"
                 android:id="@+id/textView4"
                 android:textColor="#ffffff"
                 android:layout_alignParentLeft="true"
@@ -74,5 +75,75 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <HorizontalScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontalScrollView" >
+
+        <TabHost
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tabHost"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bright_foreground_material_light" />
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/linuxTabOption"
+                        android:text="Linux"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:id="@+id/NPMTabOption"
+                        android:text="NPM"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:id="@+id/Mocking"
+                        android:text="Mocking"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:id="@+id/Jenkins"
+                        android:text="Jenkins"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:id="@+id/BuildEnv"
+                        android:text="Build Environment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" />
+
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+    </HorizontalScrollView>
 
 </FrameLayout>

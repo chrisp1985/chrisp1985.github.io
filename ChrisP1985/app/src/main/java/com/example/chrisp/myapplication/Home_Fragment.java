@@ -83,7 +83,7 @@ public class Home_Fragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle     savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_home_, container, false);
         TextView txt = (TextView) v.findViewById(R.id.homeHeading);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/KBZipaDeeDooDah.ttf");

@@ -2,15 +2,18 @@ package com.example.chrisp.myapplication;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import net.ddns.tests.chrisp1985.R;
@@ -29,6 +32,9 @@ public class OtherTools extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private FragmentTabHost mTabHost;
+    private View currentView;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -79,6 +85,9 @@ public class OtherTools extends Fragment {
 
         ImageView picture = (ImageView) v.findViewById(R.id.other_tools_image);
         picture.setImageAlpha(80);
+
+        currentView = v;
+        setupTabs(v);
         return v;
     }
 
@@ -106,6 +115,13 @@ public class OtherTools extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mTabHost = null;
+    }
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -119,5 +135,72 @@ public class OtherTools extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void setupTabs(View view) {
+        TabHost host = (TabHost) view.findViewById(R.id.tabHost);
+        host.setup();
+
+        //Tab 1
+        TabHost.TabSpec linuxSpec = host.newTabSpec("linuxTabOption");
+        linuxSpec.setContent(R.id.linuxTabOption);
+        linuxSpec.setIndicator("Linux");
+        host.addTab(linuxSpec);
+
+        //Tab 2
+        TabHost.TabSpec npmSpec = host.newTabSpec("NPMTabOption");
+        npmSpec.setContent(R.id.NPMTabOption);
+        npmSpec.setIndicator("NPM");
+        host.addTab(npmSpec);
+
+        //Tab 3
+        TabHost.TabSpec mockingSpec = host.newTabSpec("Mocking");
+        mockingSpec.setContent(R.id.Mocking);
+        mockingSpec.setIndicator("Mocking");
+        host.addTab(mockingSpec);
+
+        //Tab 4
+        TabHost.TabSpec jenkinsSpec = host.newTabSpec("Jenkins");
+        jenkinsSpec.setContent(R.id.Jenkins);
+        jenkinsSpec.setIndicator("Jenkins");
+        host.addTab(jenkinsSpec);
+
+        //Tab 5
+        TabHost.TabSpec buildEnvSpec = host.newTabSpec("BuildEnv");
+        buildEnvSpec.setContent(R.id.BuildEnv);
+        buildEnvSpec.setIndicator("Build Environment");
+        host.addTab(buildEnvSpec);
+
+
+        for(int i=0;i<host.getTabWidget().getChildCount();i++)
+        {
+            TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(Color.parseColor("#ffffff"));
+        }
+
+        TabHost.OnTabChangeListener tabListener = new TabHost.OnTabChangeListener() {
+
+            @Override
+            public void onTabChanged(String tabId) {
+                TextView myText = (TextView) currentView.findViewById (R.id.textView4);
+                if(tabId.equals("Jenkins")) {
+                    myText.setText(R.string.other_tools_jenkins);
+                }
+                else if(tabId.equals("linuxTabOption")) {
+                    myText.setText(R.string.other_tools_linux);
+                }
+                else if(tabId.equals("NPMTabOption")) {
+                    myText.setText(R.string.other_tools_npm);
+                }
+                else if(tabId.equals("Mocking")) {
+                    myText.setText(R.string.other_tools_mocking);
+                }
+                else if(tabId.equals("BuildEnv")) {
+                    myText.setText(R.string.other_tools_buildenv);
+                }
+            }
+        };
+
+        host.setOnTabChangedListener(tabListener);
     }
 }

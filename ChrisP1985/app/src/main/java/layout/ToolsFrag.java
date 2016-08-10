@@ -2,6 +2,7 @@ package layout;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import net.ddns.tests.chrisp1985.R;
@@ -30,6 +32,7 @@ public class ToolsFrag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private View currentView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,6 +80,9 @@ public class ToolsFrag extends Fragment {
 
         ImageView picture = (ImageView) v.findViewById(R.id.seleniumImg);
         picture.setImageAlpha(80);
+
+        currentView = v;
+        setupTabs(v);
         return v;
     }
 
@@ -117,5 +123,89 @@ public class ToolsFrag extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void setupTabs(View view) {
+        TabHost host = (TabHost) view.findViewById(R.id.tabHost2);
+        host.setup();
+
+        //Tab 1
+        TabHost.TabSpec jasmineSpec = host.newTabSpec("Jasmine");
+        jasmineSpec.setContent(R.id.Jasmine);
+        jasmineSpec.setIndicator("Jasmine");
+        host.addTab(jasmineSpec);
+
+        //Tab 2
+        TabHost.TabSpec protractorSpec = host.newTabSpec("Protractor");
+        protractorSpec.setContent(R.id.Protractor);
+        protractorSpec.setIndicator("Protractor");
+        host.addTab(protractorSpec);
+
+        //Tab 3
+        TabHost.TabSpec seleniumSpec = host.newTabSpec("Selenium");
+        seleniumSpec.setContent(R.id.Selenium);
+        seleniumSpec.setIndicator("Selenium");
+        host.addTab(seleniumSpec);
+
+        //Tab 4
+        TabHost.TabSpec uiAutomationSpec = host.newTabSpec("UIAutomation");
+        uiAutomationSpec.setContent(R.id.UIAutomation);
+        uiAutomationSpec.setIndicator("UIAutomation");
+        host.addTab(uiAutomationSpec);
+
+        //Tab 5
+        TabHost.TabSpec apiSpec = host.newTabSpec("API");
+        apiSpec.setContent(R.id.API);
+        apiSpec.setIndicator("API");
+        host.addTab(apiSpec);
+
+        //Tab 6
+        TabHost.TabSpec jMeterSpec = host.newTabSpec("JMeter");
+        jMeterSpec.setContent(R.id.JMeter);
+        jMeterSpec.setIndicator("JMeter");
+        host.addTab(jMeterSpec);
+
+        //Tab 7
+        TabHost.TabSpec othertoolsSpec = host.newTabSpec("OtherTools");
+        othertoolsSpec.setContent(R.id.OtherTools);
+        othertoolsSpec.setIndicator("Other Tools");
+        host.addTab(othertoolsSpec);
+
+        for(int i=0;i<host.getTabWidget().getChildCount();i++)
+        {
+            TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(Color.parseColor("#ffffff"));
+        }
+
+        TabHost.OnTabChangeListener tabListener = new TabHost.OnTabChangeListener() {
+
+            @Override
+            public void onTabChanged(String tabId) {
+                TextView myText = (TextView) currentView.findViewById (R.id.textView8);
+                if(tabId.equals("Jasmine")) {
+                    myText.setText(R.string.tools_jasmine);
+                }
+                else if(tabId.equals("Protractor")) {
+                    myText.setText(R.string.tools_protractor);
+                }
+                else if(tabId.equals("Selenium")) {
+                    myText.setText(R.string.tools_selenium);
+                }
+                else if(tabId.equals("UIAutomation")) {
+                    myText.setText(R.string.tools_uiautomation);
+                }
+                else if(tabId.equals("API")) {
+                    myText.setText(R.string.tools_api);
+                }
+                else if(tabId.equals("JMeter")) {
+                    myText.setText(R.string.tools_jmeter);
+                }
+                else if(tabId.equals("OtherTools")) {
+                    myText.setText(R.string.tools_othertools);
+                }
+            }
+        };
+
+        host.setOnTabChangedListener(tabListener);
     }
 }
