@@ -1,5 +1,6 @@
 package tests;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -12,6 +13,7 @@ import Methods.CreateDriver;
 import PageObjects.HomeObjects;
 import io.appium.java_client.android.AndroidDriver;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 /**
@@ -37,10 +39,18 @@ public class DroidTests {
         // Go to the home page.
         homeObjects = new HomeObjects(driver);
         methods = new AutomationMethods(driver);
+
+        // Click the monkey
+        methods.clickMyMonkey();
     }
 
     @After
     public void tearDown() {
+
+    }
+
+    @AfterClass
+    public static void killTheDriver() {
         driver.quit();
     }
 
@@ -60,4 +70,28 @@ public class DroidTests {
         methods.takeAScreenShot("homeScreen");
     }
 
+    @Test
+    public void clickTheMenuButtonOpensTheDrawer() {
+        // Wait for the home title to be displayed
+        assertTrue(homeObjects.homeTitle().isDisplayed());
+
+        // Make sure the drawer isn't open to begin with.
+        assertFalse(methods.checkIfDrawerIsOpen());
+
+        // Click the menu button.
+        homeObjects.menuButton().click();
+
+        // Check that the drawer is opened.
+        assertTrue(methods.checkIfDrawerIsOpen());
+    }
+
+    @Ignore
+    public void contentOfTheDrawerIsCorrect() {
+
+    }
+
+    @Ignore
+    public void linksToAllFragmentsAreCorrect() {
+
+    }
 }

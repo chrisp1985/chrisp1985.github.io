@@ -8,6 +8,7 @@ import org.openqa.selenium.TakesScreenshot;
 import java.io.File;
 import java.io.IOException;
 
+import PageObjects.HomeObjects;
 import io.appium.java_client.android.AndroidDriver;
 
 /**
@@ -16,8 +17,11 @@ import io.appium.java_client.android.AndroidDriver;
 public class AutomationMethods {
 
     AndroidDriver driver;
+    HomeObjects objects;
+
     public AutomationMethods(AndroidDriver driver) {
         this.driver = driver;
+        objects = new HomeObjects(driver);
     }
 
     public void takeAScreenShot(String fileName)
@@ -33,5 +37,14 @@ public class AutomationMethods {
         {
             e.printStackTrace();
         }
+    }
+
+    public boolean checkIfDrawerIsOpen() {
+        String drawerDesc = objects.menuButton().getAttribute("name");
+        return drawerDesc.contains("Close");
+    }
+
+    public void clickMyMonkey() {
+        objects.monkeyToolBar().click();
     }
 }
