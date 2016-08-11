@@ -182,27 +182,35 @@ public class ToolsFrag extends Fragment {
             @Override
             public void onTabChanged(String tabId) {
                 TextView myText = (TextView) currentView.findViewById (R.id.textView8);
+                TextView myTabHeading = (TextView) currentView.findViewById (R.id.textView2);
                 switch (tabId) {
                     case "Jasmine":
                         myText.setText(R.string.tools_jasmine);
+                        myTabHeading.setText("Jasmine");
                         break;
                     case "Protractor":
                         myText.setText(R.string.tools_protractor);
+                        myTabHeading.setText("Protractor");
                         break;
                     case "Selenium":
                         myText.setText(R.string.tools_selenium);
+                        myTabHeading.setText("Selenium");
                         break;
                     case "UIAutomation":
                         myText.setText(R.string.tools_uiautomation);
+                        myTabHeading.setText("UIAutomation");
                         break;
                     case "API":
                         myText.setText(R.string.tools_api);
+                        myTabHeading.setText("API");
                         break;
                     case "JMeter":
                         myText.setText(R.string.tools_jmeter);
+                        myTabHeading.setText("JMeter");
                         break;
                     case "OtherTools":
                         myText.setText(R.string.tools_othertools);
+                        myTabHeading.setText("OtherTools");
                         break;
                 }
             }

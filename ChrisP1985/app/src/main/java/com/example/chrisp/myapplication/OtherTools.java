@@ -183,20 +183,28 @@ public class OtherTools extends Fragment {
             @Override
             public void onTabChanged(String tabId) {
                 TextView myText = (TextView) currentView.findViewById (R.id.textView4);
-                if(tabId.equals("Jenkins")) {
-                    myText.setText(R.string.other_tools_jenkins);
-                }
-                else if(tabId.equals("linuxTabOption")) {
-                    myText.setText(R.string.other_tools_linux);
-                }
-                else if(tabId.equals("NPMTabOption")) {
-                    myText.setText(R.string.other_tools_npm);
-                }
-                else if(tabId.equals("Mocking")) {
-                    myText.setText(R.string.other_tools_mocking);
-                }
-                else if(tabId.equals("BuildEnv")) {
-                    myText.setText(R.string.other_tools_buildenv);
+                TextView myTabHeading = (TextView) currentView.findViewById (R.id.other_tools_desc);
+                switch (tabId) {
+                    case "Jenkins":
+                        myText.setText(R.string.other_tools_jenkins);
+                        myTabHeading.setText("Jenkins");
+                        break;
+                    case "linuxTabOption":
+                        myText.setText(R.string.other_tools_linux);
+                        myTabHeading.setText("Linux");
+                        break;
+                    case "NPMTabOption":
+                        myText.setText(R.string.other_tools_npm);
+                        myTabHeading.setText("NPM");
+                        break;
+                    case "Mocking":
+                        myText.setText(R.string.other_tools_mocking);
+                        myTabHeading.setText("Mocking");
+                        break;
+                    case "BuildEnv":
+                        myText.setText(R.string.other_tools_buildenv);
+                        myTabHeading.setText("Build Environment");
+                        break;
                 }
             }
         };
