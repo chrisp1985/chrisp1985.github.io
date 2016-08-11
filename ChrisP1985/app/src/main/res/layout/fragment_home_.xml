@@ -21,7 +21,7 @@
             app:strokeColor="#FF777777"
             app:strokeWidth="1dp"
             android:background="@color/material_grey_800"
-            android:paddingRight="90dp"
+            android:paddingRight="50dp"
             android:paddingBottom="120dp"
             android:layout_gravity="right|bottom"
             android:layout_alignParentBottom="true"

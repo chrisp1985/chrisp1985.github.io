@@ -182,26 +182,28 @@ public class ToolsFrag extends Fragment {
             @Override
             public void onTabChanged(String tabId) {
                 TextView myText = (TextView) currentView.findViewById (R.id.textView8);
-                if(tabId.equals("Jasmine")) {
-                    myText.setText(R.string.tools_jasmine);
-                }
-                else if(tabId.equals("Protractor")) {
-                    myText.setText(R.string.tools_protractor);
-                }
-                else if(tabId.equals("Selenium")) {
-                    myText.setText(R.string.tools_selenium);
-                }
-                else if(tabId.equals("UIAutomation")) {
-                    myText.setText(R.string.tools_uiautomation);
-                }
-                else if(tabId.equals("API")) {
-                    myText.setText(R.string.tools_api);
-                }
-                else if(tabId.equals("JMeter")) {
-                    myText.setText(R.string.tools_jmeter);
-                }
-                else if(tabId.equals("OtherTools")) {
-                    myText.setText(R.string.tools_othertools);
+                switch (tabId) {
+                    case "Jasmine":
+                        myText.setText(R.string.tools_jasmine);
+                        break;
+                    case "Protractor":
+                        myText.setText(R.string.tools_protractor);
+                        break;
+                    case "Selenium":
+                        myText.setText(R.string.tools_selenium);
+                        break;
+                    case "UIAutomation":
+                        myText.setText(R.string.tools_uiautomation);
+                        break;
+                    case "API":
+                        myText.setText(R.string.tools_api);
+                        break;
+                    case "JMeter":
+                        myText.setText(R.string.tools_jmeter);
+                        break;
+                    case "OtherTools":
+                        myText.setText(R.string.tools_othertools);
+                        break;
                 }
             }
         };
