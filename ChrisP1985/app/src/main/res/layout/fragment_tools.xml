@@ -51,7 +51,8 @@
                 android:textColor="#ffffff"
                     android:layout_alignBottom="@+id/seleniumImg"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:text="Jasmine" />
 
                 <TextView
                 android:layout_width="338dp"
@@ -81,7 +82,8 @@
                     android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
-                android:nestedScrollingEnabled="true" />
+                android:nestedScrollingEnabled="true"
+                    android:text="@string/tools_jasmine" />
             </RelativeLayout>
 
         </RelativeLayout>

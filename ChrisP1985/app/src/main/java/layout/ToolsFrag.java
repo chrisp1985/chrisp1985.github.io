@@ -193,7 +193,7 @@ public class ToolsFrag extends Fragment {
                         myTabHeading.setText("Protractor");
                         break;
                     case "Selenium":
-                        myText.setText(R.string.tools_selenium);
+                        myText.setText(R.string.new_selenium_tools);
                         myTabHeading.setText("Selenium");
                         break;
                     case "UIAutomation":

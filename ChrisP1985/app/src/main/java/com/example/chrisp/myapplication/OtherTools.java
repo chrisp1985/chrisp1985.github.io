@@ -194,7 +194,7 @@ public class OtherTools extends Fragment {
                         myTabHeading.setText("Linux");
                         break;
                     case "NPMTabOption":
-                        myText.setText(R.string.other_tools_npm);
+                        myText.setText(R.string.npm_again);
                         myTabHeading.setText("NPM");
                         break;
                     case "Mocking":

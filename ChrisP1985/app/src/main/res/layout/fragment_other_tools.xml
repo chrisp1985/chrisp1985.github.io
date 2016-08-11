@@ -24,8 +24,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/relativeLayout"
-                android:paddingBottom="25dp">
+                android:id="@+id/relativeLayout">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -33,10 +32,12 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/other_tools_desc"
                     android:textColor="#ffffff"
-                    android:layout_alignParentTop="true"
+                    android:text="Linux"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="172dp" />
+                    android:layout_marginBottom="28dp"
+                    android:paddingBottom="25dp" />
 
                 <ImageView
                 android:layout_width="fill_parent"
@@ -47,9 +48,7 @@
                 android:layout_alignParentStart="false"
                 android:adjustViewBounds="true"
                     android:layout_alignParentTop="true"
-                    android:layout_alignBottom="@+id/other_tools_desc"
-                    android:layout_alignRight="@+id/other_tools_heading"
-                    android:layout_alignEnd="@+id/other_tools_heading" />
+                    android:layout_alignParentBottom="true" />
 
                 <TextView
                 android:layout_width="338dp"
@@ -60,10 +59,9 @@
                 android:layout_gravity="center_horizontal|top"
                 android:textColor="#ffffff"
                 android:textSize="48dp"
-                android:layout_alignBottom="@+id/other_tools_desc"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="10dp" />
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -75,15 +73,16 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:id="@+id/textView4"
                     android:textColor="@color/abc_secondary_text_material_dark"
                     android:nestedScrollingEnabled="true"
-                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="right|bottom"
+                    android:text="@string/other_tools_linux"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_gravity="right|bottom" />
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
 
 
