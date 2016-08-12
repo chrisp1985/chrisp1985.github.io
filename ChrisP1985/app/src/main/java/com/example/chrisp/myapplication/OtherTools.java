@@ -182,7 +182,7 @@ public class OtherTools extends Fragment {
 
             @Override
             public void onTabChanged(String tabId) {
-                TextView myText = (TextView) currentView.findViewById (R.id.textView4);
+                TextView myText = (TextView) currentView.findViewById (R.id.other_tools_summary);
                 TextView myTabHeading = (TextView) currentView.findViewById (R.id.other_tools_desc);
                 switch (tabId) {
                     case "Jenkins":

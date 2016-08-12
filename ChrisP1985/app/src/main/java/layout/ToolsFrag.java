@@ -181,7 +181,7 @@ public class ToolsFrag extends Fragment {
 
             @Override
             public void onTabChanged(String tabId) {
-                TextView myText = (TextView) currentView.findViewById (R.id.textView8);
+                TextView myText = (TextView) currentView.findViewById (R.id.tools_summary);
                 TextView myTabHeading = (TextView) currentView.findViewById (R.id.textView2);
                 switch (tabId) {
                     case "Jasmine":
@@ -201,6 +201,7 @@ public class ToolsFrag extends Fragment {
                         myTabHeading.setText("UIAutomation");
                         break;
                     case "API":
+                        myText.setText(R.string.tools_jasmine);
                         myText.setText(R.string.tools_api);
                         myTabHeading.setText("API");
                         break;
