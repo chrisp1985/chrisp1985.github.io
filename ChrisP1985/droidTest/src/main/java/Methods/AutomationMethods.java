@@ -11,6 +11,8 @@ import java.io.IOException;
 import PageObjects.HomeObjects;
 import io.appium.java_client.android.AndroidDriver;
 
+import static junit.framework.TestCase.assertFalse;
+
 /**
  * Created by chrisp on 01/08/2016.
  */
@@ -46,5 +48,18 @@ public class AutomationMethods {
 
     public void clickMyMonkey() {
         objects.monkeyToolBar().click();
+    }
+
+    public void clickTheDrawerButton() {
+        // Note: Added to a method so if functionality changes and this becomes a double-
+        // click, only one method needs to be changed rather than the reference within each
+        // test case.
+        new HomeObjects(driver).menuButton().click();
+    }
+
+    public void openTheDrawer() {
+        if(!checkIfDrawerIsOpen()) {
+            clickTheDrawerButton();
+        }
     }
 }
