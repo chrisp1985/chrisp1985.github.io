@@ -8,7 +8,7 @@ import org.junit.Ignore;
 public class OtherToolsTests extends AbstractTestSetup {
 
     @Ignore
-    public void displaysJasmineOnOpen() {
+    public void displaysLinuxOnOpen() {
 
     }
 

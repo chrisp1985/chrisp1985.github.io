@@ -6,6 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.HashSet;
 
+import PageObjects.OtherToolsObjects;
+import PageObjects.ToolsObjects;
+
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
@@ -54,7 +58,7 @@ public class HomeTests extends AbstractTestSetup {
 		methods.openTheDrawer();
 
 		// Iterate over items, check that each expected item is in the list.
-        assertTrue(new HashSet(expectedNavLinks).equals(new HashSet(homeObjects.menuItemsStrings())));
+        assertEquals(new HashSet(expectedNavLinks),new HashSet(homeObjects.menuItemsStrings()));
     }
 
     @Ignore
@@ -77,18 +81,30 @@ public class HomeTests extends AbstractTestSetup {
             switch (itemName) {
                 case "Tools":
                     // Check for the image, the heading and the text.
+                    assertTrue(new ToolsObjects(driver).pageImage().isDisplayed());
+                    assertTrue(new ToolsObjects(driver).pageDescription().isDisplayed());
+                    assertTrue(new ToolsObjects(driver).pageHeading().isDisplayed());
 
                     break;
                 case "Other Tools":
                     // Check for the image, the heading and the text.
+                    assertTrue(new OtherToolsObjects(driver).pageImage().isDisplayed());
+                    assertTrue(new OtherToolsObjects(driver).pageDescription().isDisplayed());
+                    assertTrue(new OtherToolsObjects(driver).pageHeading().isDisplayed());
 
                     break;
                 case "This App":
                     // Check for the image, the heading and the text.
+                    assertTrue(new OtherToolsObjects(driver).pageImage().isDisplayed());
+                    assertTrue(new OtherToolsObjects(driver).pageDescription().isDisplayed());
+                    assertTrue(new OtherToolsObjects(driver).pageHeading().isDisplayed());
 
                     break;
                 case "Home":
                     // Check for the image, the heading and the text.
+                    assertTrue(new OtherToolsObjects(driver).pageImage().isDisplayed());
+                    assertTrue(new OtherToolsObjects(driver).pageDescription().isDisplayed());
+                    assertTrue(new OtherToolsObjects(driver).pageHeading().isDisplayed());
 
                     break;
             }

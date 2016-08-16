@@ -1,6 +1,9 @@
 package PageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.android.AndroidDriver;
 
@@ -15,21 +18,25 @@ public class OtherToolsObjects extends AbstractSharedObjects implements Examples
 
     @Override
     public WebElement pageImage() {
-        return null;
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("")));
     }
 
     @Override
     public WebElement itemsMenu() {
-        return null;
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("")));
     }
 
     @Override
     public WebElement pageHeading() {
-        return null;
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("")));
     }
 
     @Override
     public WebElement pageDescription() {
-        return null;
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("")));
     }
 }
