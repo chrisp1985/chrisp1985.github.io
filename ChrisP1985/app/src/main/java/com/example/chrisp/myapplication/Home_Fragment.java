@@ -45,17 +45,6 @@ public class Home_Fragment extends Fragment {
             R.drawable.jenkins,
             R.drawable.bootstrap
     };
-	
-	/*
-	int[] sampleImages = {
-            R.drawable.selenium,
-            R.drawable.jenkins,
-            R.drawable.bootstrap,
-            R.drawable.android_icon,
-            R.drawable.angularimg,
-            R.drawable.gradlephant,
-            R.drawable.protractor_logo_white
-    };*/
     View v;
 
     ImageListener imageListener = new ImageListener() {
@@ -103,7 +92,6 @@ public class Home_Fragment extends Fragment {
         TextView txt = (TextView) v.findViewById(R.id.homeHeading);
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/KBZipaDeeDooDah.ttf");
         txt.setTypeface(font);
-
         View myView = v.findViewById(R.id.carouselView);
         CarouselView carouselView = (CarouselView) myView;
         carouselView.setPageCount(sampleImages.length);

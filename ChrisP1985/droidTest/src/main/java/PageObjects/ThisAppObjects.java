@@ -10,33 +10,24 @@ import io.appium.java_client.android.AndroidDriver;
 /**
  * Created by chrisp on 15/08/2016.
  */
-public class ThisAppObjects extends AbstractSharedObjects implements ExamplesPages {
+public class ThisAppObjects extends AbstractSharedObjects {
 
     public ThisAppObjects(AndroidDriver incomingDriver) {
         super(incomingDriver);
     }
 
-    @Override
     public WebElement pageImage() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
+                .id("com.example.chrisp.myapplication:id/bootstrapImage")));
     }
 
-    @Override
-    public WebElement itemsMenu() {
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
-    }
-
-    @Override
     public WebElement pageHeading() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
+                .xpath("//android.widget.TextView[.='Why have I done this?']")));
     }
 
-    @Override
-    public WebElement pageDescription() {
+    public WebElement thisAppDescHeading() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
+                .xpath("//android.widget.TextView[.='This Application']")));
     }
 }

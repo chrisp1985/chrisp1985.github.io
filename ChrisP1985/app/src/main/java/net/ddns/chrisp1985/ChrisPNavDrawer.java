@@ -31,7 +31,6 @@ public class ChrisPNavDrawer extends AppCompatActivity
                     ThisApplication.OnFragmentInteractionListener,
                     OtherTools.OnFragmentInteractionListener {
 
-
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,12 +8,5 @@
   <style name="_ChrisTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
   </style>
-  
-    <style name="ChrisTheme.NoActionBar">
-    <item name="windowActionBar">false</item>
-    <item name="windowNoTitle">true</item>
-    <item name="android:windowFullscreen">true</item>
-    <item name="android:windowContentOverlay">@null</item>
-</style>
 
 </resources>

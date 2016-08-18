@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 import io.appium.java_client.android.AndroidDriver;
 
 /**
@@ -19,24 +21,23 @@ public class OtherToolsObjects extends AbstractSharedObjects implements Examples
     @Override
     public WebElement pageImage() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
-    }
-
-    @Override
-    public WebElement itemsMenu() {
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
+                .id("com.example.chrisp.myapplication:id/other_tools_image")));
     }
 
     @Override
     public WebElement pageHeading() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
+                .xpath("//android.widget.TextView[.='Other Tools']")));
     }
 
     @Override
     public WebElement pageDescription() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("")));
+                .id("com.example.chrisp.myapplication:id/other_tools_summary")));
+    }
+
+    @Override
+    public List<WebElement> tabItems() {
+        return genericItemsMenu().findElements(By.className("android.widget.TextView"));
     }
 }

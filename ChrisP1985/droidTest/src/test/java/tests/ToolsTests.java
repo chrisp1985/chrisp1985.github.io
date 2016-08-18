@@ -40,14 +40,16 @@ public class ToolsTests extends AbstractTestSetup{
     }
 
     @Test
-    public void displaysCorrectTextForEachTab() {
+    public void verifyCorrectNumberOfTabsAndSelected() {
         methods.navigateToScreen("Tools");
-        methods.clickScrollViewItem("Selenium");
+        assertEquals(new HashSet(expectedTabs),new HashSet(methods.getTabNamesInScrollView(toolsObjects)));
     }
 
     @Test
-    public void verifyCorrectNumberOfTabsAndSelected() {
+    public void displaysCorrectTextForEachTab() {
         methods.navigateToScreen("Tools");
-        assertEquals(new HashSet(expectedTabs),new HashSet(methods.getTabNamesInScrollView()));
+        for(String tabName: expectedTabs) {
+            methods.clickScrollViewItem(toolsObjects,tabName);
+        }
     }
 }

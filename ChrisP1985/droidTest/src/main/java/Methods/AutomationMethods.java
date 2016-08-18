@@ -4,6 +4,8 @@ import org.apache.commons.io.FileUtils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -16,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import PageObjects.AbstractSharedObjects;
+import PageObjects.ExamplesPages;
 import PageObjects.HomeObjects;
 import PageObjects.ToolsObjects;
 import io.appium.java_client.android.AndroidDriver;
@@ -92,64 +96,70 @@ public class AutomationMethods {
 
     }
 
-    public List<String> getTabNamesInScrollView() {
+    public List<String> getTabNamesInScrollView(ExamplesPages objsPage) {
 
         // Set prevLastVisible to a blank string, and setup the foundItems list.
         String prevLastVisible = "";
         List<String> foundItems = new ArrayList<>();
 
         // Get the lastVisible tab, and check it doesn't match the previous last visible tab.
-        WebElement lastVisible = toolsObjects.tabItems().get(toolsObjects.tabItems().size()-1);
-        while(!lastVisible.findElement(By.className("android.widget.TextView")).getText().equals(prevLastVisible)) {
+        List<WebElement> lastVisible = objsPage.tabItems();
+        while(!lastVisible.get(lastVisible.size()-1).getText().equals(prevLastVisible)) {
 
             // Set prevLastVisible to the current lastVisible for the next loop.
-            prevLastVisible = lastVisible.findElement(By.className("android.widget.TextView")).getText();
+            prevLastVisible = lastVisible.get(lastVisible.size()-1).getText();
 
             // Add the visible tabs to the list that have not already been added.
-            for(WebElement foundEle: toolsObjects.tabItems()) {
-                if(!foundItems.contains(foundEle.findElement(By.className("android.widget.TextView")).getText())) {
-                    foundItems.add(foundEle.findElement(By.className("android.widget.TextView")).getText());
+            for(WebElement foundEle: objsPage.tabItems()) {
+                if(!foundItems.contains(foundEle.getText())) {
+                    foundItems.add(foundEle.getText());
                 }
             }
 
-            // Drag the last visible tab left, the entire width of the view.
-            int lastVisX = lastVisible.getLocation().getX();
-            int lastVisY = lastVisible.getLocation().getY();
-            int firstVisX = toolsObjects.tabItems().get(0).getLocation().getX();
-            int firstVisY = toolsObjects.tabItems().get(0).getLocation().getY();
+            // Find the bounds of the tabhost, then drag from 70% of the way along, back to 30%.
+            int lastVisX = (int) (objsPage.genericItemsMenu().getLocation().getX() + (objsPage.genericItemsMenu().getSize().width * 0.7));
+            int y_coord = (int) (objsPage.genericItemsMenu().getLocation().getY() + (objsPage.genericItemsMenu().getSize().height * 0.5));
+            int firstVisX = (int) (objsPage.genericItemsMenu().getLocation().getX() + (objsPage.genericItemsMenu().getSize().width * 0.3));
 
             // Drag the list, to see what tabs are available.
-            driver.swipe(lastVisX,lastVisY,firstVisX,firstVisY,500);
-            lastVisible = toolsObjects.tabItems().get(toolsObjects.tabItems().size()-1);
+            driver.swipe(lastVisX,y_coord,firstVisX,y_coord,500);
+            lastVisible.get(lastVisible.size()-1).getText();
         }
         return foundItems;
     }
 
-    public void clickScrollViewItem(String itemName) {
+    public boolean clickScrollViewItem(ExamplesPages objsPage, String itemName) {
         boolean itemFound = false;
         String prevLastVisible = "";
-        WebElement lastVisible = toolsObjects.tabItems().get(toolsObjects.tabItems().size()-1);
-        while(!itemFound && !lastVisible.findElement(By.className("android.widget.TextView")).getText().equals(prevLastVisible)) {
-            prevLastVisible = lastVisible.findElement(By.className("android.widget.TextView")).getText();
 
-            for(WebElement item: toolsObjects.tabItems()) {
-                if(item.findElement(By.className("android.widget.TextView")).getText().equals(itemName)) {
-                    item.click();
-                    itemFound=true;
+        // Get the lastVisible tab, and check it doesn't match the previous last visible tab.
+        List<WebElement> lastVisible = objsPage.tabItems();
+        while(!lastVisible.get(lastVisible.size()-1).getText().equals(prevLastVisible) && !itemFound) {
+
+            // Set prevLastVisible to the current lastVisible for the next loop.
+            prevLastVisible = lastVisible.get(lastVisible.size()-1).getText();
+
+            // Add the visible tabs to the list that have not already been added.
+            for(WebElement foundEle: objsPage.tabItems()) {
+                if(foundEle.getText().equals(itemName)) {
+                    foundEle.click();
+                    itemFound = true;
                     break;
                 }
-                else {
-                    // Drag the last visible tab left, the entire width of the view.
-                    int lastVisX = lastVisible.getLocation().getX();
-                    int lastVisY = lastVisible.getLocation().getY();
-                    int firstVisX = toolsObjects.tabItems().get(0).getLocation().getX();
-                    int firstVisY = toolsObjects.tabItems().get(0).getLocation().getY();
+            }
 
-                    // Drag the list, to see what tabs are available.
-                    driver.swipe(lastVisX,lastVisY,firstVisX,firstVisY,500);
-                    lastVisible = toolsObjects.tabItems().get(toolsObjects.tabItems().size()-1);
-                }
+            if(!itemFound) {
+                // Find the bounds of the tabhost, then drag from 70% of the way along, back to 30%.
+                int lastVisX = (int) (objsPage.genericItemsMenu().getLocation().getX() + (objsPage.genericItemsMenu().getSize().width * 0.7));
+                int lastVisY = (int) (objsPage.genericItemsMenu().getLocation().getY() + (objsPage.genericItemsMenu().getSize().height * 0.5));
+                int firstVisX = (int) (objsPage.genericItemsMenu().getLocation().getX() + (objsPage.genericItemsMenu().getSize().width * 0.3));
+                int firstVisY = (int) (objsPage.genericItemsMenu().getLocation().getY() + (objsPage.genericItemsMenu().getSize().height * 0.5));
+
+                // Drag the list, to see what tabs are available.
+                driver.swipe(lastVisX, lastVisY, firstVisX, firstVisY, 500);
+                lastVisible.get(lastVisible.size() - 1).getText();
             }
         }
+        return itemFound;
     }
 }

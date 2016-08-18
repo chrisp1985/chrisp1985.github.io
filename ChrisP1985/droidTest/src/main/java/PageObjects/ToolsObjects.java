@@ -26,12 +26,6 @@ public class ToolsObjects extends AbstractSharedObjects implements ExamplesPages
     }
 
     @Override
-    public WebElement itemsMenu() {
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .id("android:id/tabs")));
-    }
-
-    @Override
     public WebElement pageHeading() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
                 .xpath("//android.widget.TextView[.='Tools and Frameworks']")));
@@ -43,7 +37,8 @@ public class ToolsObjects extends AbstractSharedObjects implements ExamplesPages
                 .id("com.example.chrisp.myapplication:id/tools_summary")));
     }
 
+    @Override
     public List<WebElement> tabItems() {
-        return itemsMenu().findElements(By.className("android.widget.LinearLayout"));
+        return genericItemsMenu().findElements(By.className("android.widget.TextView"));
     }
 }

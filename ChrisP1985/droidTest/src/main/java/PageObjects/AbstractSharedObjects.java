@@ -57,4 +57,9 @@ public abstract class AbstractSharedObjects {
         }
         return menuItems;
     }
+
+    public WebElement genericItemsMenu() {
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .id("android:id/tabs")));
+    }
 }
