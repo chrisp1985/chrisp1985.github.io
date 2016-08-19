@@ -15,6 +15,9 @@ import io.appium.java_client.android.AndroidDriver;
  * Created by chrisp on 01/08/2016.
  */
 public class CreateDriver {
+    private static final String DEVICE__GALAXY_S5 = "Galaxy S5";
+    private static final String DEVICE__LITTLE_SAMSUNG = "Samsung CI";
+
     /**
      * *** SETUP THE DRIVER ***
      *
@@ -27,10 +30,10 @@ public class CreateDriver {
         File applicationDirectory = new File(projectDirectory, "app\\build\\outputs\\apk\\app-debug.apk");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Galaxy S5");
+        capabilities.setCapability("deviceName", DEVICE__LITTLE_SAMSUNG);
         capabilities.setCapability("app", applicationDirectory.getAbsolutePath());
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-        capabilities.setCapability("platformVersion", "6.1");
+        capabilities.setCapability("platformVersion", "4.1");
         capabilities.setCapability("platformName", "Android");
 
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);

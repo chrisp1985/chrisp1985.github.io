@@ -18,9 +18,7 @@ import static junit.framework.TestCase.assertTrue;
  *
  *
  */
-@Ignore
 public class HomeTests extends AbstractTestSetup {
-
     @Test
     public void checkHomePageIsDisplayedOnAppStart() throws InterruptedException {
 
