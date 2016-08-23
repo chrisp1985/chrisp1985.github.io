@@ -56,9 +56,12 @@ public class AutomationMethods {
         }
     }
 
-    public boolean checkIfDrawerIsOpen() {
-        String drawerDesc = objects.menuButton().getAttribute("name");
-        return drawerDesc.contains("Close");
+    public boolean checkThatDrawerIsNotOpen() {
+        return objects.monkeyToolBar().isDisplayed();
+    }
+
+    public boolean checkThatDrawerIsOpen() {
+        return objects.boundsOfScreen().isDisplayed();
     }
 
     public void clickMyMonkey() {
@@ -73,9 +76,23 @@ public class AutomationMethods {
     }
 
     public void openTheDrawer() {
-        if(!checkIfDrawerIsOpen()) {
+        if(checkThatDrawerIsNotOpen()) {
             clickTheDrawerButton();
         }
+    }
+
+    public void closeTheDrawer() {
+        // Get the bounds of the driver.
+        int swipeBoundX = (int) (objects.boundsOfScreen().getSize().width * 0.9);
+        int swipeBoundEndX = (int) (objects.boundsOfScreen().getSize().width * 0.2);
+        int swipeBoundY = (int) (objects.boundsOfScreen().getSize().height * 0.5);
+        try {
+            driver.swipe(swipeBoundX, swipeBoundY, swipeBoundEndX, swipeBoundY, 200);
+        }
+        catch(Exception e) {
+            // Do nothing.
+        }
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(objects.monkeyToolBar()));
     }
 
     public void navigateToScreen(String screen) {

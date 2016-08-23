@@ -34,9 +34,10 @@ public class ToolsTests extends AbstractTestSetup{
 
     }
 
-    @Ignore
+    @Test
     public void displaysJasmineOnOpen() {
-
+        methods.navigateToScreen("Tools");
+        assertEquals(toolsObjects.toolsDisplayedHeading().getText(),"Jasmine");
     }
 
     @Test

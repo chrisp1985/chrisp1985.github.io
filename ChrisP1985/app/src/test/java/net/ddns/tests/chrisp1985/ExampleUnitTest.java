@@ -1,9 +1,13 @@
 package net.ddns.tests.chrisp1985;
 
 import android.view.MenuItem;
+import android.view.View;
+
+import net.ddns.chrisp1985.ChrisPNavDrawer;
 
 import org.junit.Test;
 import org.mockito.Mock;
+import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
 
@@ -15,10 +19,5 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
-    }
-
-    @Test
-    public void setupTabsCallsOnTabListener() {
-
     }
 }

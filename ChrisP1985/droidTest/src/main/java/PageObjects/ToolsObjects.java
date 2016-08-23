@@ -22,19 +22,24 @@ public class ToolsObjects extends AbstractSharedObjects implements ExamplesPages
     @Override
     public WebElement pageImage() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/seleniumImg")));
+                .name("selenium_tools_image")));
     }
 
     @Override
     public WebElement pageHeading() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("//android.widget.TextView[.='Tools and Frameworks']")));
+                .name("tools_heading")));
+    }
+
+    public WebElement toolsDisplayedHeading() {
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .name("tools_displayed_heading")));
     }
 
     @Override
     public WebElement pageDescription() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/tools_summary")));
+                .name("changeable_tools_summary")));
     }
 
     @Override

@@ -35,6 +35,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/seleniumImg"
+                    android:contentDescription="selenium_tools_image"
                     android:src="@drawable/selenium"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
@@ -47,18 +48,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:id="@+id/textView2"
+                android:id="@+id/textView2"
+                android:contentDescription="tools_displayed_heading"
                 android:textColor="#ffffff"
-                    android:layout_alignBottom="@+id/seleniumImg"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:text="Jasmine" />
+                android:layout_alignBottom="@+id/seleniumImg"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="Jasmine" />
 
                 <TextView
                 android:layout_width="338dp"
                 android:layout_height="119dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/tools_heading"
+                android:contentDescription="tools_heading"
                 android:id="@+id/textView3"
                 android:layout_gravity="center_horizontal|top"
                 android:textColor="#ffffff"
@@ -77,13 +80,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:id="@+id/tools_summary"
+                android:id="@+id/tools_summary"
                 android:textColor="@color/abc_secondary_text_material_dark"
-                    android:layout_alignParentLeft="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
                 android:nestedScrollingEnabled="true"
-                    android:text="@string/tools_jasmine" />
+                android:contentDescription="changeable_tools_summary"
+                android:text="@string/tools_jasmine" />
             </RelativeLayout>
 
         </RelativeLayout>

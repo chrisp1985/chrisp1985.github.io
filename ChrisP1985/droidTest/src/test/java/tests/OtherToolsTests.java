@@ -29,10 +29,10 @@ public class OtherToolsTests extends AbstractTestSetup {
         otherToolsObjects = new OtherToolsObjects(driver);
     }
 
-    @Ignore
+    @Test
     public void displaysLinuxOnOpen() {
         methods.navigateToScreen("Other Tools");
-
+        assertEquals(otherToolsObjects.otherToolsDisplayedHeading().getText(),"Linux");
     }
 
     @Test

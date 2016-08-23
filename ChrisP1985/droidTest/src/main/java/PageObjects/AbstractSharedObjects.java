@@ -25,23 +25,24 @@ public abstract class AbstractSharedObjects {
                 .findElement(By.className("android.widget.ImageButton"));
     }
 
-    public WebElement menu() {
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/toolbar")));
+    public WebElement boundsOfScreen() {
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(
+                By.name("android.support.v4.widget.DrawerLayout")));
     }
 
-    public WebElement drawerElement() {
-        return new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/design_navigation_view")));
+    public WebElement menu() {
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .name("top_toolbar")));
     }
 
     public WebElement monkeyToolBar() {
         return new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/toolbarImage")));
+                .name("mankey_toolbar_icon")));
     }
+
     public WebElement drawerList() {
         return new WebDriverWait(driver, 2).until(ExpectedConditions.visibilityOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/design_navigation_view")));
+                .className("android.support.v7.widget.RecyclerView")));
     }
 
     public List<WebElement> menuItems() {
@@ -60,6 +61,6 @@ public abstract class AbstractSharedObjects {
 
     public WebElement genericItemsMenu() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .id("android:id/tabs")));
+                .className("android.widget.TabWidget")));
     }
 }

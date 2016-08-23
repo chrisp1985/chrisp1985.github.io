@@ -18,16 +18,16 @@ public class ThisAppObjects extends AbstractSharedObjects {
 
     public WebElement pageImage() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/bootstrapImage")));
+                .name("bootstrap_this_app_image")));
     }
 
     public WebElement pageHeading() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("//android.widget.TextView[.='Why have I done this?']")));
+                .name("this_app_header")));
     }
 
     public WebElement thisAppDescHeading() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .xpath("//android.widget.TextView[.='This Application']")));
+                .name("this_app_sub_heading")));
     }
 }

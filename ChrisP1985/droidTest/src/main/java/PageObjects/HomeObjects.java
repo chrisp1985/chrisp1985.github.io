@@ -26,6 +26,6 @@ public class HomeObjects extends AbstractSharedObjects {
 
     public WebElement carousel() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .id("com.example.chrisp.myapplication:id/containerViewPager")));
+                .name("carousel_view")));
     }
 }

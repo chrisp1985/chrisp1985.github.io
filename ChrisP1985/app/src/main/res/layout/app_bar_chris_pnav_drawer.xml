@@ -9,11 +9,13 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
+        android:contentDescription="app_bar_layout"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            android:contentDescription="top_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/black"
@@ -25,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:src="@drawable/mankey"
+                android:contentDescription="mankey_toolbar_icon"
                 android:cropToPadding="false"
                 android:adjustViewBounds="true"
                 android:clickable="true"
