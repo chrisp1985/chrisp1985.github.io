@@ -40,4 +40,12 @@ public class OtherToolsTests extends AbstractTestSetup {
         methods.navigateToScreen("Other Tools");
         assertEquals(new HashSet(expectedTabs),new HashSet(methods.getTabNamesInScrollView(otherToolsObjects)));
     }
+
+    @Test
+    public void displaysCorrectTextForEachTab() {
+        methods.navigateToScreen("Other Tools");
+        for(String tabName: expectedTabs) {
+            methods.clickScrollViewItem(otherToolsObjects,tabName);
+        }
+    }
 }

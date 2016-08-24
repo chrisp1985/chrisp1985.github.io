@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/home_icon"
             android:title="Home" />
     </group>
 
@@ -12,16 +12,20 @@
         <menu>
             <item
                 android:id="@+id/tools"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/tools_icon"
                 android:title="Tools" />
             <item
                 android:id="@+id/other_tools"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/other_tools_icon"
                 android:title="Other Tools" />
             <item
                 android:id="@+id/this_app"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/this_app_icon"
                 android:title="This App" />
+            <item
+                android:id="@+id/open_website"
+                android:icon="@drawable/website_icon"
+                android:title="My Website" />
         </menu>
     </item>
 

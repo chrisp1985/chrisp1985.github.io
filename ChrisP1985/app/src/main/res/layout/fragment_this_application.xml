@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chrisp.myapplication.ThisApplication"
+    tools:context="net.ddns.chrisp1985.ThisApplication"
     android:background="@color/material_grey_800">
 
     <ScrollView
@@ -42,6 +42,7 @@
                 <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/this_site_desc"
                 android:id="@+id/textView6"
@@ -53,6 +54,7 @@
                 <TextView
                 android:layout_width="338dp"
                 android:layout_height="119dp"
+                android:fontFamily="sans-serif"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/this_site_heading"
                 android:contentDescription="this_app_header"
@@ -77,6 +79,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/this_app_desc"
                     android:contentDescription="about_this_app_text"
@@ -89,6 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:contentDescription="this_app_sub_heading"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/this_app_heading"
@@ -111,6 +115,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:contentDescription="what_is_in_it_debian_etc"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/whats_in_it_desc"
@@ -123,6 +128,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:contentDescription="what_is_in_it_heading"
                     android:text="@string/whats_in_it_heading"
@@ -145,6 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="why_desc"
+                    android:fontFamily="sans-serif"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="@string/why_desc"
                     android:id="@+id/textView12"
@@ -156,6 +163,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:contentDescription="why_heading"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/why_heading"

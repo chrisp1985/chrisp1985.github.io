@@ -1,9 +1,8 @@
-package com.example.chrisp.myapplication;
+package net.ddns.chrisp1985;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.chrisp.myapplication.Home_Fragment"
+    tools:context="net.ddns.chrisp1985.Home_Fragment"
     android:background="@color/material_grey_800">
 
     <RelativeLayout
@@ -33,6 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Test Tools and Frameworks, including Selenium, Bootstrap and Jenkins."
             android:contentDescription="my_app_tagline"

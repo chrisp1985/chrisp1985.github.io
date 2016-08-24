@@ -1,6 +1,7 @@
 package net.ddns.chrisp1985;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,13 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.chrisp.myapplication.Home_Fragment;
-import com.example.chrisp.myapplication.OtherTools;
-import com.example.chrisp.myapplication.ThisApplication;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import net.ddns.tests.chrisp1985.R;
-
-import layout.ToolsFrag;
 
 public class ChrisPNavDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -98,6 +95,13 @@ public class ChrisPNavDrawer extends AppCompatActivity
         // If the selection is 'This App'...
         else if (id == R.id.this_app) {
             fragmentClass = ThisApplication.class;
+        }
+        else if (id == R.id.open_website) {
+            Uri uriUrl = Uri.parse("http://chrisp1985.github.io/");
+            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+            startActivity(launchBrowser);
+            TastyToast.makeText(getApplicationContext(), "Have Fun", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+            fragmentClass = Home_Fragment.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();

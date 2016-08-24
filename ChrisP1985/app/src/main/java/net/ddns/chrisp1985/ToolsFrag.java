@@ -1,4 +1,4 @@
-package layout;
+package net.ddns.chrisp1985;
 
 import android.annotation.TargetApi;
 import android.content.Context;
