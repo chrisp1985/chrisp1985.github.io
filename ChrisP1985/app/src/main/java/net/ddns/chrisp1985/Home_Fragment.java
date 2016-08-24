@@ -42,7 +42,7 @@ public class Home_Fragment extends Fragment {
     int[] sampleImages = {
             R.drawable.selenium,
             R.drawable.jenkins,
-            R.drawable.bootstrap
+            R.drawable.android_icon
     };
     View v;
 

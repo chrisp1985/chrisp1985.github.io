@@ -9,7 +9,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.synnapps:carouselview:0.0.9'
     compile 'com.sdsmdg.tastytoast:tastytoast:0.0.4'
-    compile 'com.ms-square:expandableTextView:0.1.4'
 }
 
 android {
@@ -21,7 +20,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
     }
     buildTypes {
         release {

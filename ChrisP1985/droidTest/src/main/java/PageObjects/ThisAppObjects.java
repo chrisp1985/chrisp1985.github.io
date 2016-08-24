@@ -18,7 +18,7 @@ public class ThisAppObjects extends AbstractSharedObjects {
 
     public WebElement pageImage() {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
-                .name("bootstrap_this_app_image")));
+                .name("android_this_app_image")));
     }
 
     public WebElement pageHeading() {

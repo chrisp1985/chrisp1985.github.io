@@ -74,7 +74,7 @@ public class ThisApplication extends Fragment {
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/KBZipaDeeDooDah.ttf");
         txt.setTypeface(font);
 
-        ImageView picture = (ImageView) v.findViewById(R.id.bootstrapImage);
+        ImageView picture = (ImageView) v.findViewById(R.id.androidImage);
         picture.setImageAlpha(80);
         return v;
     }

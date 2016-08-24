@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Test Tools and Frameworks, including Selenium, Bootstrap and Jenkins."
+            android:text="Test Tools and Frameworks, including Selenium, Android and Jenkins."
             android:contentDescription="my_app_tagline"
             android:id="@+id/homeDescription"
             android:textColor="#ffffff"

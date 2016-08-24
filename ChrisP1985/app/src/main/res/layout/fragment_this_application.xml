@@ -29,9 +29,9 @@
                 <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/bootstrapImage"
-                android:contentDescription="bootstrap_this_app_image"
-                android:src="@drawable/bootstrap"
+                android:id="@+id/androidImage"
+                android:contentDescription="android_this_app_image"
+                android:src="@drawable/android_icon"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:layout_alignParentLeft="false"

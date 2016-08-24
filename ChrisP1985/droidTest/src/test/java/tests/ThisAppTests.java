@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by chrisp on 15/08/2016.
  */
-
+@Ignore
 public class ThisAppTests extends AbstractTestSetup {
 
     @Test
