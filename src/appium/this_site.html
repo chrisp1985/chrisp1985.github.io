@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="My Website.">
+    <meta name="author" content="Chris Parsons">
+    <link rel="icon" href="/src/imgs/mankey.ico">
+
+    <title>Chris Parsons WebSite</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/src/css/cover.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <link rel="stylesheet" href="/src/css/mycss.css">
+    <!--<link rel="stylesheet" href="/MyWebPage/src/css/mycss.css">-->
+</head>
+
+<body>
+<div class="jumbotron jumbotron-billboard">
+    <div class="img site"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="my-header2">Why Have I Done This?</h1>
+                <p>A bit of Bootstrap, a bit of AngularJS, and a lot of CSS and HTML editing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" align="left">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>This WebSite</h2>
+            <p>My intention in creating this site was to a) show the coding I've done so far and b) have a play around with the bits I've been learning about outside of work. </p>
+
+            <h2>What's in it?</h2>
+            <p>The main tab control in the Tools section, for instance, uses an angular controller to set the active tab. The accordion element that houses the code is jquery.</p>
+            <p>There's a bit of CSS dotted about, but mainly I'm just using what boostrap gives you with a few additional bits. The CSS for the code block was from prism (see the source).</p>
+
+            <h2>Why?</h2>
+            <p>The reason I've put this together is basically to learn more background info on the web apps I test, and to understand what I should or shouldn't be hooking into. For instance, I know that an ng-init has its uses in early designs, but really any initialisation code should be going into a controller. The less logic in HTML the better.</p>
+            <p>This isn't a comprehensive website by any means but hopefully demonstrates a bit of understanding about what I'm testing.</p>
+
+            <h2>How is it hosted?</h2>
+            <p>The website at http://chrisp1985.github.io is obviously hosted on GitHub. Storing data on Github allows automatic hosting of websites, as long as you've got an index.html available.
+            <p>If you're viewing this website at http://chrisp1985.ddns.net:8082/index.html , you're viewing the data as hosted on a Raspberry Pi Zero! The Pi is using the Forever npm module to run a NodeJS Server, which is executing a server javascript file. The site occasionally goes down, because the Pi Zero is using iffy Wifi on a dongle in our bedroom upstairs, and the router supplied by our ISP isn't great (hello TalkTalk!).</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

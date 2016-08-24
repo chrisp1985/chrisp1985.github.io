@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myModule">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="My Website.">
+        <meta name="author" content="Chris Parsons">
+        <link rel="icon" href="/src/imgs/mankey.ico">
+
+        <title>Chris Parsons WebSite</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+        <!-- Custom styles for this template -->
+        <link href="/src/css/cover.css" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"><\/script>')</script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+
+        <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
+
+        <script src="/src/js/menuControl.js"></script>
+        <!--<script src="/MyWebPage/src/js/menuControl.js"></script>-->
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $( ".accordion" ).accordion({
+                    collapsible: true,
+                    heightStyle: "content",
+                    active: false
+                });
+            });
+        </script>
+        <script src="/src/syntax/prism.js"></script>
+        <link rel="stylesheet" href="/src/syntax/prism.css">
+        <link rel="stylesheet" href="/src/css/mycss.css">
+        <!--<link rel="stylesheet" href="/MyWebPage/src/css/mycss.css">-->
+    </head>
+    <body>
+        <div class="jumbotron jumbotron-billboard">
+            <div class="img tools"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="my-header2">Tools and Frameworks</h1>
+                        <p>Covering an assortment of tools and frameworks for a range of testing written in a few different languages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="container" align="left">
+                <div class="row">
+                    <div class="col-md-9">
+
+                        <br />
+                        <div>
+                            <section class="tab container" ng-controller="myCtrl as tab">
+                                <ul class="nav nav-pills">
+                                    <li ng-class="{ active: tab.isSet(1) }">
+                                        <a href ng-click="tab.setTab(1)">Jasmine</a></li>
+                                    <li ng-class="{ active: tab.isSet(2) }">
+                                        <a href ng-click="tab.setTab(2)">Protractor</a></li>
+                                    <li ng-class="{ active: tab.isSet(3) }">
+                                        <a href ng-click="tab.setTab(3)">Selenium</a></li>
+                                    <li ng-class="{ active: tab.isSet(4) }">
+                                        <a href ng-click="tab.setTab(4)">UI Automation</a></li>
+                                    <li ng-class="{ active: tab.isSet(5) }">
+                                        <a href ng-click="tab.setTab(5)">API</a></li>
+                                    <li ng-class="{ active: tab.isSet(6) }">
+                                        <a href ng-click="tab.setTab(6)">JMeter</a></li>
+                                    <li ng-class="{ active: tab.isSet(7) }">
+                                        <a href ng-click="tab.setTab(7)">Other Tools</a></li>
+                                </ul>
+                                <h4><br/></h4>
+
+                                <div ng-show="tab.isSet(1)">
+                                    <blockquote>{{tab.selects[0].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[0].languages}}</p>
+                                    </blockquote>
+                                    <div class="accordion">
+                                        <div>Example 1</div>
+                                        <pre><code class="language-javascript">
+describe("SERVICES & FACTORIES - authenticator Test Suite", function() {
+    "use strict";
+
+    // *******************************
+    //  AUTHENTICATOR ANGULAR MODULE
+    // *******************************
+    var authenticatedTokenService,myCookies,authenticatorService,httpBackend,$window;
+
+    beforeEach(module('authenticator'));
+    beforeEach(module('ngCookies'));
+    beforeEach(module(function($provide) {
+        $window = {location: { replace: jasmine.createSpy()} };
+        $provide.value('$window', $window);
+    }));
+
+    beforeEach(inject(function($injector) {
+        authenticatedTokenService = $injector.get('AuthenticatedToken',[myCookies]);
+        authenticatorService = $injector.get('Authenticator',['$http', authenticatedTokenService, $window]);
+        myCookies = $injector.get('$cookieStore',[]);
+        httpBackend = $injector.get('$httpBackend');
+    }));
+
+    // ***********************
+    //  AUTHENTICATOR FACTORY
+    // ***********************
+    describe('Authenticator Factory',function() {
+
+        // *********
+        //   LOGIN
+        // *********
+        describe('login',function() {
+            it('Check that the login method is defined.',function() {
+                expect(authenticatorService.login).not.toEqual(undefined);
+            });
+
+            it('Check that when the login method is executed with valid credentials, the successCallback is called.',function() {
+                var creds, successCallbackSpy, errorCallbackSpy;
+                creds = {"userName":"administrator","password":"admin"};
+                successCallbackSpy = jasmine.createSpy();
+                errorCallbackSpy = jasmine.createSpy();
+
+                httpBackend.expectPOST('/tokens/', creds, function(headers) {
+                    return headers['Content-Type'] === 'application/json';
+                }).respond(200, 'HELLO');
+                authenticatorService.login(creds, successCallbackSpy, errorCallbackSpy);
+                httpBackend.flush();
+                expect(successCallbackSpy).toHaveBeenCalled();
+            });
+
+            it('Check that when the login method is executed with invalid credentials, the errorCallback is called.',function() {
+                var invalidcreds, successCallbackSpy, errorCallbackSpy;
+                invalidcreds = {"userName":"admin2","password":"admin2"};
+                successCallbackSpy = jasmine.createSpy();
+                errorCallbackSpy = jasmine.createSpy();
+
+                httpBackend.expectPOST('/tokens/', invalidcreds, function(headers) {
+                    return headers['Content-Type'] === 'application/json';
+                }).respond(500, 'BOO');
+                authenticatorService.login(invalidcreds, successCallbackSpy, errorCallbackSpy);
+                httpBackend.flush();
+                expect(errorCallbackSpy).toHaveBeenCalled();
+            });
+        });
+    });
+});</code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[0].example1}}</p>
+
+                                    <p><br/></p>
+
+                                    <div class="accordion">
+                                        <div>Example 2</div>
+                                        <pre><code class="language-javascript">
+describe('CONTROLLERS - Settings Admin Test Cases', function() {
+    "use strict";
+
+    // **********************************************
+    //    MYAPP CONTROLLER ANGULAR MODULE
+    // **********************************************
+    var scope,myAppCtrl,toaster,$window,loaderState,state,event;
+
+    beforeEach(module(
+        'myappctrl',
+        'toaster',
+        'flow',
+        'loaderstate',
+    ));
+    beforeEach(module(function($provide) {
+        $window = {open: function(url) { return url;} };
+        $provide.value('$window', $window);
+    }));
+    beforeEach(inject(function($injector,$controller,$rootScope) {
+        scope = $rootScope.$new();
+        state = { go: function() {}};
+        event = {"bubbles":true,"cancelBubble":false,"isTrusted":true,"returnValue":true,"type":"change"};
+        toaster = $injector.get('toaster',[]);
+        loaderState = $injector.get('LoaderState');
+        myAppCtrl = $controller('MyAppCtrl',{
+            $scope:scope,
+            LoaderState:loaderState,
+            toaster:toaster,
+            $window:$window,
+            $state:state
+        });
+    }));
+
+    // ********
+    //  added
+    // ********
+    describe('added',function() {
+        it('Check that execution of the added method returns true if getExtension returns txt.',function() {
+            var $flow = {"support":true,"supportDirectory":true,"files":[],"defaults":{"chunkSize":1048576,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":false,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"multipart","testMethod":"GET","uploadMethod":"POST","prioritizeFirstAndLastChunk":false,"target":"/","testChunks":true,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,415,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false},"opts":{"chunkSize":209715200,"forceChunkSize":false,"simultaneousUploads":3,"singleFile":true,"fileParameterName":"file","progressCallbacksInterval":500,"speedSmoothingFactor":0.1,"query":{},"headers":{},"withCredentials":false,"preprocess":null,"method":"octet","testMethod":"GET","uploadMethod":"PUT","prioritizeFirstAndLastChunk":false,"testChunks":false,"generateUniqueIdentifier":null,"maxChunkRetries":0,"chunkRetryInterval":null,"permanentErrors":[404,500,501],"successStatuses":[200,201,202],"onDropStopPropagation":false,"minFileSize":0},"events":{"catchall":[null]}};
+            var flowFile = {"name":"myFakeFile.txt","getExtension":function() {return "txt"}};
+            var toasterSpy = spyOn(toaster,'pop');
+
+            expect(scope.added(event, $flow, flowFile)).toBe(true);
+            expect(toasterSpy).not.toHaveBeenCalled();
+        });
+    });
+});</code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[0].example2}}</p>
+
+                                    <p><br/></p>
+                                </div>
+
+                                <div ng-show="tab.isSet(2)">
+                                    <blockquote ng-cloak>{{tab.selects[1].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[1].languages}}</p>
+                                    </blockquote>
+                                    <div class="accordion">
+                                        <div>Example 1</div>
+
+                                            <pre>
+                                                <code class="language-javascript">
+// Import the methods.
+var myServiceMethods = require("./libs/my-service-methods.js");
+
+// Import the objects
+var homePage = require("./pageobjs/homePage.js");
+var commonBase;
+
+describe("First Test Suite", function() {
+    "use strict";
+
+    beforeEach(function() {
+        myServiceMethods.login("admin","admin");
+        commonBase= new Date().getTime();
+    });
+
+    it('Check that the content of both tabs is correct.',function() {
+        // Add a new tree node.
+        myServiceMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
+        + commonBase + "_testNode", true);
+
+        // Check that both tabs are shown.
+        expect(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed()).toBeTruthy();
+
+        // Click on tab1
+        homePage.tab1.click();
+
+        // Check that description and title stuff are shown.
+        expect(homePage.titleInputField.isDisplayed()
+        && homePage.descriptionInputField.isDisplayed()).toBeTruthy();
+
+        // Click on tab2
+        homePage.tab2.click();
+
+        // Check that the root node part is shown.
+        expect(homePage.treeRoot().isDisplayed()).toBeTruthy();
+    });
+});
+                                                </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[1].example1}}</p>
+
+                                    <p><br/></p>
+                                </div>
+
+                                <div ng-show="tab.isSet(3)">
+                                    <blockquote>{{tab.selects[2].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[2].languages}}</p>
+                                    </blockquote>
+                                    <div class="accordion">
+                                        <div>Example 1</div>
+                                        <pre><code class="language-java">
+public class TestClass {
+    // Set up general variables
+    private static WebDriver driver;
+    private static AuthenticationFlow authenticationFlow;
+    private static HomePage homePage;
+    private String commonBase;
+    private static MyMethods myMethods;
+
+    // Add test specific variables
+    private final Date d = new Date();
+
+    @Rule
+    public final TestRule watcher = new TestWatcher() {
+        @Override
+        protected void starting(Description description) {
+            System.out.println("Starting test: " + description.getMethodName());
+            TabPageTree.setTestName(description.getMethodName());
+        }
+
+        @Override
+        protected void failed(Throwable e, Description description) {
+            myMethods.takeAScreenShot(TabPageTree.getTestName());
+        }
+    };
+
+    @Before
+    public void initializeDriver() {
+        // Go to the index page.
+        authenticationFlow.getToStartPosition();
+        commonBase = String.valueOf(d.getTime());
+    }
+
+    @BeforeClass
+    public static void installService() {
+        // Create the driver
+        driver = CreateDriver.setupDriver(AuthenticationFlow.runOnBrowser);
+
+        // Login
+        authenticationFlow = new AuthenticationFlow(driver);
+        authenticationFlow.login(AuthenticationFlow.USERNAME, AuthenticationFlow.PASSWORD);
+
+        homePage = new HomePage(driver);
+        myMethods = new MyMethods(driver);
+
+        // Wait for the page to load.
+        WebDriverWait wait = new WebDriverWait(driver, 6);
+        wait.until(ExpectedConditions.titleIs("My Web Service"));
+        new HTTPRequests(driver).addWorkingServicesAndSchemas();
+    }
+
+    @AfterClass
+    public static void closeTheDriver() {
+        driver.quit();
+    }
+
+    @After
+    public void killContent() {
+        HTTPRequests chris = new HTTPRequests(driver);
+        chris.deleteResource("/appconfig/content");
+    }
+
+    @Test
+    public void checkContentOfBothTabs() {
+        // Add a new node.
+        myMethods.createNewNode(commonBase + "_rootNode", commonBase + "_baseNode", "New_"
+        + commonBase + "_testNode", true);
+
+        // Check that both tabs are shown.
+        assertTrue(homePage.tab1.isDisplayed() && homePage.tab2.isDisplayed());
+
+        // Click on tab1
+        homePage.tab1.click();
+
+        // Check that description and title stuff are shown.
+        assertTrue(homePage.titleInputField.isDisplayed()
+        && homePage.descriptionInputField.isDisplayed());
+
+        // Click on tab2
+        homePage.tab2.click();
+
+        // Check that the root node part is shown.
+        assertTrue(homePage.treeRoot().isDisplayed());
+    }
+}
+                                </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                        <p>{{tab.selects[2].example1}}</p>
+
+                                    <p><br/></p>
+                                    <div class="accordion">
+                                        <div>Example 2</div>
+                                        <pre><code class="language-java">
+public void login(String username, String password) {
+    webDriver.get(LOGIN_URL);
+    webDriver.manage().window().setSize(new Dimension(1040,744));
+    if(runOnBrowser.equals("ie") && !webDriver.getTitle().contains("My WebPage")) {
+        // Needed for IE certification issue only.
+        webDriver.get("javascript:document.getElementById('overridelink').click();");
+    }
+    assertThat(webDriver.getTitle(), is("My WebPage - Login"));
+    loginPage.setUserName(username);
+    loginPage.setPassword(password);
+    loginPage.clickLogin();
+}
+                                    </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                        <p>{{tab.selects[2].example2}}</p>
+
+                                    <p><br/></p>
+                                    <div class="accordion">
+										<div>Python Create Driver</div>
+												<pre>
+                                                    <code class="language-python">
+# CREATE DRIVER #
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import *
+from selenium.webdriver.support import expected_conditions
+
+
+class CreateDriver(object):
+    def __init__(self):
+        print "new CreateDriver"
+
+    @staticmethod
+    def setupdriver(browser):
+
+        ###############
+        # FIREFOX SETUP
+        ##############
+        if browser == "firefox":
+            ffprofile = webdriver.FirefoxProfile()
+            ffprofile.set_preference("browser.helperApps.neverAsk.saveToDisk",
+                                     "application/zip,text/json")
+            ffprofile.set_preference("browser.download.folderList", 2)
+            ffprofile.set_preference("app.update.enabled", False)
+
+            driver = webdriver.Firefox(ffprofile)
+
+        ##############
+        # CHROME SETUP
+        ##############
+        else:
+            prefs = {"download.default_directory": "C:\\Chrome_Download_Dir"}
+            chromeopts = webdriver.ChromeOptions()
+            chromeopts.add_experimental_option("prefs", prefs)
+            driver = webdriver.Chrome("C:\\chromedriver.exe", chrome_options=chromeopts)
+
+        return driver
+
+
+def main():
+    driver = CreateDriver().setupdriver("chrome")
+    driver.get("http://www.google.com")
+    search_button = WebDriverWait(driver, 5).until(
+        expected_conditions.visibility_of_element_located((By.XPATH, "//input[contains(@value, 'Feeling Lucky')]")))
+    search_button.click()
+    WebDriverWait(driver, 10).until(expected_conditions.title_is("Google Doodles"))
+
+
+if __name__ == "__main__":
+    main()
+												</code></pre>
+									</div>
+									<p><br/></p>
+
+									<p>{{tab.selects[2].pythondriver}}</p>
+
+									<p><br/></p>
+
+									<div class="accordion">
+										<div>Python Page Objects</div>
+												<pre>
+                                                    <code class="language-python">
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import *
+from selenium.webdriver.support import expected_conditions
+
+
+class AuthenticationObjects(object):
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    def username_text_box(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH, "//input[@placeholder='username']")))
+
+    def password_text_box(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH, "//input[@placeholder='password']")))
+
+    def submit_button(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+
+    def fail_popup(self):
+        return WebDriverWait(self.driver, 10).until(
+            expected_conditions.presence_of_element_located((By.XPATH,
+                             "//div[contains(@class,'pop-up-box')][contains(text(),'Invalid Credentials.')]")))
+												</code></pre>
+									</div>
+     								<div class="accordion">
+										<div>Python Methods</div>
+												<pre>
+                                                    <code class="language-python">
+from AuthenticationObjects import AuthenticationObjects
+import time
+
+
+class LoginFlow(object):
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    def send_user_name(self, username_string):
+        AuthenticationObjects(self.driver).username_text_box().send_keys(username_string)
+
+    def send_password(self, password_string):
+        AuthenticationObjects(self.driver).password_text_box().send_keys(password_string)
+
+    def click_submit(self):
+        AuthenticationObjects(self.driver).submit_button().click()
+
+    def check_for_popup(self, fail_bool):
+        if fail_bool:
+            AuthenticationObjects(self.driver).fail_popup().click()
+        else:
+            pass
+
+    def wait_for_string_to_be_url(self, url_string, time_to_wait):
+        count = 0
+        while url_string not in self.driver.current_url:
+                if count != time_to_wait:
+                    time.sleep(1)
+                    count = + 1
+                else:
+                    raise Exception("Test failed because", url_string,
+                                    "was not found after ", time_to_wait, "seconds.")</code></pre>
+									</div>
+     								<div class="accordion">
+										<div>Python Tests</div>
+												<pre>
+                                                    <code class="language-python">
+import unittest
+
+from Libs.Methods.create_driver import CreateDriver
+from Libs.Methods.login_flow import *
+
+
+class AuthenticationTestSuite(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = CreateDriver().setupdriver("firefox")
+        self.login_flow = LoginFlow(self.driver)
+        self.login_address = "http://chrisp1985.ddns.net:9998/login.html"
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def login_succeeds_if_password_and_user_are_correct_test(self):
+
+        # Get the login page.
+        self.driver.get(self.login_address)
+
+        # Send the user/password and press submit.
+        self.login_flow.send_user_name("admin")
+        self.login_flow.send_password("admin")
+        self.login_flow.click_submit()
+
+        # Wait for the url to contain the search string.
+        self.login_flow.wait_for_string_to_be_url("index", 10)
+
+        # Check that the title of the page is correct.
+        self.assertIn("Chris Parsons Website", self.driver.title)
+
+    def login_fails_if_password_is_incorrect_test(self):
+        # Get the login page.
+        self.driver.get(self.login_address)
+
+        # Send the user/password and press submit.
+        self.login_flow.send_user_name("admin")
+        self.login_flow.send_password("noob")
+        self.login_flow.click_submit()
+
+        # Check for the error popup
+        self.login_flow.check_for_popup(True)
+
+    def login_fails_if_username_is_incorrect_test(self):
+        self.driver.get(self.login_address)
+
+        self.login_flow.send_user_name("noob")
+        self.login_flow.send_password("admin")
+        self.login_flow.click_submit()
+
+        # Check for the error popup
+        self.login_flow.check_for_popup(True)
+
+    def login_fails_if_username_and_password_are_incorrect_test(self):
+        # Get the login page.
+        self.driver.get(self.login_address)
+
+        # Send the user/password and press submit.
+        self.login_flow.send_user_name("noob")
+        self.login_flow.send_password("noob")
+        self.login_flow.click_submit()
+
+        # Check for the error popup
+        self.login_flow.check_for_popup(True)</code></pre>
+									</div>
+									<p><br/></p>
+
+									<p>{{tab.selects[2].python1}}</p>
+
+									<p><br/></p>
+                                </div>
+
+                                <div ng-show="tab.isSet(4)">
+                                    <blockquote>{{tab.selects[3].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[3].languages}}</p>
+                                    </blockquote>
+                                    <div class="accordion">
+                                        <div>Example 1</div>
+                                        <pre><code class="language-csharp">
+/**
+* *** WAIT FOR AN OBJECT ***
+* This waits for an object to appear in the application by constantly polling the available objects.
+*
+* @param winRoot
+*      The AutomationElement from which to start the search. If it's left blank, it'll query objects from the very top level.
+*
+* @param node
+*      A blank treenode to fill out the childTreeNode stuff.
+*
+* @param timeToWait
+*      The time to wait for the object to appear. If the timer exceeds this time, the method will fail.
+*
+* @param elementName
+*      The name of the element by the Page Objects method. Eg, to find the completion of the progress bar, this is 'progressBarComplete'.
+*
+* @param args
+*      The arguments required by the element as in the Page Objects.
+*
+* @return
+*      Returns the found object.
+*/
+public AutomationElement waitForObject(AutomationElement winRoot, TreeNode node, double timeToWait, String elementName, object[] args)
+{
+    // Set the time.
+    DateTime timeAtStart = DateTime.Now;
+    DateTime now = new DateTime(1985, 10, 26, 13, 15, 00); // Back to the Future Day - Oct 26th 1985.
+
+    // Set the returned element to be null (so if the element isn't found, null is returned).
+    AutomationElement returnedEle = null;
+
+    // While the timer hasn't expired...
+    while (now.Subtract(timeAtStart).TotalSeconds < timeToWait)
+    {
+        try
+        {
+            // Create the object here.
+            MethodInfo method = typeof(PageObjects).GetMethod(elementName);
+            AutomationElement root = null;
+            if (winRoot == null)
+            {
+                root = AutomationElement.RootElement.FindChildByProcessId(AutomationMethods.processId);
+            }
+            else
+            {
+               root = winRoot;
+            }
+
+            // Invoke the element through reflection.
+            AutomationElement newEle = (AutomationElement)method.Invoke(new PageObjects(), args);
+            if (newEle.GetCurrentPropertyValue(AutomationElement.IsEnabledProperty).Equals(true))
+            {
+                // OMG, you found the element.
+                returnedEle = newEle;
+                break;
+            }
+        }
+        catch
+        {
+            // Just carry on.
+        }
+        // Reset the time.
+        now = DateTime.Now;
+    }
+
+    // Has the timer expired?
+    if (now.Subtract(timeAtStart).TotalSeconds > timeToWait)
+    {
+        Assert.Fail("Wait time was exceeded for element so test failed.");
+    }
+
+    // Return the element.
+    return returnedEle;
+}
+                                        </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[3].example1}}</p>
+
+                                    <p><br/></p>
+                                    <div class="accordion">
+                                        <div>Example 2</div>
+                                        <pre><code class="language-csharp">
+/*
+* *** STOP A SERVICE ***
+* This can stop the process to allow for checking that valid errors are displayed when a connection is lost.
+*
+* @param stop
+*      If stop is true, the service is stopped. If it's false, it's started.
+*
+* @param service
+*      This is the name of the service to stop.
+*/
+public void stopASpecificService(bool stop, String serviceName)
+{
+    // Set services, and then get them.
+    ServiceController[] scServices;
+    scServices = ServiceController.GetServices();
+
+    // Iterate over the available services until...
+    foreach (ServiceController scTemp in scServices)
+    {
+        // ... you have found metadata service!
+        if (scTemp.ServiceName.Equals(serviceName))
+        {
+            if (stop)
+            {
+                // Stop the service and wait until it's stopped.
+                scTemp.Stop();
+                scTemp.WaitForStatus(ServiceControllerStatus.Stopped);
+            }
+            else
+            {
+            // Start the service and wait until it's started.
+            scTemp.Start();
+            scTemp.WaitForStatus(ServiceControllerStatus.Running);
+            }
+
+        // Wait until the service has stopped/started.
+        Thread.Sleep(2000);
+        }
+    }
+}</code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[3].example2}}</p>
+
+                                    <p><br/></p>
+                                    <div class="accordion">
+                                        <div>Example 3</div>
+                                        <pre><code class="language-csharp">
+[Test]
+public void Test1()
+{
+    /*
+    * SUMMARY: Disconnect the service and check that valid error messages are displayed to the user when attempting to use the service.
+    *
+    * Test Steps
+    * 1. Add data to the application.
+    * 2. Disconnect the service.
+    * 3. Attempt to execute the run task.
+    *
+    * Expected Outcomes
+    * 1. The data is added successfully and all of the nodes are populated in the application.
+    * 2. The service is disconnected.
+    * 3. A popup is displayed, informing the user that the request cannot be processed.
+    */
+
+    Console.WriteLine("Starting Test 1");
+
+    // Run the stuff before the test.
+    beforeTest();
+    int processId = MyApp_AutomationMethods.processId;
+
+    // Set the Main Window.
+    TreeNode node = new TreeNode();
+    MyApp_AutomationMethods ext = new MyApp_AutomationMethods();
+
+    UIAutomationMethods meths = new UIAutomationMethods();
+
+    // 2. Disconnect the service.
+    try {
+        meths.stopASpecificService(true, "MyCompany:MyApplication");
+
+        // 3. Attempt to execute the ‘Run’ task.
+        AutomationElement mainWindow = AutomationElement.RootElement.FindChildByProcessId(processId);
+        ext.clickRun();
+
+        // Check for the error and dismiss it.
+        new MyApp_AutomationMethods().readAndDismissError(AutomationElement.RootElement.FindChildByProcessId(processId),
+        node, "Could not execute the task. Please check if the application is running.");
+
+        Console.WriteLine("Test 1 Passed!");
+    }
+    finally
+    {
+        // Restart the service.
+        meths.stopASpecificService(false, "MyCompany:MyApplication");
+    }
+}
+                                        </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[3].example3}}</p>
+
+                                    <p><br/></p>
+                                </div>
+
+                                <div ng-show="tab.isSet(5)">
+                                    <blockquote>{{tab.selects[4].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[4].languages}}</p>
+                                    </blockquote>
+                                    <div class="accordion">
+                                        <div>RestAssured</div>
+                                        <pre><code class="language-java">
+/**
+* *** GET TOKEN VIA REST-ASSURED ***
+* This creates a request for a token, and returns the string response.
+*
+* @param username
+*            The user of the service.
+* @param password
+*            The password of the user of the service.
+* @return A string of the token response to use embedded in cookies.
+*/
+public String getTokenRestAssured(String username, String password)
+{
+    return RestAssured.given().relaxedHTTPSValidation().contentType(ContentType.JSON).request()
+    .body("{\n" + "    userName:\"" + username + "\",\n" + "    password:\"" + password + "\"\n" + "    }")
+    .when().post("https://localhost:7753/tokenPath/").asString();
+}
+
+/**
+* *** GET REQUEST VIA REST-ASSURED ***
+* This creates a request to a resource location, and returns the response.
+*
+* @param resourceLocation
+*            The resource location to get.
+* @return The response as a Rest Assured response, allowing further
+*         querying of status codes, messages etc.
+*/
+public Response getRequest(String resourceLocation)
+{
+    return RestAssured.given().relaxedHTTPSValidation()
+    .cookie("customAuthToken", getTokenRestAssured("administrator", "admin")).when().get(resourceLocation);
+}
+
+/**
+* *** PUT REQUEST VIA REST-ASSURED ***
+* This creates a PUT request for a resource, and returns the response.
+*
+* @param bodyText
+*            The body of text to add to the request.
+* @param resourceLocation
+*            The resource location to get.
+* @return The response as a Rest Assured response, allowing further
+*         querying of status codes, messages etc.
+*/
+public Response putRequest(String bodyText, String resourceLocation)
+{
+    return RestAssured.given().relaxedHTTPSValidation()
+    .cookie("customAuthToken", getTokenRestAssured("administrator", "admin")).request().body(bodyText).when()
+    .put(resourceLocation);
+}
+
+@Test
+public void validGetRequestRestAssured()
+{
+    // Add the resource
+    putRequest(
+    "trialText",
+    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+    + "_validGetRequest").then().assertThat().statusCode(200);
+
+    // Check the contents
+    assertTrue(getRequest(
+    credsBasedRequest.URLString + "path/to/my/content/" + commonBase
+    + "_validGetRequest").asString().contains("trialText"));
+}
+
+@Test
+public void getInvalidURLRestAssured()
+{
+    getRequest(credsBasedRequest.URLString + "path/to/my/con").then()
+    .assertThat().statusCode(404);
+}
+                                        </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[4].restassured}}</p>
+
+                                    <p><br/></p>
+                                    <div class="accordion">
+                                        <div>RestSharp</div>
+                                        <pre><code class="language-csharp">
+
+* *** GET THE TOKEN ***
+* Executes a 'POST' command to get a token string back, which can then be used in cookies for further requests.
+*
+* @param userName
+*      This is the name of the ... user... for the metadata service.
+*
+* @param passWord
+*      This is the password that the user logs into the web service with.
+*/
+public String getAToken(String userName, String passWord)
+{
+    // This needs to be set to avoid SSL issues.
+    ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+    // Set the Client and the Request.
+    var client = new RestClient("https://localhost:7753");
+    var request = new RestRequest("tokens", Method.POST);
+
+    // Add the details and get the token string.
+    request.AddParameter("application/json", "{userName:\"" + userName + "\",password:\"" + passWord + "\"}", ParameterType.RequestBody);
+    return client.Execute(request).Content;
+}
+
+/**
+* *** GET WHATEVER ***
+* Executes a 'GET' command for the request path supplied.
+*
+* @param requestPath
+*      This is the URI for the request.
+*
+* @return
+*      This is the returned content from the response as a string.
+*/
+public String getWhatever(String requestPath)
+{
+    // This needs to be set to avoid SSL issues.
+    ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+    // Set the Client and the Request.
+    RestClient client = new RestClient("https://localhost:7753");
+    RestRequest request = new RestRequest(requestPath, Method.GET);
+
+    // Add the token and the pathToFile to the request.
+    request.AddCookie("customAuthToken", getAToken("administrator","admin"));
+
+    // Execute and return the response as a string.
+    return client.Execute(request).Content;
+}
+                                        </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[4].restsharp}}</p>
+
+                                    <p><br/></p>
+                                    <div class="accordion">
+                                        <div>Mocha</div>
+                                        <pre><code class="language-javascript">
+var should = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\should');
+var request = require('C:\\Users\\parsonsc\\AppData\\Roaming\\npm\\node_modules\\supertest');
+
+describe('Mocha Tests', function() {
+
+    // GENERAL
+    var url = 'https://mylocalservice:7753';
+
+    // USERS
+    var testUser = 'admin';
+
+    describe('2.3.1.2 PUT /path/to/user/{username}', function() {
+        it('PUTUSER-1', function(done) {
+
+        // *******************************************************
+        // Summary
+        // Confirm that the API accepts HTTP PUT requests for creating users when all mandatory fields are set in the body.
+
+        // Preconditions
+        // Fully Operable WebService is available.
+        // WebService is fully licensed.
+        // *******************************************************
+        request(url)
+        .put('/path/to/user/'+testUser) // Set the URI you're trying to PUT.
+        .set('Authorization', 'Basic c2VwdXJhLW9wZW5pZDpwYXNzd29yZA==') // set the Custom Header.
+        .set('Content-Type', 'application/json') // Set the Content Type header.
+        .send({
+            'authtype':'oauth2',
+            'id':testUser,
+            'password':testUser,
+            'name':testUser,
+            'type':'admin',
+            'role':'Manager',
+            'description':'TRIAL USER',
+            'defaultlanguage':'en'
+        }) // Send the Data that is contained within the body of the command.
+        .end(function(err, res) {
+            if (err) {
+               throw err;
+            }
+            // console.log(res.body);
+            res.status.should.be.equal(200); // Check the HTTP Status is 200 (OK)
+            res.should.have.properties("user","status");
+            res.body.status.should.have.property("success",true);
+            done();
+        });
+    });
+});
+                                        </code></pre>
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[4].mocha}}</p>
+
+                                    <p><br/></p>
+                                <div class="accordion">
+                                    <div>Marvel</div>
+                                            <pre>
+                                                <code class="language-javascript">
+http://gateway.marvel.com/v1/public/characters?apikey=085672cb3bc7ad07244dbd1a1690eac3&ts=45&hash=0a3cf7d92c54f1e5f062c299f3bab34c&name=Deadpool
+{
+  "code": 200,
+  "status": "Ok",
+  "copyright": "© 2016 MARVEL",
+  "attributionText": "Data provided by Marvel. © 2016 MARVEL",
+  "attributionHTML": "<a href=\"http://marvel.com\">Data provided by Marvel. © 2016 MARVEL</a>",
+  "etag": "152f2c29b03e5d4f3338cbf1221822349e9c08d0",
+  "data": {
+    "offset": 0,
+    "limit": 20,
+    "total": 1,
+    "count": 1,
+    "results": [
+      {
+        "id": 1009268,
+        "name": "Deadpool",
+        "description": "",
+        "modified": "2013-10-18T17:33:26-0400",
+        "thumbnail": {
+          "path": "http://i.annihil.us/u/prod/marvel/i/mg/9/90/5261a86cacb99",
+          "extension": "jpg"
+        },
+        "resourceURI": "http://gateway.marvel.com/v1/public/characters/1009268",
+        "comics": {
+          "available": 420,
+          "collectionURI": "http://gateway.marvel.com/v1/public/characters/1009268/comics",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/41112",
+              "name": "5 Ronin (Hardcover)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/36160",
+              "name": "5 Ronin (2010) #5"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/38751",
+              "name": "5 Ronin (2010) #5 (MCGUINNESS COVER)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/394",
+              "name": "Agent X (2002) #15"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/24418",
+              "name": "Amazing Spider-Man (1999) #611"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/31556",
+              "name": "Amazing Spider-Man (1999) #620 (DEADPOOL VARIANT)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/31560",
+              "name": "Avengers: The Initiative (2007) #33 (DEADPOOL VARIANT)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/41349",
+              "name": "Battle Scars (2011) #3"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/41348",
+              "name": "Battle Scars (2011) #4"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/23971",
+              "name": "Cable (2008) #13"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/23972",
+              "name": "Cable (2008) #13 (OLIVETTI (MW, 50/50 COVER))"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/24171",
+              "name": "Cable (2008) #14"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/24172",
+              "name": "Cable (2008) #14 (OLIVETTI MW, 50/50 COVER)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/24631",
+              "name": "Cable (2008) #15"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/24632",
+              "name": "Cable (2008) #15 (OLIVETTI (MW, 50/50 COVER))"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/430",
+              "name": "Cable & Deadpool (2004) #1"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/479",
+              "name": "Cable & Deadpool (2004) #2"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/644",
+              "name": "Cable & Deadpool (2004) #3"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/706",
+              "name": "Cable & Deadpool (2004) #4"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/548",
+              "name": "Cable & Deadpool (2004) #5"
+            }
+          ],
+          "returned": 20
+        },
+        "series": {
+          "available": 102,
+          "collectionURI": "http://gateway.marvel.com/v1/public/characters/1009268/series",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/15276",
+              "name": "5 Ronin (2011)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/12429",
+              "name": "5 Ronin (2010)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/459",
+              "name": "Agent X (2002 - 2004)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/454",
+              "name": "Amazing Spider-Man (1999 - 2013)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1945",
+              "name": "Avengers: The Initiative (2007 - 2010)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/15370",
+              "name": "Battle Scars (2011 - 2012)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/4002",
+              "name": "Cable (2008 - 2010)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/693",
+              "name": "Cable & Deadpool (2004 - 2008)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/13886",
+              "name": "Cable & Deadpool MGC (2011)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1209",
+              "name": "Cable & Deadpool Vol. 1: If Looks Could Kill (2007)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1338",
+              "name": "Cable & Deadpool Vol. 2: The Burnt Offering (2007)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1488",
+              "name": "Cable & Deadpool Vol. 3: The Human Race (2005)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1578",
+              "name": "Cable & Deadpool Vol. 4: Bosom Buddies (2006)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1676",
+              "name": "Cable & Deadpool Vol. 5: Living Legends (2006)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1960",
+              "name": "Cable & Deadpool Vol. 6: Paved with Good Intentions (2007)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/2710",
+              "name": "Cable & Deadpool Vol. 7: Separation Anxiety (2007)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1487",
+              "name": "Cable/Deadpool Vol. 3: The Human Race (2005)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1577",
+              "name": "Cable/Deadpool Vol. 4: Bosom Buddies (2006)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/10105",
+              "name": "Civil War: X-Men (2011)"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/1962",
+              "name": "Civil War: X-Men Universe (2007)"
+            }
+          ],
+          "returned": 20
+        },
+        "stories": {
+          "available": 600,
+          "collectionURI": "http://gateway.marvel.com/v1/public/characters/1009268/stories",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/1135",
+              "name": "Cover #1135",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/1619",
+              "name": "Interior #1619",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2464",
+              "name": "3 of 6 - The Passion of the Cable",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2465",
+              "name": "3 of 6 - The Passion of the Cable",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2467",
+              "name": "Interior #2467",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2469",
+              "name": "Interior #2469",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2471",
+              "name": "Interior #2471",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2473",
+              "name": "Interior #2473",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2475",
+              "name": "Interior #2475",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2477",
+              "name": "Interior #2477",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2479",
+              "name": "Interior #2479",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2481",
+              "name": "4 of 6 - The Passion of the Cable",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2483",
+              "name": "5 of 6 - The Passion of the Cable",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2484",
+              "name": "2 of 2 - Thirty Pieces",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2485",
+              "name": "2 of 2 - Thirty Pieces",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2487",
+              "name": "1 of 2 - A Murder in Paradise",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2488",
+              "name": "2 of 2 - A Murder in Paradise",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2489",
+              "name": "1 of 4 - Enema of the State",
+              "type": "cover"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2490",
+              "name": "1 of 4 - Enema of the State",
+              "type": "interiorStory"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/stories/2492",
+              "name": "2 of 4 - Enema of the State",
+              "type": "interiorStory"
+            }
+          ],
+          "returned": 20
+        },
+        "events": {
+          "available": 9,
+          "collectionURI": "http://gateway.marvel.com/v1/public/characters/1009268/events",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/227",
+              "name": "Age of Apocalypse"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/238",
+              "name": "Civil War"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/318",
+              "name": "Dark Reign"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/251",
+              "name": "House of M"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/298",
+              "name": "Messiah War"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/269",
+              "name": "Secret Invasion"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/309",
+              "name": "Shattered Heroes"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/308",
+              "name": "X-Men: Regenesis"
+            },
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/events/306",
+              "name": "X-Men: Schism"
+            }
+          ],
+          "returned": 9
+        },
+        "urls": [
+          {
+            "type": "detail",
+            "url": "http://marvel.com/comics/characters/1009268/deadpool?utm_campaign=apiRef&utm_source=085672cb3bc7ad07244dbd1a1690eac3"
+          },
+          {
+            "type": "wiki",
+            "url": "http://marvel.com/universe/Deadpool_(Wade_Wilson)?utm_campaign=apiRef&utm_source=085672cb3bc7ad07244dbd1a1690eac3"
+          },
+          {
+            "type": "comiclink",
+            "url": "http://marvel.com/comics/characters/1009268/deadpool?utm_campaign=apiRef&utm_source=085672cb3bc7ad07244dbd1a1690eac3"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+                                </div>
+                                <p><br/></p>
+
+                                <p>{{tab.selects[4].marvel}}</p>
+
+                                <p><br/></p>
+                                </div>
+
+                                <div ng-show="tab.isSet(6)">
+                                    <blockquote>{{tab.selects[5].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[5].languages}}</p>
+                                    </blockquote>
+                                    <div class="accordion">
+                                        <div>Example JMX</div>
+                                        <pre><code class="language-markup">
+                                            <textarea>
+        <?xml version="1.0" encoding="UTF-8"?>
+        <jmeterTestPlan version="1.2" properties="2.8" jmeter="2.13 r1665067">
+            <hashTree>
+                <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+                    <stringProp name="TestPlan.comments"></stringProp>
+                    <boolProp name="TestPlan.functional_mode">false</boolProp>
+                    <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+                    <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                        <collectionProp name="Arguments.arguments"/>
+                    </elementProp>
+                    <stringProp name="TestPlan.user_define_classpath"></stringProp>
+                </TestPlan>
+                <hashTree>
+                    <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp - POST TOKENS" enabled="true">
+                        <stringProp name="TestPlan.comments">A method to get the token to use for authorisation during the test cases.</stringProp>
+                        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438604949000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438604949000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                    </SetupThreadGroup>
+                    <hashTree>
+                        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+                            <boolProp name="resetInterpreter">false</boolProp>
+                            <stringProp name="parameters"></stringProp>
+                            <stringProp name="filename"></stringProp>
+                            <stringProp name="script">props.put(&quot;ThreadActive&quot;,&quot;Active&quot;);</stringProp>
+                        </BeanShellPreProcessor>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST to Tokens" enabled="true">
+                            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                                <collectionProp name="Arguments.arguments">
+                                    <elementProp name="" elementType="HTTPArgument">
+                                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                                        <stringProp name="Argument.value">{ &quot;userName&quot;:&quot;admin&quot;, &quot;password&quot;:&quot;admin&quot; }</stringProp>
+                                        <stringProp name="Argument.metadata">=</stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/tokens/</stringProp>
+                            <stringProp name="HTTPSampler.method">POST</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">Content-Type</stringProp>
+                                    <stringProp name="Header.value">application/json</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="Send Token String to Properties" enabled="true">
+                            <boolProp name="resetInterpreter">false</boolProp>
+                            <stringProp name="parameters"></stringProp>
+                            <stringProp name="filename"></stringProp>
+                            <stringProp name="script">String theString = prev.getResponseDataAsString();
+                                props.put(&quot;newToken&quot;,theString);</stringProp>
+                            <stringProp name="TestPlan.comments">Sends the returned token string to the JMeter properties.</stringProp>
+                        </BeanShellPostProcessor>
+                        <hashTree/>
+                    </hashTree>
+                    <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp - PUT file" enabled="true">
+                        <stringProp name="TestPlan.comments">Puts a .json file in the content area, to check that reading a specific file is OK.	</stringProp>
+                        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438605331000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438605331000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                    </SetupThreadGroup>
+                    <hashTree>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT a file for the GET test" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/content/jsonConstant/fileToRead</stringProp>
+                            <stringProp name="HTTPSampler.method">PUT</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+                                <collectionProp name="HTTPFileArgs.files">
+                                    <elementProp name="${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile3.json" elementType="HTTPFileArg">
+                                        <stringProp name="File.path">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile3.json</stringProp>
+                                        <stringProp name="File.paramname"></stringProp>
+                                        <stringProp name="File.mimetype"></stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">content-type</stringProp>
+                                    <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+                            <collectionProp name="CookieManager.cookies">
+                                <elementProp name="customAuthToken" elementType="Cookie" testname="customAuthToken">
+                                    <stringProp name="Cookie.value">${__property(newToken)}</stringProp>
+                                    <stringProp name="Cookie.domain">localhost</stringProp>
+                                    <stringProp name="Cookie.path">/</stringProp>
+                                    <boolProp name="Cookie.secure">true</boolProp>
+                                    <longProp name="Cookie.expires">0</longProp>
+                                    <boolProp name="Cookie.path_specified">true</boolProp>
+                                    <boolProp name="Cookie.domain_specified">true</boolProp>
+                                </elementProp>
+                            </collectionProp>
+                            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+                        </CookieManager>
+                        <hashTree/>
+                    </hashTree>
+                    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="GET scan File Data ?index (50 Users - 2 second ramp-up - 1 request)" enabled="true">
+                        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438589169000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438589169000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                        <stringProp name="TestPlan.comments">Gets a list of the file data available in the service.</stringProp>
+                    </ThreadGroup>
+                    <hashTree>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Scanned File Data" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/content?index&amp;maxDepth=inf&amp;scanDirection=ascending</stringProp>
+                            <stringProp name="HTTPSampler.method">GET</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">Content-Type</stringProp>
+                                    <stringProp name="Header.value">application/json</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+                            <collectionProp name="CookieManager.cookies">
+                                <elementProp name="customAuthToken" elementType="Cookie" testname="customAuthToken">
+                                    <stringProp name="Cookie.value">${__property(newToken)}</stringProp>
+                                    <stringProp name="Cookie.domain">localhost</stringProp>
+                                    <stringProp name="Cookie.path">/</stringProp>
+                                    <boolProp name="Cookie.secure">true</boolProp>
+                                    <longProp name="Cookie.expires">0</longProp>
+                                    <boolProp name="Cookie.path_specified">true</boolProp>
+                                    <boolProp name="Cookie.domain_specified">true</boolProp>
+                                </elementProp>
+                            </collectionProp>
+                            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+                        </CookieManager>
+                        <hashTree/>
+                    </hashTree>
+                    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="GET File Data content (50 Users - 2 second ramp-up - 1 request)" enabled="true">
+                        <stringProp name="TestPlan.comments">Gets specific file data from the json file that was put in the constant area in the setUp - PUT file method.</stringProp>
+                        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438604679000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438604679000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                    </ThreadGroup>
+                    <hashTree>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET specific File Data" enabled="true">
+                            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                                <collectionProp name="Arguments.arguments">
+                                    <elementProp name="" elementType="HTTPArgument">
+                                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                                        <stringProp name="Argument.value"></stringProp>
+                                        <stringProp name="Argument.metadata">=</stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/content/jsonConstant/fileToRead</stringProp>
+                            <stringProp name="HTTPSampler.method">GET</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">Content-Type</stringProp>
+                                    <stringProp name="Header.value">application/json</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+                            <collectionProp name="CookieManager.cookies">
+                                <elementProp name="customAuthToken" elementType="Cookie" testname="customAuthToken">
+                                    <stringProp name="Cookie.value">${__property(newToken)}</stringProp>
+                                    <stringProp name="Cookie.domain">localhost</stringProp>
+                                    <stringProp name="Cookie.path">/</stringProp>
+                                    <boolProp name="Cookie.secure">true</boolProp>
+                                    <longProp name="Cookie.expires">0</longProp>
+                                    <boolProp name="Cookie.path_specified">true</boolProp>
+                                    <boolProp name="Cookie.domain_specified">true</boolProp>
+                                </elementProp>
+                            </collectionProp>
+                            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+                        </CookieManager>
+                        <hashTree/>
+                    </hashTree>
+                    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="PUT File Data (50 Users - 5 second ramp-up - 1 request)" enabled="true">
+                        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438589169000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438589169000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                        <stringProp name="TestPlan.comments">Puts a json file in the testFile location with a UUID filename.</stringProp>
+                    </ThreadGroup>
+                    <hashTree>
+                        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+                            <stringProp name="filename"></stringProp>
+                            <stringProp name="parameters">${__UUID}</stringProp>
+                            <boolProp name="resetInterpreter">false</boolProp>
+                            <stringProp name="script">String URI = &quot;putfile_&quot;+Parameters;
+                                props.put(&quot;putLoc&quot;,URI);</stringProp>
+                        </BeanShellPreProcessor>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT File Data" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/file/my_file_${__putLoc}.json</stringProp>
+                            <stringProp name="HTTPSampler.method">PUT</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+                                <collectionProp name="HTTPFileArgs.files">
+                                    <elementProp name="${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile1.json" elementType="HTTPFileArg">
+                                        <stringProp name="File.path">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile1.json</stringProp>
+                                        <stringProp name="File.paramname"></stringProp>
+                                        <stringProp name="File.mimetype"></stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">content-type</stringProp>
+                                    <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+                            <collectionProp name="CookieManager.cookies">
+                                <elementProp name="customAuthToken" elementType="Cookie" testname="customAuthToken">
+                                    <stringProp name="Cookie.value">${__property(newToken)}</stringProp>
+                                    <stringProp name="Cookie.domain">localhost</stringProp>
+                                    <stringProp name="Cookie.path">/</stringProp>
+                                    <boolProp name="Cookie.secure">true</boolProp>
+                                    <longProp name="Cookie.expires">0</longProp>
+                                    <boolProp name="Cookie.path_specified">true</boolProp>
+                                    <boolProp name="Cookie.domain_specified">true</boolProp>
+                                </elementProp>
+                            </collectionProp>
+                            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+                        </CookieManager>
+                        <hashTree/>
+                    </hashTree>
+                    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="DELETE File Data (50 Users - 5 second ramp-up - 1 request)" enabled="true">
+                        <stringProp name="TestPlan.comments">Gets specific file data from the json file that was put in the constant area in the setUp - PUT file method.</stringProp>
+                        <stringProp name="ThreadGroup.on_sample_error">stopthread</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438604679000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438604679000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+                    </ThreadGroup>
+                    <hashTree>
+                        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Create unique filename" enabled="true">
+                            <stringProp name="filename"></stringProp>
+                            <stringProp name="parameters">${__threadNum}</stringProp>
+                            <boolProp name="resetInterpreter">false</boolProp>
+                            <stringProp name="script">String URI = &quot;putfile_&quot;+Parameters;
+                                props.put(&quot;putLoc&quot;,URI);</stringProp>
+                            <stringProp name="TestPlan.comments">Creates a unique filename formed from the test name (putfile_) and the threadNum.</stringProp>
+                        </BeanShellPreProcessor>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT File Data before DELETE File Data" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout">1000</stringProp>
+                            <stringProp name="HTTPSampler.response_timeout">1000</stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/putfile_${__threadNum}.json</stringProp>
+                            <stringProp name="HTTPSampler.method">PUT</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+                                <collectionProp name="HTTPFileArgs.files">
+                                    <elementProp name="${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}\Resources\testFile1.json" elementType="HTTPFileArg">
+                                        <stringProp name="File.path">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}\Resources\testFile1.json</stringProp>
+                                        <stringProp name="File.paramname"></stringProp>
+                                        <stringProp name="File.mimetype"></stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree>
+                            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                                <collectionProp name="Asserion.test_strings">
+                                    <stringProp name="49586">200</stringProp>
+                                </collectionProp>
+                                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                                <boolProp name="Assertion.assume_success">false</boolProp>
+                                <intProp name="Assertion.test_type">16</intProp>
+                            </ResponseAssertion>
+                            <hashTree/>
+                        </hashTree>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET File Data check before DELETE File Data" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout">1000</stringProp>
+                            <stringProp name="HTTPSampler.response_timeout">1000</stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/putfile_${__threadNum}.json</stringProp>
+                            <stringProp name="HTTPSampler.method">GET</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree>
+                            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                                <collectionProp name="Asserion.test_strings">
+                                    <stringProp name="49586">200</stringProp>
+                                </collectionProp>
+                                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                                <boolProp name="Assertion.assume_success">false</boolProp>
+                                <intProp name="Assertion.test_type">16</intProp>
+                            </ResponseAssertion>
+                            <hashTree/>
+                        </hashTree>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">Content-Type</stringProp>
+                                    <stringProp name="Header.value">application/json</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+                            <collectionProp name="CookieManager.cookies">
+                                <elementProp name="customAuthToken" elementType="Cookie" testname="customAuthToken">
+                                    <stringProp name="Cookie.value">${__property(newToken)}</stringProp>
+                                    <stringProp name="Cookie.domain">localhost</stringProp>
+                                    <stringProp name="Cookie.path">/</stringProp>
+                                    <boolProp name="Cookie.secure">true</boolProp>
+                                    <longProp name="Cookie.expires">0</longProp>
+                                    <boolProp name="Cookie.path_specified">true</boolProp>
+                                    <boolProp name="Cookie.domain_specified">true</boolProp>
+                                </elementProp>
+                            </collectionProp>
+                            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+                        </CookieManager>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DELETE File Data" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout">1000</stringProp>
+                            <stringProp name="HTTPSampler.response_timeout">1000</stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/file/my_file_${__threadNum}.json</stringProp>
+                            <stringProp name="HTTPSampler.method">DELETE</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                    </hashTree>
+                    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="MOVE File Data (50 Users - 5 second ramp-up - 1 request)" enabled="true">
+                        <stringProp name="TestPlan.comments">Moves a specific resource from one destination to a new one.</stringProp>
+                        <stringProp name="ThreadGroup.on_sample_error">stopthread</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438759870000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438759870000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+                    </ThreadGroup>
+                    <hashTree>
+                        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Create unique filename" enabled="true">
+                            <stringProp name="filename"></stringProp>
+                            <stringProp name="parameters">${__threadNum}</stringProp>
+                            <boolProp name="resetInterpreter">false</boolProp>
+                            <stringProp name="script">String URI_src = &quot;movefileSRC_&quot;+Parameters;
+                                props.put(&quot;srcLoc&quot;,URI_src);</stringProp>
+                            <stringProp name="TestPlan.comments">Creates a unique filename formed from the test name (movefileSRC_) and the threadNum.</stringProp>
+                        </BeanShellPreProcessor>
+                        <hashTree/>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">content-type</stringProp>
+                                    <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+                            <collectionProp name="CookieManager.cookies">
+                                <elementProp name="customAuthToken" elementType="Cookie" testname="customAuthToken">
+                                    <stringProp name="Cookie.value">${__property(newToken)}</stringProp>
+                                    <stringProp name="Cookie.domain">localhost</stringProp>
+                                    <stringProp name="Cookie.path">/</stringProp>
+                                    <boolProp name="Cookie.secure">true</boolProp>
+                                    <longProp name="Cookie.expires">0</longProp>
+                                    <boolProp name="Cookie.path_specified">true</boolProp>
+                                    <boolProp name="Cookie.domain_specified">true</boolProp>
+                                </elementProp>
+                            </collectionProp>
+                            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+                        </CookieManager>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT File Data before MOVE File Data" enabled="true">
+                            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                                <collectionProp name="Arguments.arguments">
+                                    <elementProp name="" elementType="HTTPArgument">
+                                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                                        <stringProp name="Argument.value"></stringProp>
+                                        <stringProp name="Argument.metadata">=</stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/movefileSRC_${__threadNum}</stringProp>
+                            <stringProp name="HTTPSampler.method">PUT</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+                                <collectionProp name="HTTPFileArgs.files">
+                                    <elementProp name="${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile1.json" elementType="HTTPFileArg">
+                                        <stringProp name="File.path">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile1.json</stringProp>
+                                        <stringProp name="File.paramname"></stringProp>
+                                        <stringProp name="File.mimetype"></stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree>
+                            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                                <collectionProp name="Asserion.test_strings">
+                                    <stringProp name="49586">200</stringProp>
+                                </collectionProp>
+                                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                                <boolProp name="Assertion.assume_success">false</boolProp>
+                                <intProp name="Assertion.test_type">16</intProp>
+                            </ResponseAssertion>
+                            <hashTree/>
+                        </hashTree>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET File Data check before MOVE File Data" enabled="true">
+                            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                                <collectionProp name="Arguments.arguments">
+                                    <elementProp name="" elementType="HTTPArgument">
+                                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                                        <stringProp name="Argument.value"></stringProp>
+                                        <stringProp name="Argument.metadata">=</stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/movefileSRC_${__threadNum}</stringProp>
+                            <stringProp name="HTTPSampler.method">GET</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree>
+                            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                                <collectionProp name="Asserion.test_strings">
+                                    <stringProp name="49586">200</stringProp>
+                                </collectionProp>
+                                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                                <boolProp name="Assertion.assume_success">false</boolProp>
+                                <intProp name="Assertion.test_type">16</intProp>
+                            </ResponseAssertion>
+                            <hashTree/>
+                        </hashTree>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MOVE file Data" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/movefileSRC_${__threadNum}?to=/path/to/my/app/config/testFile/movedDirectory/movefileSRC_${__threadNum}&amp;move</stringProp>
+                            <stringProp name="HTTPSampler.method">POST</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                    </hashTree>
+                    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="COPY file data (50 Users - 5 second ramp-up - 1 request)" enabled="true">
+                        <stringProp name="TestPlan.comments">Moves a specific resource from one destination to a new one.</stringProp>
+                        <stringProp name="ThreadGroup.on_sample_error">stopthread</stringProp>
+                        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+                            <boolProp name="LoopController.continue_forever">false</boolProp>
+                            <stringProp name="LoopController.loops">1</stringProp>
+                        </elementProp>
+                        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                        <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+                        <longProp name="ThreadGroup.start_time">1438759870000</longProp>
+                        <longProp name="ThreadGroup.end_time">1438759870000</longProp>
+                        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+                        <stringProp name="ThreadGroup.duration"></stringProp>
+                        <stringProp name="ThreadGroup.delay"></stringProp>
+                        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+                    </ThreadGroup>
+                    <hashTree>
+                        <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Create unique filename" enabled="true">
+                            <stringProp name="filename"></stringProp>
+                            <stringProp name="parameters">${__threadNum}</stringProp>
+                            <boolProp name="resetInterpreter">false</boolProp>
+                            <stringProp name="script">String URI_src = &quot;copyfileSRC_&quot;+Parameters;
+                                props.put(&quot;srcLoc&quot;,URI_src);</stringProp>
+                            <stringProp name="TestPlan.comments">Creates a unique filename formed from the test name (copyfileSRC_) and the threadNum.</stringProp>
+                        </BeanShellPreProcessor>
+                        <hashTree/>
+                        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                            <collectionProp name="HeaderManager.headers">
+                                <elementProp name="" elementType="Header">
+                                    <stringProp name="Header.name">content-type</stringProp>
+                                    <stringProp name="Header.value">application/json; charset=utf-8</stringProp>
+                                </elementProp>
+                            </collectionProp>
+                        </HeaderManager>
+                        <hashTree/>
+                        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+                            <collectionProp name="CookieManager.cookies">
+                                <elementProp name="customAuthToken" elementType="Cookie" testname="customAuthToken">
+                                    <stringProp name="Cookie.value">${__property(newToken)}</stringProp>
+                                    <stringProp name="Cookie.domain">localhost</stringProp>
+                                    <stringProp name="Cookie.path">/</stringProp>
+                                    <boolProp name="Cookie.secure">true</boolProp>
+                                    <longProp name="Cookie.expires">0</longProp>
+                                    <boolProp name="Cookie.path_specified">true</boolProp>
+                                    <boolProp name="Cookie.domain_specified">true</boolProp>
+                                </elementProp>
+                            </collectionProp>
+                            <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+                        </CookieManager>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT File Data before COPY File Data" enabled="true">
+                            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                                <collectionProp name="Arguments.arguments">
+                                    <elementProp name="" elementType="HTTPArgument">
+                                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                                        <stringProp name="Argument.value"></stringProp>
+                                        <stringProp name="Argument.metadata">=</stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/copyfileSRC_${__threadNum}</stringProp>
+                            <stringProp name="HTTPSampler.method">PUT</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
+                                <collectionProp name="HTTPFileArgs.files">
+                                    <elementProp name="${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile1.json" elementType="HTTPFileArg">
+                                        <stringProp name="File.path">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}${__BeanShell(File.separator,)}/Resources/testFile1.json</stringProp>
+                                        <stringProp name="File.paramname"></stringProp>
+                                        <stringProp name="File.mimetype"></stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET File Data check before COPY File Data" enabled="true">
+                            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                                <collectionProp name="Arguments.arguments">
+                                    <elementProp name="" elementType="HTTPArgument">
+                                        <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                                        <stringProp name="Argument.value"></stringProp>
+                                        <stringProp name="Argument.metadata">=</stringProp>
+                                    </elementProp>
+                                </collectionProp>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/copyfileSRC_${__threadNum}</stringProp>
+                            <stringProp name="HTTPSampler.method">GET</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="COPY File Data" enabled="true">
+                            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                                <collectionProp name="Arguments.arguments"/>
+                            </elementProp>
+                            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+                            <stringProp name="HTTPSampler.port">9998</stringProp>
+                            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                            <stringProp name="HTTPSampler.protocol">https</stringProp>
+                            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                            <stringProp name="HTTPSampler.path">/path/to/my/app/config/testFile/copyfileSRC_${__threadNum}?to=/path/to/my/app/config/testFile/copiedDirectory/copyfileSRC_${__threadNum}&amp;copy</stringProp>
+                            <stringProp name="HTTPSampler.method">POST</stringProp>
+                            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                            <boolProp name="HTTPSampler.use_keepalive">false</boolProp>
+                            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                            <stringProp name="HTTPSampler.implementation">Java</stringProp>
+                            <boolProp name="HTTPSampler.monitor">false</boolProp>
+                            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                        </HTTPSamplerProxy>
+                        <hashTree/>
+                    </hashTree>
+                    <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+                        <boolProp name="ResultCollector.error_logging">false</boolProp>
+                        <objProp>
+                            <name>saveConfig</name>
+                            <value class="SampleSaveConfiguration">
+                                <time>true</time>
+                                <latency>true</latency>
+                                <timestamp>true</timestamp>
+                                <success>true</success>
+                                <label>true</label>
+                                <code>true</code>
+                                <message>true</message>
+                                <threadName>false</threadName>
+                                <dataType>true</dataType>
+                                <encoding>false</encoding>
+                                <assertions>true</assertions>
+                                <subresults>true</subresults>
+                                <responseData>true</responseData>
+                                <samplerData>false</samplerData>
+                                <xml>false</xml>
+                                <fieldNames>false</fieldNames>
+                                <responseHeaders>false</responseHeaders>
+                                <requestHeaders>false</requestHeaders>
+                                <responseDataOnError>false</responseDataOnError>
+                                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                                <assertionsResultsToSave>0</assertionsResultsToSave>
+                                <bytes>true</bytes>
+                                <hostname>true</hostname>
+                                <threadCounts>true</threadCounts>
+                                <sampleCount>true</sampleCount>
+                            </value>
+                        </objProp>
+                        <stringProp name="filename"></stringProp>
+                        <boolProp name="saveHeaders">false</boolProp>
+                    </ResultCollector>
+                    <hashTree/>
+                    <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+                        <boolProp name="ResultCollector.error_logging">false</boolProp>
+                        <objProp>
+                            <name>saveConfig</name>
+                            <value class="SampleSaveConfiguration">
+                                <time>true</time>
+                                <latency>true</latency>
+                                <timestamp>true</timestamp>
+                                <success>true</success>
+                                <label>true</label>
+                                <code>true</code>
+                                <message>true</message>
+                                <threadName>true</threadName>
+                                <dataType>true</dataType>
+                                <encoding>false</encoding>
+                                <assertions>true</assertions>
+                                <subresults>true</subresults>
+                                <responseData>false</responseData>
+                                <samplerData>false</samplerData>
+                                <xml>false</xml>
+                                <fieldNames>false</fieldNames>
+                                <responseHeaders>false</responseHeaders>
+                                <requestHeaders>false</requestHeaders>
+                                <responseDataOnError>false</responseDataOnError>
+                                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                                <assertionsResultsToSave>0</assertionsResultsToSave>
+                                <bytes>true</bytes>
+                                <hostname>true</hostname>
+                                <threadCounts>true</threadCounts>
+                                <sampleCount>true</sampleCount>
+                            </value>
+                        </objProp>
+                        <stringProp name="filename"></stringProp>
+                    </ResultCollector>
+                    <hashTree/>
+                    <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="false">
+                        <boolProp name="ResultCollector.error_logging">false</boolProp>
+                        <objProp>
+                            <name>saveConfig</name>
+                            <value class="SampleSaveConfiguration">
+                                <time>true</time>
+                                <latency>true</latency>
+                                <timestamp>true</timestamp>
+                                <success>true</success>
+                                <label>true</label>
+                                <code>true</code>
+                                <message>true</message>
+                                <threadName>true</threadName>
+                                <dataType>true</dataType>
+                                <encoding>false</encoding>
+                                <assertions>true</assertions>
+                                <subresults>true</subresults>
+                                <responseData>false</responseData>
+                                <samplerData>false</samplerData>
+                                <xml>false</xml>
+                                <fieldNames>false</fieldNames>
+                                <responseHeaders>false</responseHeaders>
+                                <requestHeaders>false</requestHeaders>
+                                <responseDataOnError>false</responseDataOnError>
+                                <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                                <assertionsResultsToSave>0</assertionsResultsToSave>
+                                <bytes>true</bytes>
+                                <hostname>true</hostname>
+                                <threadCounts>true</threadCounts>
+                                <sampleCount>true</sampleCount>
+                            </value>
+                        </objProp>
+                        <stringProp name="filename"></stringProp>
+                    </ResultCollector>
+                    <hashTree/>
+                </hashTree>
+                <WorkBench guiclass="WorkBenchGui" testclass="WorkBench" testname="WorkBench" enabled="true">
+                    <boolProp name="WorkBench.save">true</boolProp>
+                </WorkBench>
+                <hashTree/>
+            </hashTree>
+        </jmeterTestPlan>
+                                            </textarea ng-cloak>
+                                        </code></pre>
+                                    </div>
+                                    <div class="accordion">
+                                        <div>Example Screenshot 1</div>
+                                        <img style="background-color: #FFFFFF;" src="/src/imgs/putData.PNG" />
+                                    </div>
+                                    <div class="accordion">
+                                        <div>Example Screenshot 2</div>
+                                        <img style="background-color: #FFFFFF;" src="/src/imgs/Results.PNG" />
+                                    </div>
+                                    <p><br/></p>
+
+                                    <p>{{tab.selects[5].jmxexample}}</p>
+
+                                    <p><br/></p>
+                                </div>
+
+                                <div ng-show="tab.isSet(7)">
+                                    <blockquote>{{tab.selects[6].description}}
+                                        <p><br /></p>
+                                        <p>Languages: {{tab.selects[6].languages}}</p>
+                                    </blockquote>
+                                    <h3>TestComplete</h3>
+                                    <p>{{tab.selects[6].testcomplete}}</p>
+
+                                    <h4><br /></h4>
+                                    <h3>Sikuli</h3>
+                                    <p>{{tab.selects[6].sikuli}}</p>
+
+                                    <h4><br /></h4>
+                                    <h3>Robot Framework</h3>
+                                    <p>{{tab.selects[6].robotframework}}</p>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </body>
+</html>
