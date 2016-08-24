@@ -73,6 +73,7 @@ public class ToolsFrag2 extends Fragment {
         View v = inflater.inflate(R.layout.webview_examples, container, false);
         browser = (WebView) v.findViewById(R.id.webview);
         browser.getSettings().setJavaScriptEnabled(true);
+        browser.clearCache(true);
         browser.loadUrl("http://chrisp1985.github.io/src/appium/tools.html");
         return v;
     }

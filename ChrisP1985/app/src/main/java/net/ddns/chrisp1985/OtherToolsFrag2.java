@@ -73,6 +73,7 @@ public class OtherToolsFrag2 extends Fragment {
         View v = inflater.inflate(R.layout.webview_examples, container, false);
         other_tools_browser = (WebView) v.findViewById(R.id.webview);
         other_tools_browser.getSettings().setJavaScriptEnabled(true);
+        other_tools_browser.clearCache(true);
         other_tools_browser.loadUrl("http://chrisp1985.github.io/src/appium/othertools.html");
         return v;
     }
