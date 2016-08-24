@@ -17,18 +17,18 @@ import net.ddns.tests.chrisp1985.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ToolsFrag2.OnFragmentInteractionListener} interface
+ * {@link OtherToolsFrag2.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ToolsFrag2#newInstance} factory method to
+ * Use the {@link OtherToolsFrag2#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class ToolsFrag2 extends Fragment {
+public class OtherToolsFrag2 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    WebView browser;
+    WebView other_tools_browser;
     private View currentView;
 
     // TODO: Rename and change types of parameters
@@ -46,15 +46,15 @@ public class ToolsFrag2 extends Fragment {
      * @return A new instance of fragment ToolsFrag.
      */
     // TODO: Rename and change types and number of parameters
-    public static ToolsFrag2 newInstance(String param1, String param2) {
-        ToolsFrag2 fragment = new ToolsFrag2();
+    public static OtherToolsFrag2 newInstance(String param1, String param2) {
+        OtherToolsFrag2 fragment = new OtherToolsFrag2();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public ToolsFrag2() {
+    public OtherToolsFrag2() {
         // Required empty public constructor
     }
 
@@ -71,9 +71,9 @@ public class ToolsFrag2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle     savedInstanceState) {
         View v = inflater.inflate(R.layout.webview_examples, container, false);
-        browser = (WebView) v.findViewById(R.id.webview);
-        browser.getSettings().setJavaScriptEnabled(true);
-        browser.loadUrl("http://chrisp1985.github.io/src/appium/tools.html");
+        other_tools_browser = (WebView) v.findViewById(R.id.webview);
+        other_tools_browser.getSettings().setJavaScriptEnabled(true);
+        other_tools_browser.loadUrl("http://chrisp1985.github.io/src/appium/othertools.html");
         return v;
     }
 

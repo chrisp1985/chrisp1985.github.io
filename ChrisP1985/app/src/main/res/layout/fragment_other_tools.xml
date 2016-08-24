@@ -8,9 +8,10 @@
     <ScrollView
         android:id="@+id/ScrollView01"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="547dp"
         android:layout_gravity="center"
-        android:fillViewport="false">
+        android:fillViewport="false"
+        android:paddingBottom="20dp">
 
         <RelativeLayout
         android:layout_width="match_parent"
@@ -90,6 +91,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
+
             </RelativeLayout>
 
 
@@ -165,5 +167,15 @@
             </LinearLayout>
         </TabHost>
     </HorizontalScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Switch To WebView"
+        android:id="@+id/other_tools_webview_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="right|bottom"
+        android:onClick="onOtherToolsWebViewClick" />
 
 </FrameLayout>

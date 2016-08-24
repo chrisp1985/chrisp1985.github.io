@@ -25,8 +25,10 @@ public class ChrisPNavDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
                     Home_Fragment.OnFragmentInteractionListener,
                     ToolsFrag.OnFragmentInteractionListener,
+                    ToolsFrag2.OnFragmentInteractionListener,
                     ThisApplication.OnFragmentInteractionListener,
-                    OtherTools.OnFragmentInteractionListener {
+                    OtherTools.OnFragmentInteractionListener,
+                    OtherToolsFrag2.OnFragmentInteractionListener {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -136,6 +138,27 @@ public class ChrisPNavDrawer extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
+    public void onToolsWebViewClick(View view) {
+        Fragment fragment = null;
+        Class fragmentClass = ToolsFrag2.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+    }
 
-
+    public void onOtherToolsWebViewClick(View view) {
+        Fragment fragment = null;
+        Class fragmentClass = OtherToolsFrag2.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+    }
 }
