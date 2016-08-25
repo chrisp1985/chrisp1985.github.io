@@ -1,6 +1,7 @@
 package net.ddns.chrisp1985;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import net.ddns.tests.chrisp1985.R;
 
@@ -70,10 +73,26 @@ public class ToolsFrag2 extends Fragment {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle     savedInstanceState) {
-        View v = inflater.inflate(R.layout.webview_examples, container, false);
+        // Create the view and set the browser.
+        final View v = inflater.inflate(R.layout.webview_examples, container, false);
         browser = (WebView) v.findViewById(R.id.webview);
+
+        // Set browser load view.
         browser.getSettings().setJavaScriptEnabled(true);
         browser.clearCache(true);
+        browser.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // Hide Loading and progress bar.
+                v.findViewById(R.id.loadingText).setVisibility(View.GONE);
+                v.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
+                // Show the WebView
+                v.findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            }
+        });
+
+        // Load the URL into the browser.
         browser.loadUrl("http://chrisp1985.github.io/src/appium/tools.html");
         return v;
     }

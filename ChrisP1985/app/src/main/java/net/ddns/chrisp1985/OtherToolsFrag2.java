@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import net.ddns.tests.chrisp1985.R;
 
@@ -70,10 +71,21 @@ public class OtherToolsFrag2 extends Fragment {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle     savedInstanceState) {
-        View v = inflater.inflate(R.layout.webview_examples, container, false);
+        final View v = inflater.inflate(R.layout.webview_examples, container, false);
         other_tools_browser = (WebView) v.findViewById(R.id.webview);
         other_tools_browser.getSettings().setJavaScriptEnabled(true);
         other_tools_browser.clearCache(true);
+        other_tools_browser.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // Hide Loading and progress bar.
+                v.findViewById(R.id.loadingText).setVisibility(View.GONE);
+                v.findViewById(R.id.progressBar).setVisibility(View.GONE);
+
+                // Show the WebView
+                v.findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            }
+        });
         other_tools_browser.loadUrl("http://chrisp1985.github.io/src/appium/othertools.html");
         return v;
     }
