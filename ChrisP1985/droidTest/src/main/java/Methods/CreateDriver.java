@@ -13,14 +13,15 @@ import io.appium.java_client.android.AndroidDriver;
 
 /**
  * Created by chrisp on 01/08/2016.
+ * A Class to initially create the Android driver with relevant capabilities.
  */
 public class CreateDriver {
+
     private static final String DEVICE__GALAXY_S5 = "Galaxy S5";
     private static final String DEVICE__LITTLE_SAMSUNG = "Samsung CI";
 
     /**
-     * *** SETUP THE DRIVER ***
-     *
+     * Setup the driver to use in each test session.
      * @return The setup driver.
      */
     public static AndroidDriver setupDriver() throws MalformedURLException {
@@ -29,6 +30,7 @@ public class CreateDriver {
         System.out.println(projectDirectory);
         File applicationDirectory = new File(projectDirectory, "app\\build\\outputs\\apk\\app-debug.apk");
 
+        // Create and add all the capabilities for the device.
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", DEVICE__LITTLE_SAMSUNG);
         capabilities.setCapability("app", applicationDirectory.getAbsolutePath());
@@ -36,6 +38,7 @@ public class CreateDriver {
         capabilities.setCapability("platformVersion", "4.1");
         capabilities.setCapability("platformName", "Android");
 
+        // Create the driver using the capabilities and return it.
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
         return driver;

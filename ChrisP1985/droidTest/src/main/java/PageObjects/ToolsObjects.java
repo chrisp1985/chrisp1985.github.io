@@ -46,4 +46,21 @@ public class ToolsObjects extends AbstractSharedObjects implements ExamplesPages
     public List<WebElement> tabItems() {
         return genericItemsMenu().findElements(By.className("android.widget.TextView"));
     }
+
+    public WebElement progressBar() {
+        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By
+                .name("webview_progress_bar")));
+    }
+
+    public WebElement toolsWebPage() {
+        return new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("//android.webkit.WebView[@content-desc='Chris Parsons WebSite']" +
+                        "/android.view.View[@content-desc='Tools and Frameworks']")));
+    }
+
+    @Override
+    public WebElement webViewButton() {
+        return new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(By
+                .xpath("//android.widget.Button[@text='Switch To WebView']")));
+    }
 }

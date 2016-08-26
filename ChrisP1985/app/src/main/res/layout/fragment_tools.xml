@@ -23,8 +23,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
-            android:nestedScrollingEnabled="true"
-            android:paddingTop="40dp">
+        android:nestedScrollingEnabled="true"
+        android:paddingTop="25dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"

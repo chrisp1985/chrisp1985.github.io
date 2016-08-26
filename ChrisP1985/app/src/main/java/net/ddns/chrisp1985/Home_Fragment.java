@@ -28,24 +28,26 @@ import net.ddns.tests.chrisp1985.R;
  * create an instance of this fragment.
  */
 public class Home_Fragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
+    View v;
 
+    /**
+     * The images to use in the carousel.
+     */
     int[] sampleImages = {
             R.drawable.selenium,
             R.drawable.jenkins,
             R.drawable.android_icon
     };
-    View v;
 
+    /**
+     * The image listener (to set the resources and the alpha)
+     */
     ImageListener imageListener = new ImageListener() {
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         @Override
@@ -54,6 +56,10 @@ public class Home_Fragment extends Fragment {
             imageView.setImageAlpha(80);
         }
     };
+
+    /**
+     * The constructor for home.
+     */
     public Home_Fragment() {
         // Required empty public constructor
     }
@@ -76,6 +82,10 @@ public class Home_Fragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * On creation of the new fragment.
+     * @param savedInstanceState The current instance state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +95,13 @@ public class Home_Fragment extends Fragment {
         }
     }
 
+    /**
+     * The Create View method.
+     * @param inflater The method through which the view is displayed.
+     * @param container The container in which to show the view.
+     * @param savedInstanceState The current instance state.
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_home_, container, false);
@@ -98,6 +115,10 @@ public class Home_Fragment extends Fragment {
         return v;
     }
 
+    /**
+     *
+     * @param uri
+     */
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -105,6 +126,10 @@ public class Home_Fragment extends Fragment {
         }
     }
 
+    /**
+     * On attach to the fragment.
+     * @param context The context.
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -116,6 +141,9 @@ public class Home_Fragment extends Fragment {
         }
     }
 
+    /**
+     * When leaving the fragment.
+     */
     @Override
     public void onDetach() {
         super.onDetach();

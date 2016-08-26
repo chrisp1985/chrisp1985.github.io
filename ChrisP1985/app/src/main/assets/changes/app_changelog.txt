@@ -1,0 +1,15 @@
+Changelog
+
+v1.0
+Initial App.
+
+v1.1
+Font Awesome icons in drawer.
+Bootstrap replaced by Android.
+WebViews added.
+Permissions edited to allow internet.
+Toast on exit to website, and entry to tools/other tools.
+
+v1.2
+Rotation enabled.
+Fragment heading images resized for tablet compatibility.

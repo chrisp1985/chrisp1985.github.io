@@ -19,4 +19,6 @@ public interface ExamplesPages {
 
     WebElement genericItemsMenu();
 
+    WebElement webViewButton();
+
 }

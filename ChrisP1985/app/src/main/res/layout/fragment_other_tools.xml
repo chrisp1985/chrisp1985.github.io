@@ -7,11 +7,13 @@
 
     <ScrollView
         android:id="@+id/ScrollView01"
-        android:layout_width="match_parent"
-        android:layout_height="547dp"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:fillViewport="false"
-        android:paddingBottom="20dp">
+        android:paddingBottom="20dp"
+        android:layout_marginBottom="20dp"
+        android:nestedScrollingEnabled="true">
 
         <RelativeLayout
         android:layout_width="match_parent"

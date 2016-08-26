@@ -30,18 +30,27 @@ public class ChrisPNavDrawer extends AppCompatActivity
                     OtherTools.OnFragmentInteractionListener,
                     OtherToolsFrag2.OnFragmentInteractionListener {
 
+    /**
+     * Create the Nav Drawer view.
+     * @param savedInstanceState The current instance state.
+     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Create the initial view for the application.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chris_pnav_drawer);
 
-        // Set the toolbar
+        // Set the toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Set the alpha (opaqueness) of the image on the toolbar.
         ImageView toolbarImage = (ImageView) toolbar.findViewById(R.id.toolbarImage);
         toolbarImage.setImageAlpha(80);
 
+        // Set the initial fragment to be the home fragment.
         Fragment fragment = null;
         Class fragmentClass = Home_Fragment.class;
         try {
@@ -50,6 +59,7 @@ public class ChrisPNavDrawer extends AppCompatActivity
             e.printStackTrace();
         }
 
+        // Replace whatever it's already got with the home fragment.
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
@@ -65,6 +75,9 @@ public class ChrisPNavDrawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * What to do when Back is pressed on the drawer.
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -75,34 +88,56 @@ public class ChrisPNavDrawer extends AppCompatActivity
         }
     }
 
+    /**
+     * What to do when the navigation item is selected in the drawer.
+     * @param item The item selected.
+     * @return Boolean to say the action has been done.
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Get the selected item
         int id = item.getItemId();
+
+        // Set the initial fragment/class to null.
         Fragment fragment = null;
         Class fragmentClass = null;
 
         // If the selection is 'Tools'...
         if (id == R.id.tools) {
+            // Set the fragment.
             fragmentClass = ToolsFrag.class;
+
+            // Produce a toaster to make the user aware of the WebView button.
+            TastyToast.makeText(getApplicationContext(), "Use WebView to see examples.", TastyToast.LENGTH_LONG, TastyToast.INFO);
         }
         else if (id == R.id.home) {
+            // Set the fragment.
             fragmentClass = Home_Fragment.class;
         }
         // If the selection is 'Other Tools'...
         else if (id == R.id.other_tools) {
+            // Set the fragment.
             fragmentClass = OtherTools.class;
+
+            // Produce a toaster to make the user aware of the WebView button.
+            TastyToast.makeText(getApplicationContext(), "Use WebView to see examples.", TastyToast.LENGTH_LONG, TastyToast.INFO);
         }
         // If the selection is 'This App'...
         else if (id == R.id.this_app) {
+            // Set the fragment.
             fragmentClass = ThisApplication.class;
         }
         else if (id == R.id.open_website) {
+            // Set and launch the browser.
             Uri uriUrl = Uri.parse("http://chrisp1985.github.io/");
             Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
             startActivity(launchBrowser);
+
+            // Produce a toaster to say goodbye.
             TastyToast.makeText(getApplicationContext(), "Have Fun", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+
+            // Set the home fragment.
             fragmentClass = Home_Fragment.class;
         }
         try {
@@ -110,9 +145,12 @@ public class ChrisPNavDrawer extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Replace the current fragment with the new one.
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
+        // Close the drawer.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         while(!drawer.isDrawerOpen(GravityCompat.START)) {
@@ -121,11 +159,19 @@ public class ChrisPNavDrawer extends AppCompatActivity
         return true;
     }
 
+    /**
+     *
+     * @param uri
+     */
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
+    /**
+     * What happens when the monkey is clicked in the taskbar (hint, you go to home).
+     * @param view The view to pass in via the onClick method of the image.
+     */
     public void onMonkeyClick(View view) {
         Fragment fragment = null;
         Class fragmentClass = Home_Fragment.class;
@@ -138,6 +184,10 @@ public class ChrisPNavDrawer extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
+    /**
+     * What happens when the tools webview is clicked.
+     * @param view The view to pass in via the onClick method of the image.
+     */
     public void onToolsWebViewClick(View view) {
         Fragment fragment = null;
         Class fragmentClass = ToolsFrag2.class;
@@ -150,6 +200,10 @@ public class ChrisPNavDrawer extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
     }
 
+    /**
+     * What happens when the other tools webview is clicked.
+     * @param view The view to pass in via the onClick method of the image.
+     */
     public void onOtherToolsWebViewClick(View view) {
         Fragment fragment = null;
         Class fragmentClass = OtherToolsFrag2.class;

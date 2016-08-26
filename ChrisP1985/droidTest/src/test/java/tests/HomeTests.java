@@ -17,10 +17,9 @@ import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by chrisp on 01/08/2016.
- *
- *
+ * Test suite for the Home Page.
  */
-@Ignore
+ @Ignore
 public class HomeTests extends AbstractTestSetup {
 
     @Test
@@ -89,11 +88,11 @@ public class HomeTests extends AbstractTestSetup {
 
             // Click the item
             String itemName = item.findElement(By.className("android.widget.CheckedTextView")).getText();
-            item.click();
 
             // Check it goes to the correct page.
             switch (itemName) {
                 case "Tools":
+                    item.click();
                     // Check for the image, the heading and the text.
                     assertTrue(new ToolsObjects(driver).pageImage().isDisplayed());
                     assertTrue(new ToolsObjects(driver).pageDescription().isDisplayed());
@@ -101,6 +100,7 @@ public class HomeTests extends AbstractTestSetup {
 
                     break;
                 case "Other Tools":
+                    item.click();
                     // Check for the image, the heading and the text.
                     assertTrue(new OtherToolsObjects(driver).pageImage().isDisplayed());
                     assertTrue(new OtherToolsObjects(driver).pageDescription().isDisplayed());
@@ -108,6 +108,7 @@ public class HomeTests extends AbstractTestSetup {
 
                     break;
                 case "This App":
+                    item.click();
                     // Check for the image, the heading and the text.
                     assertTrue(new ThisAppObjects(driver).pageImage().isDisplayed());
                     assertTrue(new ThisAppObjects(driver).thisAppDescHeading().isDisplayed());
@@ -115,11 +116,14 @@ public class HomeTests extends AbstractTestSetup {
 
                     break;
                 case "Home":
+                    item.click();
                     // Check for the image, the heading and the text.
                     assertTrue(new HomeObjects(driver).carousel().isDisplayed());
                     assertTrue(new HomeObjects(driver).homeTitle().isDisplayed());
 
                     break;
+                case "My Website":
+                    // Do nothing for now.
             }
 
             // Click the monkey to get back to the homepage and then open the drawer.

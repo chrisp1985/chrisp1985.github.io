@@ -18,6 +18,7 @@ import io.appium.java_client.android.AndroidDriver;
  * Created by chrisp on 15/08/2016.
  */
 public abstract class AbstractTestSetup {
+
     static AndroidDriver driver;
     HomeObjects homeObjects;
     AutomationMethods methods;
@@ -26,7 +27,8 @@ public abstract class AbstractTestSetup {
             "Home",
             "Tools",
             "Other Tools",
-            "This App");
+            "This App",
+            "My Website");
 
     @BeforeClass
     public static void setupSuite() throws MalformedURLException {

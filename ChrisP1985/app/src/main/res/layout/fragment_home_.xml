@@ -5,32 +5,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="net.ddns.chrisp1985.Home_Fragment"
     android:background="@color/main_background_color">
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:fillViewport="false"
+        android:paddingBottom="20dp"
+        android:layout_marginBottom="20dp"
+        android:nestedScrollingEnabled="true">
 
-    <RelativeLayout
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="442dp">
 
-        <com.synnapps.carouselview.CarouselView
-            android:id="@+id/carouselView"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            app:fillColor="#FFFFFFFF"
-            app:pageColor="#00000000"
-            app:radius="6dp"
-            app:slideInterval="3000"
-            android:contentDescription="carousel_view"
-            app:strokeColor="#FF777777"
-            app:strokeWidth="1dp"
-            android:background="@color/main_background_color"
-            android:paddingRight="50dp"
-            android:paddingBottom="120dp"
-            android:layout_gravity="right|bottom"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
-
-        <TextView
+            <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -40,28 +29,42 @@
             android:id="@+id/homeDescription"
             android:textColor="#ffffff"
             android:layout_gravity="right|center_vertical"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="40dp"
-            android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/homeHeading"
+                android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="338dp"
-            android:layout_height="70dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:contentDescription="my_app_main_heading"
-            android:text="@string/home_heading"
-            android:id="@+id/homeHeading"
-            android:layout_gravity="center_horizontal|top"
-            android:textColor="#ffffff"
-            android:textSize="48dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/homeDescription"
-            android:layout_marginBottom="-10dp"
-            android:layout_marginLeft="15dp" />
+            <TextView
+                android:layout_width="338dp"
+                android:layout_height="70dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:contentDescription="my_app_main_heading"
+                android:text="@string/home_heading"
+                android:id="@+id/homeHeading"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="48dp"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/carouselView"
+                android:layout_alignStart="@+id/homeDescription" />
 
-    </RelativeLayout>
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="6dp"
+                app:slideInterval="3000"
+                android:contentDescription="carousel_view"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp"
+                android:background="@color/main_background_color"
+                android:layout_gravity="right|bottom"
+                android:layout_alignStart="@+id/homeHeading"
+                android:layout_alignParentTop="true" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </FrameLayout>
