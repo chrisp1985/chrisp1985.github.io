@@ -2,6 +2,7 @@ package net.ddns.chrisp1985;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.sdsmdg.tastytoast.TastyToast;
@@ -37,6 +40,12 @@ public class ChrisPNavDrawer extends AppCompatActivity
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Fix the orientation (portrait screws up on tablets).
+        if(getResources().getBoolean(R.bool.landscape_only)){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
         // Create the initial view for the application.
         super.onCreate(savedInstanceState);
@@ -146,16 +155,14 @@ public class ChrisPNavDrawer extends AppCompatActivity
             e.printStackTrace();
         }
 
+        // Close the drawer.
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
         // Replace the current fragment with the new one.
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        // Close the drawer.
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        while(!drawer.isDrawerOpen(GravityCompat.START)) {
-            // Wait
-        }
         return true;
     }
 
