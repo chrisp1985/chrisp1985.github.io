@@ -31,6 +31,15 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $( ".accordion" ).accordion({
+                    collapsible: true,
+                    heightStyle: "content",
+                    active: false
+                });
+            });
+        </script>	
     <script src="/src/syntax/prism.js"></script>
     <link rel="stylesheet" href="/src/syntax/prism.css">
     <link rel="stylesheet" href="/src/css/mycss.css">
@@ -114,7 +123,47 @@
 									<br \>
 									<p>{{tab.selects[3].background2}}</p>
 									<br \>
-									<p>{{tab.selects[3].background3}}</p>									
+									<p>{{tab.selects[3].background3}}</p>			
+									<br \>
+									<div class="accordion">
+                                        <div>Get Items in ScrollView Method</div>
+                                        <pre><code class="language-java">
+public List<String> getTabNamesInScrollView(ExamplesPages objsPage) {
+
+	// Set prevLastVisible to a blank string, and setup the foundItems list.
+	String prevLastVisible = "";
+	List<String> foundItems = new ArrayList<>();
+
+	// Get the lastVisible tab, and check it doesn't match the previous last visible tab.
+	List<WebElement> lastVisible = objsPage.tabItems();
+	while (!lastVisible.get(lastVisible.size() - 1).getText().equals(prevLastVisible)) {
+
+		// Set prevLastVisible to the current lastVisible for the next loop.
+		prevLastVisible = lastVisible.get(lastVisible.size() - 1).getText();
+
+		// Add the visible tabs to the list that have not already been added.
+		for (WebElement foundEle : objsPage.tabItems()) {
+			if (!foundItems.contains(foundEle.getText())) {
+				foundItems.add(foundEle.getText());
+			}
+		}
+
+		// Find the bounds of the tabhost, then drag from 70% of the way along, back to 30%.
+		int lastVisX = (int) (objsPage.genericItemsMenu().getLocation().getX() + (objsPage.genericItemsMenu().getSize().width * 0.7));
+		int y_coord = (int) (objsPage.genericItemsMenu().getLocation().getY() + (objsPage.genericItemsMenu().getSize().height * 0.5));
+		int firstVisX = (int) (objsPage.genericItemsMenu().getLocation().getX() + (objsPage.genericItemsMenu().getSize().width * 0.3));
+
+		// Drag the list, to see what tabs are available.
+		driver.swipe(lastVisX, y_coord, firstVisX, y_coord, 500);
+		lastVisible = objsPage.tabItems();
+		lastVisible.get(lastVisible.size() - 1).getText();
+	}
+	return foundItems;
+}										
+										</code></pre>
+									</div>
+									<p><br/></p>
+									<p>{{tab.selects[3].background4}}</p>	
                                 </div>								
 
                             </section>
