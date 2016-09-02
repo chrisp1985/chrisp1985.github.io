@@ -45,8 +45,6 @@ public class ChrisPNavDrawer extends AppCompatActivity
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
 
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
         // Create the initial view for the application.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chris_pnav_drawer);

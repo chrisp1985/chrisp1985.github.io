@@ -28,6 +28,20 @@
           return this.tab === tabName;
         };
     });
+	
+    app.controller("androidCtrl", function() {
+        this.tab = 1;
+
+        this.selects = androidTabs;
+
+        this.setTab = function(newValue){
+          this.tab = newValue;
+        };
+
+        this.isSet = function(tabName){
+          return this.tab === tabName;
+        };
+    });	
 
     var tabs =
     [
@@ -125,4 +139,32 @@
             git:"Git can be used to collect or submit data to a private or public repository. The example shows some fairly basic examples, but the notable ones are clone, pull, status, add, commit and push. Clone allows a user to clone a whole repository, for example from GitHub or Bitbucket. If a repository has already been cloned, the ‘git pull’ command collects the latest versions of any updated files between the user’s current working copy and the latest one. Once changes are made (which can be viewed with git status), git add will add all of the data to the staging area. Git commit –m”<Message>” will commit the data to a stored push request. Git push –u <dest> <source> then pushes the changes into the repository for other people to use. All of the website has been changed using Git (it’s on GitHub…). All of these commands are run through the console which in this case is being executed on Ubuntu."
         },
     ];
+	
+	var androidTabs =
+	[
+		{
+			name:"Background",
+			description:"Why I did this.",
+			background1:"Originally, this was planned as an activity to make use of my Raspberry Pi 3: deploy TeamCity (which I’d not used before) and build an Android application. The main issue with the Raspberry Pi is that it uses an ARM chipset, which cannot compile Android SDK binaries and so couldn’t build the artefacts. This meant moving to an AMD/Intel processor to build the software successfully. Using an old PC found in my parents’ loft and adding a couple of extra gigs of RAM, I flattened the machine, installed Debian, MySQL and TeamCity and can now pick up commits to GitHub and automatically build the resulting APK. The build server can be found at http://chrisp1985.ddns.net:8111 .\nThe development of the Android software itself is/was a bit of a pain.",
+			background2:"Android Studio is based off Intelli J so was immediately familiar, but having to edit XML as well as some not-fantastically-well-documented Java made the process a bit tricky. For instance, using a custom typeface isn’t as easy as selecting the text and choosing the font in the visual editor, you have to set the type on creation of the fragment in the Java code. And working out that I needed to open a fragment from the drawer, and then finding out how to do that, wasn’t easy. The intention of this was to create an application that I could test against with Appium, but as Appium requires a) a VTX enabled CPU (which my old PC doesn’t have) or b) a connected Android device (which I don’t have spare), the Appium tests are currently ignored for builds. My focus currently is on creating a relatively solid app, so that any tests I create can check a consistent build rather than one that is liable to drastically change."
+		},
+		{
+			name:"Setup",
+			description:"How everything was setup for development and test purposes.",			
+			background1:"The OS being used to host the system is Debian Jessie 8. The reasons for using Linux as opposed to Windows are for a) licensing and b) learning. I’ve used Raspbian on my Pi 3 and Zero, and I’ve got Mint and Ubuntu on my laptop, but I’d never used Debian before and, seeing as it’s known for its reliability for server hosting, seemed an appropriate choice to run TeamCity.\n\nTeamCity runs from the “sudo sh /opt/jetbrains/TeamCity/bin/runAll.sh start” command, and stores data in a MySQL database backend. The database is connected to TeamCity using a MySQL JDBC driver. The TeamCity data is then added to MySQL using the ‘create database teamcity character set UTF8 collate utf8_bin;’ command. TeamCity is run from TomCat, so any changes to the ports can be made in the Catalina conf files.",
+			background2: "Finally, the project makes a direct link to GitHub to pick up any commits made to my repository. This is really easy and just involves adding the clone link from GitHub to your build. Once this is done, TeamCity interrogates GitHub and finds the root build.gradle file, then sets up the build using this."
+		},		
+		{
+			name:"Development",
+			description:"How the app was developed, issues encountered and their solutions.",						
+			background1:"From a functional point of view, Android apps are based off activities and fragments. The activities control things, the fragments are pages that can be loaded within the app. Everything from a UI perspective is XML, which can be automatically created based off of UI designs. In my app, I chose to use a drawer activity from the wizard and build around that, which allows the user to drag a drawer from the left side of the app and navigate to elements inside the app.</p><p>There are a few elements within the app that have been quite tricky to resolve. As mentioned, setting the typeface to a custom TFF is difficult because the view needs to be inflated before anything can be done. Getting views and understanding where things can be added in the XML and where they must be added as part of an activity is pretty important to getting it all functioning properly. The carousel on the home page is provided via a plugin which can be found on Android Arsenal. The images are faded by lowering the alpha attribute."
+		},	
+		{
+			name:"Test",
+			description:"How the app is tested (Spoiler: by Appium), issues and solutions.",									
+			background1:"The reason for doing any of this was to use Appium to test, which seems to function in more or less the exact same way as Selenium. Boot up the Appium server (hosted on Node), connect a phone, create an AndroidDriver and then do the rest basically the same as you’d do with Selenium. Xpaths can be deduced using the UIAutomaterView batch file found in the tools directory of the SDK. The tests can be run from jUnit and, as long as there’s a connected phone or emulator available, can be easily executed as part of the build cycle.",
+			background2:"Appium behaves in a lot of ways exactly the same as Selenium, but has nowhere near the power. XPath in Selenium is easy, and navigating through the DOM in this way makes sense. The implementation in Appium often feels like it’s shoe-horned into the product, forcing users to navigate through classes rather than elements. The broad coverage of Selenium is also lacking, as you can’t build an xPath to find a specific item. With the drawer example, I wanted to check that the items within the drawer matched the items I was expecting. To do this, I attempted to xpath to the textview items within each menu item via return drawerList().findElements( By.xpath(\"//android.support.v7.widget.LinearLayoutCompat/ android.widget.CheckedTextView\")); However, this didn’t work and instead threw back an exception: \“Cannot use xpath locator strategy from an element. It can only be used from the root element\” which is apparently a known limitation of Appium and hasn’t been fixed since it was found in 2014. To get around this, I instead had to create a list of WebElements (which were the items in the list), and then find the strings for each of those items.",
+			background3:"For the structure of the test suite, I chose to create abstract classes for both the tests and the objects. By abstracting the test class, I don’t have to repeat the setup/teardown methods for each suite and can keep all of it in one place for easier maintenance. Similarly with the objects, all of the drawer and toolbar elements are shared across pages so it makes more sense to keep these in one place rather than potentially have to update the same methods/objects in 4 or 5 suites. I added an interface for the example pages to use so that I could use the same named methods across any future example pages, and because I only had to write the methods once, then just implement them on the Page Objects with a right-click > implement methods. Each page uses a page image, description, header and toolbar, so is a good candidate for employing an interface."
+		}
+	];
 })();
