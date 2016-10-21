@@ -557,60 +557,61 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                             <p><br /></p>
                             <p>Languages: {{tab.selects[5].languages}}</p>
                         </blockquote>
-                        <!--<div class="accordion">-->
-                            <!--<div>DocX4J</div>-->
-                                            <!--<pre>-->
-                                                <!--<code class="language-java">-->
-                                                    <!--<textarea>-->
-<!--private void addIssuesToWordDoc() throws Exception {-->
-		<!--// Set the hashmap.-->
-		<!--HashMap<String,String> replacements = new HashMap<String, String>(){{-->
-        <!--// Set the version-->
-        <!--put("Version x","Version "+System.getProperty("MyProductVersion"));-->
-        <!---->
-        <!--// Set the other bits-->
-        <!--put("HighPriorityCount",getTotalNumberOfHighPriorityIssues());-->
-        <!--put("Date",new Date().toString());-->
-        <!--put("ClosedCount",getResolvedIssuesOnProject());-->
-        <!--put("fixVersion",System.getProperty("productMajorVersion"));-->
+                        <div class="accordion">
+                            <div>DocX4J</div>
+                                            <pre>
+                                                <code class="language-java">
+                                                    <textarea>
+private void addIssuesToWordDoc() throws Exception {
+    // Set the hashmap.
+    // Prism (the CSS syntax highlighter) doesn't like diamonds, so the hashmap bit below is commented out...
+    <!--HashMap<String,String> replacements = new HashMap<String, String>(){{-->
+        // Set the version
+        put("Version x","Version "+System.getProperty("MyProductVersion"));
 
-        <!--// Release Location Link-->
-        <!--put("ReleaseLocation",RELEASE_LOCATION);-->
-    <!--}};-->
+        // Set the other bits
+        put("HighPriorityCount",getTotalNumberOfHighPriorityIssues());
+        put("Date",new Date().toString());
+        put("ClosedCount",getResolvedIssuesOnProject());
+        put("fixVersion",System.getProperty("productMajorVersion"));
 
-    <!--// Import the file.-->
-    <!--File inputFile = new File(INPUT_DOCX);-->
+        // Release Location Link
+        put("ReleaseLocation",RELEASE_LOCATION);
+    }};
 
-    <!--// Setup the file to create.-->
-    <!--File outputFile = new File(OUTPUT_DOCX);-->
+    // Import the file.
+    File inputFile = new File(INPUT_DOCX);
 
-    <!--// Set and prepare the package.-->
-    <!--WordprocessingMLPackage myPackage = WordprocessingMLPackage.load(inputFile);-->
-    <!--VariablePrepare.prepare(myPackage);-->
+    // Setup the file to create.
+    File outputFile = new File(OUTPUT_DOCX);
 
-    <!--// Get the main document contents.-->
-    <!--MainDocumentPart mainDocumentPart = myPackage.getMainDocumentPart();-->
+    // Set and prepare the package.
+    WordprocessingMLPackage myPackage = WordprocessingMLPackage.load(inputFile);
+    VariablePrepare.prepare(myPackage);
 
-    <!--// Replace parts of the document with strings from the hashmap.-->
-    <!--mainDocumentPart.variableReplace(replacements);-->
+    // Get the main document contents.
+    MainDocumentPart mainDocumentPart = myPackage.getMainDocumentPart();
 
-    <!--// For each Jira, add it as a paragraph to the document to create a vertical list.-->
-    <!--for(String jiraRes : getHighPriorityOpenIssues()) {-->
-        <!--myPackage.getMainDocumentPart().addParagraphOfText(jiraRes);-->
-    <!--}-->
+    // Replace parts of the document with strings from the hashmap.
+    mainDocumentPart.variableReplace(replacements);
 
-    <!--// Save the document.-->
-    <!--myPackage.save(outputFile);-->
-<!--}-->
-<!--</textarea>-->
-<!--</code>-->
-								<!--</pre>-->
-                        <!--</div>-->
-                        <!--<p><br/></p>-->
+    // For each Jira, add it as a paragraph to the document to create a vertical list.
+    for(String jiraRes : getHighPriorityOpenIssues()) {
+        myPackage.getMainDocumentPart().addParagraphOfText(jiraRes);
+    }
 
-                        <!--<p>{{tab.selects[5].docx4j}}</p>-->
+    // Save the document.
+    myPackage.save(outputFile);
+}
+</textarea>
+</code>
+								</pre>
+                        </div>
+                        <p><br/></p>
 
-                        <!--<p><br/></p>-->
+                        <p>{{tab.selects[5].docx4j}}</p>
+
+                        <p><br/></p>
                         <div class="accordion">
                             <div>Jira</div>
                                             <pre>
