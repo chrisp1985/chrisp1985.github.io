@@ -98,7 +98,7 @@
             testcomplete:"TestComplete is a tool from SmartBear for automation of mobile, web and desktop apps. Most of the code written with TestComplete was in C#-script, which is a hybrid of Javascript and C# without really being similar to either of them. The framework itself is very easy to get into, as a lot of the heavy lifting is done for you. Whereas with other frameworks you may need to devise your own application object model, TestComplete does this for you. The easiest way to store objects for a test quickly is to record/playback a test case, and then edit the test using the objects that are stored. Tests are easy to create without using record/playback, but require an Object Spy to manually map everything being used before a test can be executed.",
             sikuli:"Sikuli is a framework that uses image recognition. Relying on image recognition only in test cases has some serious limitations, but combining it with Selenium meant that DOM objects could be manipulated but the actual look and feel of the UI could be verified at the same time. As the tool uses image recognition, a lot of images need to be stored which can bloat a project’s size. The language used in Sikuli is python.",
             robotframework:"Robot Framework is a very high-level test runner. Tests can be written by piecing together keywords, with the libraries those keywords call sitting underneath. It feels like a cumbersome tool, but was very useful for combing Sikuli and Selenium into one suite."
-        },
+        }
     ];
 
     var otherTabs =
@@ -145,7 +145,7 @@
             docx4j:"Docx4J is a plugin that can be pulled from MavenCentral that allows for text replacement within a Word document. The approach I took was to create a template Word report document that contained text placeholders, then generate useful information and replace the placeholder text with the real bits. This allows me to keep the formatting of the document in a presentable style whilst presenting real information in the content. Placeholders take the form of ‘${ExampleText}’ where ‘ExampleText’ is the string to replace. Within the Java code, you can then use the variableReplace method and pass in a hashmap of the strings you want to replace with their replacement.",
             jira:"A lot of useful statistics to put into a test report can be gathered from Jira, and its REST API provides an easy way to automate the report generation. Using basic authentication, a user can submit a query and parse the JSON response to find outstanding issue counts, resolved counts, issue descriptions, reporter names etc. In the example, I use RestAssured to send a request with basic authentication to get the resolved issue count, then parse it using a JSONObject plugin translator and get the ‘total’. This can then be added to the report.",
             results:"Each component is tested automatically with the results captured by Gradle. This means that I can define a zipping task, then just put a finalizedBy on the test function within the component to zip up the results. I can then publish to a repository and link to that results location in the document. The groupId and artifactId will always be the same for every release, with only the version changing. This means a string can be formed of a known URL with only the version parts needing to be substituted in each run."
-        },		
+        }	
     ];
 	
 	var androidTabs =
