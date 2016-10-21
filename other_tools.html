@@ -562,22 +562,7 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                                 <pre>
                                     <code class="language-java">
 private void addIssuesToWordDoc() throws Exception {
-    // Set the hashmap.
-    // Prism (the CSS syntax highlighter) doesn't like diamonds, so the diamonds are replaced by *...
-    HashMap *String,String* replacements = new HashMap*String, String*() {
-
-		// Set the version
-        put("Version x","Version "+System.getProperty("MyProductVersion"));
-
-        // Set the other bits
-        put("HighPriorityCount",getTotalNumberOfHighPriorityIssues());
-        put("Date",new Date().toString());
-        put("ClosedCount",getResolvedIssuesOnProject());
-        put("fixVersion",System.getProperty("productMajorVersion"));
-
-        // Release Location Link
-        put("ReleaseLocation",RELEASE_LOCATION);
-    }};
+    // Set the hashmap to contain the replacements strings.
 
     // Import the file.
     File inputFile = new File(INPUT_DOCX);
