@@ -519,8 +519,9 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                             <div class="accordion">
                                 <div>DocX4J</div>
 									<pre>
-                                                <code class="language-java">
-												<textarea>private void addIssuesToWordDoc() throws Exception {
+                                        <code class="language-java">
+                                        <textarea>
+private void addIssuesToWordDoc() throws Exception {
     // Set the hashmap.
     // Prism (the CSS syntax highlighter) doesn't like diamonds, so the diamonds are replaced by *...
     HashMap *String,String* replacements = new HashMap*String, String*(){{
@@ -561,7 +562,8 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
 
     // Save the document.
     myPackage.save(outputFile);
-}</textarea>
+}
+</textarea>
 </code>
 </pre>
                             </div>
@@ -573,7 +575,8 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                             <div class="accordion">
                                 <div>Jira</div>
                                 <pre>
-                                                <code class="language-groovy">// Constructor
+                                                <code class="language-groovy">
+// Constructor
 private JiraQuery() {
     RestAssured.authentication = preemptive().basic(MY_USERNAME,MY_PASSWORD);
 }
@@ -584,7 +587,8 @@ private JiraQuery() {
  */
 private String getTotalNumberOfHighPriorityIssues() {
     return new JSONObject(jiraQueryAsString(JIRA_GET_HIGH_PRIORITY_ISSUES)).get("total").toString();
-}</code></pre>
+}
+</code></pre>
                             </div>
                             <p><br/></p>
 
