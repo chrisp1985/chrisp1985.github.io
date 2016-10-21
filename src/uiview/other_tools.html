@@ -520,11 +520,10 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                                 <div>DocX4J</div>
 
                                 <pre>
-                                                <code class="language-markup">
-                                                <textarea>
-private void addIssuesToWordDoc() throws Exception {
-    // Set the hashmap.
-    HashMap<String,String> replacements = new HashMap<String, String>(){{
+                                                <code class="language-java">
+	private void addIssuesToWordDoc() throws Exception {
+		// Set the hashmap.
+		HashMap<String,String> replacements = new HashMap<String, String>(){{
         // Set the version
         put("Version x","Version "+System.getProperty("MyProductVersion"));
 
@@ -561,9 +560,7 @@ private void addIssuesToWordDoc() throws Exception {
 
     // Save the document.
     myPackage.save(outputFile);
-}
-</textarea>
-                                                </code></pre>
+}</code></pre>
                             </div>
                             <p><br/></p>
 

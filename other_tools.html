@@ -559,13 +559,10 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                         </blockquote>
                         <div class="accordion">
                             <div>DocX4J</div>
-
                                             <pre>
-                                                <code class="language-markup">
-                                                <textarea>
-private void addIssuesToWordDoc() throws Exception {
-    // Set the hashmap.
-    HashMap<String,String> replacements = new HashMap<String, String>(){{
+                                                <code class="language-java">private void addIssuesToWordDoc() throws Exception {
+		// Set the hashmap.
+		HashMap<String,String> replacements = new HashMap<String, String>(){{
         // Set the version
         put("Version x","Version "+System.getProperty("MyProductVersion"));
         
@@ -602,9 +599,8 @@ private void addIssuesToWordDoc() throws Exception {
 
     // Save the document.
     myPackage.save(outputFile);
-}
-</textarea>
-                                                </code></pre>
+}</code>
+								</pre>
                         </div>
                         <p><br/></p>
 
@@ -614,7 +610,7 @@ private void addIssuesToWordDoc() throws Exception {
                         <div class="accordion">
                             <div>Jira</div>
                                             <pre>
-                                                <code class="language-groovy">
+                                                <code class="language-java">
 // Constructor
 private JiraQuery() {
     RestAssured.authentication = preemptive().basic(MY_USERNAME,MY_PASSWORD);
@@ -636,15 +632,13 @@ private String getTotalNumberOfHighPriorityIssues() {
                             <div>Results</div>
                                             <pre>
                                                 <code class="language-groovy">
-            <textarea>
 // Test reporting.
 task resultsZip(type: Zip) {
     classifier = "my_test_results"
     from file("build/reports/tests/")
 }
 
-test.finalizedBy(resultsZip)</textarea>
-                                                </code></pre>
+test.finalizedBy(resultsZip)</code></pre>
                         </div>
                         <p><br/></p>
 
