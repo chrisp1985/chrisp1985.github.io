@@ -561,8 +561,7 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                             <div>DocX4J</div>
                                             <pre>
                                                 <code class="language-java">
-                                                    <textarea>
-private void addIssuesToWordDoc() throws Exception {
+<textarea>private void addIssuesToWordDoc() throws Exception {
     // Set the hashmap.
     // Prism (the CSS syntax highlighter) doesn't like diamonds, so the diamonds are replaced by *...
     HashMap *String,String* replacements = new HashMap*String, String*(){{
@@ -602,8 +601,7 @@ private void addIssuesToWordDoc() throws Exception {
 
     // Save the document.
     myPackage.save(outputFile);
-}
-</textarea>
+}</textarea>
 </code>
 								</pre>
                         </div>
@@ -615,8 +613,7 @@ private void addIssuesToWordDoc() throws Exception {
                         <div class="accordion">
                             <div>Jira</div>
                                             <pre>
-                                                <code class="language-java">
-// Constructor
+                                                <code class="language-java">// Constructor
 private JiraQuery() {
     RestAssured.authentication = preemptive().basic(MY_USERNAME,MY_PASSWORD);
 }
@@ -636,8 +633,7 @@ private String getTotalNumberOfHighPriorityIssues() {
                         <div class="accordion">
                             <div>Results</div>
                                             <pre>
-                                                <code class="language-groovy">
-// Test reporting.
+                                                <code class="language-groovy">// Test reporting.
 task resultsZip(type: Zip) {
     classifier = "my_test_results"
     from file("build/reports/tests/")
