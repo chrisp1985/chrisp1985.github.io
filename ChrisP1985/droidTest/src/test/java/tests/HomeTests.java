@@ -1,7 +1,9 @@
 package tests;
+import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 
 import java.util.HashSet;
@@ -134,4 +136,16 @@ public class HomeTests extends AbstractTestSetup {
         // Close the drawer to end the test.
         methods.closeTheDrawer();
     }
+	
+    // This test is only for phones, so check that the gradle property is not a phone.
+    @Test
+    public void rotateScreenNotAllowedOnTablet() {
+
+        // Junit only - keeping in in case I switch back from TestNG to jUnit.
+        Assume.assumeTrue(!System.getProperty("deviceName").equals("phone"));
+
+        // Rotate the screen and check the orientation is still landscape.
+        driver.rotate(ScreenOrientation.PORTRAIT);
+        assertEquals(driver.getOrientation(),ScreenOrientation.LANDSCAPE);
+    }	
 }

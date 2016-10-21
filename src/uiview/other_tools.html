@@ -38,6 +38,8 @@
                                 <a href ng-click="tab.setTab(4)">Linux</a></li>
                             <li ng-class="{ active: tab.isSet(5) }">
                                 <a href ng-click="tab.setTab(5)">Build Environment</a></li>
+							<li ng-class="{ active: tab.isSet(6) }">
+								<a href ng-click="tab.setTab(6)">Test Reporting</a></li>								
                         </ul>
                         <h4><br/></h4>
 
@@ -507,6 +509,105 @@ chrisp@chrisp-Aspire-2920:~/Documents/chrisp1985.github.io$
                             <p><br/></p>
 
                             <p>{{tab.selects[4].git}}</p>
+                            <p><br/></p>
+                        </div>
+                        <div ng-show="tab.isSet(6)">
+                            <blockquote ng-cloak>{{tab.selects[5].description}}
+                                <p><br /></p>
+                                <p>Languages: {{tab.selects[5].languages}}</p>
+                            </blockquote>
+                            <div class="accordion">
+                                <div>DocX4J</div>
+
+                                <pre>
+                                                <code class="language-markup">
+                                                <textarea>
+private void addIssuesToWordDoc() throws Exception {
+    // Set the hashmap.
+    HashMap<String,String> replacements = new HashMap<String, String>(){{
+        // Set the version
+        put("Version x","Version "+System.getProperty("MyProductVersion"));
+
+        // Set the other bits
+        put("HighPriorityCount",getTotalNumberOfHighPriorityIssues());
+        put("Date",new Date().toString());
+        put("ClosedCount",getResolvedIssuesOnProject());
+        put("fixVersion",System.getProperty("productMajorVersion"));
+
+        // Release Location Link
+        put("ReleaseLocation",RELEASE_LOCATION);
+    }};
+
+    // Import the file.
+    File inputFile = new File(INPUT_DOCX);
+
+    // Setup the file to create.
+    File outputFile = new File(OUTPUT_DOCX);
+
+    // Set and prepare the package.
+    WordprocessingMLPackage myPackage = WordprocessingMLPackage.load(inputFile);
+    VariablePrepare.prepare(myPackage);
+
+    // Get the main document contents.
+    MainDocumentPart mainDocumentPart = myPackage.getMainDocumentPart();
+
+    // Replace parts of the document with strings from the hashmap.
+    mainDocumentPart.variableReplace(replacements);
+
+    // For each Jira, add it as a paragraph to the document to create a vertical list.
+    for(String jiraRes : getHighPriorityOpenIssues()) {
+        myPackage.getMainDocumentPart().addParagraphOfText(jiraRes);
+    }
+
+    // Save the document.
+    myPackage.save(outputFile);
+}
+</textarea>
+                                                </code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[5].docx4j}}</p>
+
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>Jira</div>
+                                <pre>
+                                                <code class="language-groovy">
+// Constructor
+private JiraQuery() {
+    RestAssured.authentication = preemptive().basic(MY_USERNAME,MY_PASSWORD);
+}
+
+/**
+ * GET TOTAL NUMBER OF HIGH PRIORITY ISSUES.
+ * @return String representation of total High Priority issues.
+ */
+private String getTotalNumberOfHighPriorityIssues() {
+    return new JSONObject(jiraQueryAsString(JIRA_GET_HIGH_PRIORITY_ISSUES)).get("total").toString();
+}</code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[5].jira}}</p>
+                            <p><br/></p>
+                            <div class="accordion">
+                                <div>Results</div>
+                                <pre>
+                                                <code class="language-groovy">
+            <textarea>
+// Test reporting.
+task resultsZip(type: Zip) {
+    classifier = "my_test_results"
+    from file("build/reports/tests/")
+}
+
+test.finalizedBy(resultsZip)</textarea>
+                                                </code></pre>
+                            </div>
+                            <p><br/></p>
+
+                            <p>{{tab.selects[5].results}}</p>
                             <p><br/></p>
                         </div>
                     </section>
