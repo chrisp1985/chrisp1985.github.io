@@ -29,6 +29,12 @@
     background-position:-50px -50px;
     background-size: 380px 380px;
 }
+.jumbotron-billboard .blazing {
+    background: #000 url("https://hips.hearstapps.com/digitalspyuk.cdnds.net/16/10/1457538955-gettyimages-88429164.jpg") center center;
+    background-repeat:no-repeat;
+    background-position:-50px -50px;
+    background-size: 380px 380px;
+}
 .jumbotron-billboard .android {
     background: #000 url("../imgs/Android-Icon.png") center center;
     background-repeat:no-repeat;

@@ -55,6 +55,12 @@ body {
   horizontal-align: right;
 }
 
+.site-wrapper-inner-left {
+  display: table-cell;
+  vertical-align: top;
+  horizontal-align: left;
+}
+
 .cover-container {
   margin-right: auto;
   margin-left: auto;
